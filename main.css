@@ -6,7 +6,7 @@ html,body{
 body{
     margin: 0;
     padding: 0;
-    background: #222;
+    background: #f4f5f6;
 }
 
 div{
@@ -18,5 +18,7 @@ div{
 }
 
 svg.bct{
-    fill:#c2c2c2;
+    fill:#111;
+    height:200px;
+    max-height: 80vh;
 }
