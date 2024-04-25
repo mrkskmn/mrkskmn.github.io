@@ -15,10 +15,29 @@ div{
     height:100%;
     align-items:center;
     justify-content:center;
+    animation: fadeIn .5s cubic-bezier(0.645, 0.045, 0.355, 1) .5s forwards;
+    opacity: 0;
+    scale: .95;
 }
 
 svg.bct{
     fill:#111;
     height:200px;
     max-height: 80vh;
+}
+
+@keyframes fadeIn {
+
+    0% {
+        opacity: 0;
+        scale: .95;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        scale: 1;
+        transform: translateY(0);
+    }
+    
 }
