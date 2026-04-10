@@ -5,28 +5,41 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  background-color: rgba(tokens.$color-canvas, 0.95);
+  backdrop-filter: blur(1rem);
+  z-index: 1000;
 
-  &__logo {
-    font-family: tokens.$font-family-head;
-    font-size: 1.25rem;
-    color: tokens.$color-text;
-    text-decoration: none;
+  .inner {
+    width: 100%;
+    max-width: tokens.max-width(content);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn{
+    font-size: .9375rem;
   }
 
   &__links {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: .125rem;
     list-style: none;
+    position: relative; 
+    left: -.75rem; // Adjust for button padding
 
     a {
       font-family: tokens.$font-family-body;
       font-size: 1rem;
       color: tokens.$color-text;
       text-decoration: none;
-      opacity: 0.6;
-      transition: opacity 0.2s ease;
+      opacity: 0.8;
+      transition: opacity tokens.duration(fast) tokens.easing(default);
 
       &:hover {
         opacity: 1;

@@ -1,0 +1,26 @@
+@use "sass:map";
+
+// Motion
+// ------
+
+$duration: (
+  fast:    150ms,
+  default: 300ms,
+  slow:    600ms,
+);
+
+@function duration($size) {
+  @return map.get($duration, $size);
+}
+
+$easing: (
+  default: ease,
+  in:      ease-in,
+  out:     ease-out,
+  in-out:  ease-in-out,
+  spring:  cubic-bezier(0.34, 1.56, 0.64, 1),
+);
+
+@function easing($type) {
+  @return map.get($easing, $type);
+}

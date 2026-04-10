@@ -2,6 +2,7 @@
 import "@styles/index.scss";
 import Navigation from "@components/Navigation/Navigation.astro";
 import Footer from "@components/Footer/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -20,11 +21,34 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Libertinus+Serif:wght@400&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
-  </head>
+    <title>{title} | Markus Kammin</title>
+    <ClientRouter />
+    <style lang="scss" is:global>
+      @use "styles/tokens" as tokens;
+
+      @keyframes blur-out {
+        from { filter: blur(0);    opacity: 1; }
+        to   { filter: blur(1rem); opacity: 0; }
+      }
+
+      @keyframes blur-in {
+        from { filter: blur(1rem); opacity: 0; }
+        to   { filter: blur(0);    opacity: 1; }
+      }
+
+      ::view-transition-old(root) {
+        animation: blur-out tokens.duration(slow) tokens.easing(default) forwards;
+      }
+
+      ::view-transition-new(root) {
+        animation: blur-in tokens.duration(slow) tokens.easing(default) forwards;
+      }
+    </style></head
+  >
+
   <body>
     <Navigation />
     <slot />

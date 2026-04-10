@@ -1,17 +1,68 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
+import { Image } from "astro:assets";
 import { ArrowUpRight } from "@lucide/astro";
+import blueNoise from "../assets/bluenoise.jpg";
 ---
 
-<BaseLayout title="Markus Kammin">
+<BaseLayout title="Start">
+  <!-- Hero & value proposition -->
   <section>
     <div class="inner hero">
-      <h1>
-        I am <span class="pill"><div class="avatar"></div>Markus</span><br>
-        Design leader shaping<br>how design culture<br>thrives at scale.
+      <h1 class="display">
+        I am <span class="pill"><div class="avatar"></div>Markus</span><br />
+        Design leader shaping<br />how design culture<br />thrives at scale.
       </h1>
-      <Button href="https://www.haiilo.com" title="head of ux at haiilo" icon={ArrowUpRight} />
+      <Button
+        href="https://www.haiilo.com"
+        title="head of ux at haiilo"
+        size="large"
+        icon={ArrowUpRight}
+      />
+    </div>
+  </section>
+
+  <!-- Visual breaker -->
+  <section>
+    <div class="inner visual-break">
+      <Image src={blueNoise} height={800} alt="" />
+    </div>
+  </section>
+
+  <!-- Core section -->
+  <section>
+    <div class="inner core">
+      <div class="stack stack--h">
+        <div class="copy stack stack--v">
+          <h2 class="display">
+            10+ years designing products, leading teams, and figuring out how to
+            make complex things simple.
+          </h2>
+          <p class="lead">
+            Right now I'm more into building tools and shipping ideas than
+            prepping case studies and documenting the past. <br /> <br />
+            If you want to chat about AI tools and workflows, design culture and system,
+            or whatever problem you're trying to solve - reach out.
+          </p>
+          <div class="buttons stack stack--h gap--lg">
+            <Button
+              href="mailto:hey@markus.design"
+              title="hey@markus.design"
+              size="large"
+              variant="ghost"
+            />
+            <Button
+              href="https://www.linkedin.com/in/markuskammin/"
+              title="LinkedIn"
+              size="large"
+              variant="ghost"
+              icon={ArrowUpRight}
+            />
+          </div>
+        </div>
+        <div></div>
+      </div>
     </div>
   </section>
 </BaseLayout>

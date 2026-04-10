@@ -1,25 +1,66 @@
+@use "sass:map";
+
 // Spacing, Sizes & Layout
 // ----------------
 
+// Layout
 
-// Layout 
+$max-width: (
+  slim: 500px,
+  content: 980px,   // body text / articles
+  wide: 1080px,     // wide sections
+  full: 2000px,     // full-bleed wrapper cap
+);
 
-$max-width-content: 980px;   // body text / articles
-$max-width-wide: 1080px;     // wide sections
-$max-width-full: 1440px;     // full-bleed wrapper cap
+@function max-width($size) {
+  @return map.get($max-width, $size);
+}
 
+.stack {
+  display: flex;
+
+  &--h {
+    flex-direction: row;
+  }
+
+  &--v {
+    flex-direction: column;
+  }
+}
+
+$gap: (
+  none: 0,
+  sm: 4px,
+  md: 8px,
+  lg: 12px,
+  xl: 24px,
+  2xl: 48px,
+  3xl: 80px,
+);
+
+@function gap($size) {
+  @return map.get($gap, $size);
+}
+
+@each $name, $value in $gap {
+  .gap--#{$name} {
+    gap: $value;
+  }
+}
 
 // Border radius
-
-@function radius($size) {
-  @return map-get($border-radius, $key: $size);
-}
 
 $border-radius: (
   none: 0,
   sm: 4px,
   md: 8px,
-  lg: 16px,
-  full: 9999px
+  lg: 12px,
+  xl: 24px,
+  2xl: 48px,
+  3xl: 80px,
+  full: 9999px,
 );
 
+@function radius($size) {
+  @return map.get($border-radius, $size);
+}

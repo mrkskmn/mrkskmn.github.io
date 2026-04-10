@@ -1,32 +1,77 @@
 @use "styles/tokens" as tokens;
 
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: tokens.radius(full);
+  padding: 0 1rem;
+  border-radius: tokens.radius(md);
   font-family: tokens.$font-family-body;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  overflow: hidden;
 
-  &:hover {
-    opacity: 0.8;
+  transition: all tokens.duration(fast) tokens.easing(default);
+
+  // Sizes
+  &--compact {
+    height: 36px;
+    padding: 0 0.75rem;
+  }
+  &--large {
+    height: 44px;
   }
 
+  // Animated background
+  .btn__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: tokens.radius(md);
+    transform: scale(0);
+    opacity: 0;
+    transition: all tokens.duration(fast) tokens.easing(default);
+    transform-origin: center;
+  }
+
+  // Keep text and icon above the background
+  > :not(.btn__bg) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover .btn__bg {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  // Variants
   &--primary {
-    background-color: tokens.$color-text;
-    color: tokens.$color-canvas;
-    border: 2px solid tokens.$color-text;
+    color: tokens.$color-text;
+
+    .btn__bg {
+      background-color: rgba(tokens.$color-mid, 0.9);
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 0.125rem rgba(tokens.$color-mid, 1);
+      .btn__bg {
+        background-color: rgba(tokens.$color-mid, 1);
+      }
+    }
   }
 
   &--ghost {
-    background-color: transparent;
     color: tokens.$color-text;
-    border: 2px solid tokens.$color-text;
+
+    .btn__bg {
+      background-color: rgba(tokens.$color-mid, 0.95);
+    }
   }
 }

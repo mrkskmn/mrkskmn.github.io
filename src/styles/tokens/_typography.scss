@@ -1,22 +1,61 @@
+@use "colors" as colors;
+
 // Typography
 // ----------
 
-$font-family-head: "Instrument Serif", serif;
-$font-family-body: "Figtree", sans-serif;
+$font-family-display: "Instrument Serif", serif;
+$font-family-head:    "Libertinus Serif", serif;
+$font-family-body:    "Figtree", sans-serif;
 
-h1,
+*{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: $font-family-display;
+  font-size: 6.5rem;
+  line-height: 1;
+  letter-spacing: -3px;
+  font-weight: 400;
+  font-style: normal;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
   font-family: $font-family-head;
+  font-weight: 400;
 }
 
-h1 {
-  font-size: 6.5rem;
+h2 {
+  font-size: 2.75rem;
   line-height: 1;
-  letter-spacing: -3px;
-  font-weight: 400;
+  letter-spacing: -3%;
   font-style: normal;
+}
+
+// Display class
+// Applied to large hero text for custom selection styling
+
+.display {
+  pointer-events: none;
+  &::selection,
+  & *::selection {
+    background-color: transparent;
+  }
+}
+
+
+// Regular text stylings
+
+p{
+  font-family: $font-family-body;
+  line-height: 1.45;
+
+  &.lead{
+    font-size: 1.25rem;
+  }
 }

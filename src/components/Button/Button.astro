@@ -8,6 +8,8 @@ interface Props {
   variant?: "primary" | "ghost";
   icon?: any;
   strokeWidth?: number;
+  iconSize?: number;
+  size?: "compact" | "large";
 }
 
 const {
@@ -17,6 +19,8 @@ const {
   variant = "primary",
   icon: Icon,
   strokeWidth = 1.5,
+  iconSize = 20,
+  size = "compact",
 } = Astro.props;
 
 const isExternal = !href.startsWith("/");
@@ -28,8 +32,9 @@ const rel = resolvedTarget === "_blank" ? "noopener noreferrer" : undefined;
   href={href}
   target={resolvedTarget}
   rel={rel}
-  class:list={["btn", `btn--${variant}`]}
+  class:list={["btn", `btn--${variant}`, `btn--${size}`]}
 >
+  <div class="btn__bg"></div>
   {title}
-  {Icon && <Icon size={24} stroke-width={strokeWidth} />}
+  {Icon && <Icon size={iconSize} stroke-width={strokeWidth} />}
 </a>

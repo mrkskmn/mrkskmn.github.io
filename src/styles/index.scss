@@ -8,10 +8,40 @@
   padding: 0;
 }
 
+html {
+  // Reserves scrollbar gutter space at all times — prevents layout
+  // shifting/flickering when the scrollbar appears or disappears
+  scrollbar-gutter: stable;
+}
+
 body {
   background-color: tokens.$color-canvas;
   color: tokens.$color-text;
   font-family: tokens.$font-family-body;
+}
+
+// Custom scrollbar — Webkit (Chrome, Safari, Edge)
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(tokens.$color-text, 0.2);
+  border-radius: tokens.radius(full);
+
+  &:hover {
+    background-color: rgba(tokens.$color-text, 0.4);
+  }
+}
+
+// Custom scrollbar — Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(tokens.$color-text, 0.2) transparent;
 }
 
 // Global Styles
@@ -22,17 +52,50 @@ section {
   align-items: center;
   justify-content: center;
 
+  padding-left: 2rem;
+  padding-right: 2rem;
+
   .inner {
     width: 100%;
 
     &.hero {
-      max-width: tokens.$max-width-content;
-      height: 80vh;
+      max-width: tokens.max-width(content);
+      height: 85vh;
+      min-height: fit-content;
       display: flex;
       flex-direction: column;
       gap: 4rem;
       align-items: start;
       justify-content: center;
+    }
+
+    &.visual-break {
+      width: 100%;
+      max-width: tokens.max-width(full);
+
+      padding-bottom: 14.75rem;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: tokens.radius(3xl);
+        object-fit: cover;
+        aspect-ratio: 21 / 9;
+      }
+    }
+
+    &.core {
+      max-width: tokens.max-width(content);
+
+      .copy {
+        max-width: tokens.max-width(slim);
+        gap: 5rem;
+      }
+
+      .buttons {
+        position: relative;
+        left: -1rem;
+      }
     }
   }
 }
