@@ -1,0 +1,30 @@
+---
+import "./Button.scss";
+
+interface Props {
+  href: string;
+  title: string;
+  target?: "_self" | "_blank" | "_parent" | "_top";
+  variant?: "primary" | "ghost";
+}
+
+const {
+  href,
+  title,
+  target,
+  variant = "primary",
+} = Astro.props;
+
+const isExternal = !href.startsWith("/");
+const resolvedTarget = target ?? (isExternal ? "_blank" : "_self");
+const rel = resolvedTarget === "_blank" ? "noopener noreferrer" : undefined;
+---
+
+<a
+  href={href}
+  target={resolvedTarget}
+  rel={rel}
+  class:list={["btn", `btn--${variant}`]}
+>
+  {title}
+</a>

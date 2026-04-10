@@ -1,4 +1,4 @@
-@use "tokens" as tokens;
+@use "styles/tokens" as tokens;
 
 *,
 *::before,
@@ -10,14 +10,51 @@
 
 body {
   background-color: tokens.$color-canvas;
+  color: tokens.$color-text;
   font-family: tokens.$font-family-body;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: tokens.$font-family-head;
+// Global Styles
+
+section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .inner {
+    width: 100%;
+
+    &.hero {
+      max-width: tokens.$max-width-content;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      align-items: start;
+      justify-content: center;
+
+    }
+  }
+}
+
+// Local styles
+
+span.pill {
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  border: 2px solid tokens.$color-text;
+  border-radius: tokens.radius(full);
+  display: inline-flex;
+  align-items: baseline;
+  vertical-align: baseline;
+
+  div.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: tokens.radius(full);
+    background-color: tokens.$color-text;
+    margin-right: 1rem;
+    position: relative;
+    top: 0.5rem;
+  }
 }

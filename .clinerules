@@ -8,9 +8,20 @@
 
 ## Code Style
 - Use design tokens from src/styles/tokens/
-- Component-scoped SCSS files
 - Modern SCSS with @use and @forward (not @import)
 - File-based routing in src/pages/
+
+## Component Conventions
+- Every component lives in its own folder under src/components/ComponentName/
+- Each component has a matching SCSS file in the same folder: ComponentName.astro + ComponentName.scss
+- Both files use PascalCase to match (e.g. Button.astro, Button.scss)
+- The SCSS file is imported in the component's frontmatter: import "./ComponentName.scss"
+- The SCSS file imports tokens via: @use "../../styles/tokens" as tokens
+- Import components using path aliases: import Button from "@components/Button/Button.astro"
+- Import styles using path aliases: import "@styles/index.scss"
+- Available aliases: @components → src/components, @styles → src/styles, @layouts → src/layouts
+- Aliases are defined in astro.config.mjs (build) and tsconfig.json (IDE support)
+- SCSS @use also uses absolute paths from src/ root via loadPaths in astro.config.mjs: @use "styles/tokens" as tokens
 
 ## Developer Context
 - User is proficient in HTML/CSS/SCSS

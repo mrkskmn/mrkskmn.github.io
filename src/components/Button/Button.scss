@@ -1,0 +1,32 @@
+@use "styles/tokens" as tokens;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: tokens.radius(full);
+  font-family: tokens.$font-family-body;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &--primary {
+    background-color: tokens.$color-text;
+    color: tokens.$color-canvas;
+    border: 2px solid tokens.$color-text;
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: tokens.$color-text;
+    border: 2px solid tokens.$color-text;
+  }
+}

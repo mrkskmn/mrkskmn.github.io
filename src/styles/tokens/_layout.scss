@@ -1,0 +1,25 @@
+// Spacing, Sizes & Layout
+// ----------------
+
+
+// Layout 
+
+$max-width-content: 980px;   // body text / articles
+$max-width-wide: 1080px;     // wide sections
+$max-width-full: 1440px;     // full-bleed wrapper cap
+
+
+// Border radius
+
+@function radius($size) {
+  @return map-get($border-radius, $key: $size);
+}
+
+$border-radius: (
+  none: 0,
+  sm: 4px,
+  md: 8px,
+  lg: 16px,
+  full: 9999px
+);
+

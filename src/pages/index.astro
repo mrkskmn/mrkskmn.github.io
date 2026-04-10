@@ -1,17 +1,33 @@
 ---
-import "../styles/index.scss";
+import "@styles/index.scss";
+import Button from "@components/Button/Button.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Hello world!</title>
+  </head>
+  <body>
+    <section>
+      <div class="inner hero">
+        <h1>
+          I am <span class="pill"><div class="avatar"></div>Markus</span><br>
+          Design leader shaping<br>how design culture<br>thrives at scale.
+        </h1>
+
+        <Button href="https://www.haiilo.com" title="head of ux at haiilo" />
+      </div>
+    </section>
+  </body>
 </html>
