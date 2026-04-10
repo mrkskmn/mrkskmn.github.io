@@ -10,6 +10,7 @@ interface Props {
   strokeWidth?: number;
   iconSize?: number;
   size?: "compact" | "large";
+  [key: string]: any; // allows data-* and style attributes to pass through
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   strokeWidth = 1.5,
   iconSize = 20,
   size = "compact",
+  ...rest
 } = Astro.props;
 
 const isExternal = !href.startsWith("/");
@@ -33,6 +35,7 @@ const rel = resolvedTarget === "_blank" ? "noopener noreferrer" : undefined;
   target={resolvedTarget}
   rel={rel}
   class:list={["btn", `btn--${variant}`, `btn--${size}`]}
+  {...rest}
 >
   <div class="btn__bg"></div>
   {title}

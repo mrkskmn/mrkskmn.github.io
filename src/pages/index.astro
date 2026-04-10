@@ -10,7 +10,7 @@ import blueNoise from "../assets/bluenoise.jpg";
   <!-- Hero & value proposition -->
   <section>
     <div class="inner hero">
-      <h1 class="display">
+      <h1 class="display" data-animate style="--delay: 0">
         I am <span class="pill"><div class="avatar"></div>Markus</span><br />
         Design leader shaping<br />how design culture<br />thrives at scale.
       </h1>
@@ -19,13 +19,15 @@ import blueNoise from "../assets/bluenoise.jpg";
         title="head of ux at haiilo"
         size="large"
         icon={ArrowUpRight}
+        data-animate
+        style="--delay: 1"
       />
     </div>
   </section>
 
   <!-- Visual breaker -->
   <section>
-    <div class="inner visual-break">
+    <div class="inner visual-break" data-animate style="--delay: 2">
       <Image src={blueNoise} height={800} alt="" />
     </div>
   </section>
@@ -35,17 +37,17 @@ import blueNoise from "../assets/bluenoise.jpg";
     <div class="inner core">
       <div class="stack stack--h">
         <div class="copy stack stack--v">
-          <h2 class="display">
+          <h2 class="display" data-animate-scroll style="--delay: 0">
             10+ years designing products, leading teams, and figuring out how to
             make complex things simple.
           </h2>
-          <p class="lead">
+          <p class="lead" data-animate-scroll style="--delay: 1">
             Right now I'm more into building tools and shipping ideas than
             prepping case studies and documenting the past. <br /> <br />
             If you want to chat about AI tools and workflows, design culture and system,
             or whatever problem you're trying to solve - reach out.
           </p>
-          <div class="buttons stack stack--h gap--lg">
+          <div class="buttons stack stack--h gap--lg" data-animate-scroll style="--delay: 2">
             <Button
               href="mailto:hey@markus.design"
               title="hey@markus.design"
