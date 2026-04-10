@@ -11,6 +11,13 @@
 - Modern SCSS with @use and @forward (not @import)
 - File-based routing in src/pages/
 
+## Layout Conventions
+- Layouts live in src/layouts/ as flat files (no subfolder): BaseLayout.astro
+- Layouts handle all shared boilerplate: <head>, fonts, global styles, Navigation, Footer
+- Pages use layouts via: import BaseLayout from "@layouts/BaseLayout.astro"
+- Always pass a title prop to BaseLayout: <BaseLayout title="Page Title">
+- Page-specific content goes between the layout tags — it gets injected via <slot />
+
 ## Component Conventions
 - Every component lives in its own folder under src/components/ComponentName/
 - Each component has a matching SCSS file in the same folder: ComponentName.astro + ComponentName.scss

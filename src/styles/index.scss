@@ -33,7 +33,6 @@ section {
       gap: 4rem;
       align-items: start;
       justify-content: center;
-
     }
   }
 }
@@ -49,10 +48,10 @@ span.pill {
   vertical-align: baseline;
 
   div.avatar {
-    width: 90px;
-    height: 90px;
+    width: 5.625rem;
+    aspect-ratio: 1 / 1;
     border-radius: tokens.radius(full);
-    background-color: tokens.$color-text;
+    background-color: tokens.$color-accent;
     margin-right: 1rem;
     position: relative;
     top: 0.5rem;

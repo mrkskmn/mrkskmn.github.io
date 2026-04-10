@@ -7,10 +7,12 @@
 // Base colors
 
 $color-dark: #141412;
-$color-light: #F4F0EB;
+$color-light: #f4f0eb;
 
 // UI colors
 
 $color-canvas: $color-dark;
 $color-surface: rgba($color-light, 0.05);
-$color-text:$color-light
+$color-text: $color-light;
+
+$color-accent: #ff7300;
