@@ -1,0 +1,25 @@
+# Claude Code Rules for Portfolio Project
+
+## Stack
+- Astro (no React, no TypeScript)
+- SCSS only (no Tailwind)
+- pnpm as package manager
+- Minimal JavaScript (only when necessary for interactivity)
+
+## Code Style
+- Use design tokens from src/styles/tokens/
+- Component-scoped SCSS files
+- Modern SCSS with @use and @forward (not @import)
+- File-based routing in src/pages/
+
+## Developer Context
+- User is proficient in HTML/CSS/SCSS
+- User is learning JavaScript - explain JS concepts when introducing them
+- User prefers clean, readable code over clever abstractions
+- User wants to understand what's happening, not just copy-paste
+
+## Project Goals
+- Build a portfolio site to showcase design work
+- Learn modern web development workflows
+- Understand component architecture via Astro
+- Practice Git branching and deployment
