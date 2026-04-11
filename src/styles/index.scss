@@ -57,6 +57,7 @@ section {
 
   .inner {
     width: 100%;
+    padding-bottom: 14.75rem;
 
     &.hero {
       max-width: tokens.max-width(content);
@@ -67,6 +68,7 @@ section {
       gap: 4rem;
       align-items: start;
       justify-content: center;
+      padding: 0;
     }
 
     &.visual-break {
@@ -97,26 +99,124 @@ section {
         left: -1rem;
       }
     }
+
+    &.about {
+      max-width: tokens.max-width(content);
+
+      > div{ align-items: center;}
+
+      img {
+        width: 100%;
+        height: auto;
+        min-width:0;
+        border-radius: tokens.radius(2xl);
+        object-fit: cover;
+        display: block;
+      }
+
+      .copy {
+        gap: 5rem;
+      }
+
+      .buttons {
+        position: relative;
+        left: -1rem;
+      }
+    }
   }
 }
 
 // Local styles
 
 span.pill {
-  padding: 0.5rem 2.5rem 0.5rem 1rem;
-  border: 2px solid tokens.$color-text;
+  padding: 0.25rem 2.5rem 0.25rem 1rem;
+  box-shadow: inset 0 0 0 4px rgba(tokens.$color-text, .05);
   border-radius: tokens.radius(full);
   display: inline-flex;
   align-items: baseline;
   vertical-align: baseline;
+  position: relative;
+  gap: tokens.gap(lg);
 
-  div.avatar {
-    width: 5.625rem;
+  .svg.cursor {
+    color: tokens.$color-accent;
+    position:absolute;
+    width: 4rem;
     aspect-ratio: 1 / 1;
-    border-radius: tokens.radius(full);
-    background-color: tokens.$color-accent;
-    margin-right: 1rem;
+    top: -3.75rem;
+    right:-2rem;
+
+    animation: fade-up tokens.duration(slow) tokens.easing(out) both;
+    animation-delay: 700ms;
+  }
+
+  span.avatar {
+    color: tokens.$color-accent;
+    width: 91px;
+    aspect-ratio: 1 / 1;
     position: relative;
     top: 0.5rem;
+    flex-shrink: 0;
+  }
+}
+
+.svg.dots {
+  color: tokens.$color-accent;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  // Each dot fades in staggered.
+  // Change the order of IDs here to control the build-up direction.
+  // Step 1 = first to appear, higher = later.
+  $dot-order: (
+    "dot-11":  1,
+    "dot-8":  2,
+    "dot-5":  3,
+    "dot-6":  4,
+    "dot-2":  5,
+    "dot-9":  6,
+    "dot-7":  7,
+    "dot-13": 8,
+    "dot-3":  9,
+    "dot-1":  10,
+    "dot-10": 11,
+    "dot-4": 12,
+    "dot-12": 13,
+    "dot-0": 14,
+    "dot-14": 15,
+    "dot-15": 16,
+    "dot-16": 17,
+    "dot-17": 18,
+  );
+
+  // Override data-animate-scroll defaults — container stays visible,
+  // individual dots handle their own entrance animation
+  &[data-animate-scroll] {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  svg > g,
+  svg > path {
+    animation: fade tokens.duration(slow) tokens.easing(out) both;
+    animation-play-state: paused;
+  }
+
+  &.is-visible svg > g,
+  &.is-visible svg > path {
+    animation-play-state: running;
+  }
+
+  @each $id, $step in $dot-order {
+    svg > ##{$id} {
+      animation-delay: calc(var(--delay, 0) * tokens.duration(default) + #{($step - 1) * 60}ms);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    svg > g,
+    svg > path { animation: none; }
   }
 }

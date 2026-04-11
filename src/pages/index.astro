@@ -4,6 +4,10 @@ import Button from "@components/Button/Button.astro";
 import { Image } from "astro:assets";
 import { ArrowUpRight } from "@lucide/astro";
 import blueNoise from "../assets/bluenoise.jpg";
+import cursor from "../assets/cursor.svg?raw";
+import avatar from "../assets/avatar.svg?raw";
+import dots from "../assets/dots.svg?raw";
+import me from "../assets/me.png";
 ---
 
 <BaseLayout title="Start">
@@ -11,7 +15,14 @@ import blueNoise from "../assets/bluenoise.jpg";
   <section>
     <div class="inner hero">
       <h1 class="display" data-animate style="--delay: 0">
-        I am <span class="pill"><div class="avatar"></div>Markus</span><br />
+        I am
+        <span class="pill">
+          <span class="svg cursor" set:html={cursor} />
+          <span class="svg avatar" set:html={avatar} />
+          Markus
+        </span>
+
+        <br />
         Design leader shaping<br />how design culture<br />thrives at scale.
       </h1>
       <Button
@@ -43,11 +54,16 @@ import blueNoise from "../assets/bluenoise.jpg";
           </h2>
           <p class="lead" data-animate-scroll style="--delay: 1">
             Right now I'm more into building tools and shipping ideas than
-            prepping case studies and documenting the past. <br /> <br />
+            prepping case studies and documenting the past. <br />
+            <br />
             If you want to chat about AI tools and workflows, design culture and system,
             or whatever problem you're trying to solve - reach out.
           </p>
-          <div class="buttons stack stack--h gap--lg" data-animate-scroll style="--delay: 2">
+          <div
+            class="buttons stack stack--h gap--lg"
+            data-animate-scroll
+            style="--delay: 2"
+          >
             <Button
               href="mailto:hey@markus.design"
               title="hey@markus.design"
@@ -63,7 +79,57 @@ import blueNoise from "../assets/bluenoise.jpg";
             />
           </div>
         </div>
-        <div></div>
+        <span
+          class="svg dots"
+          set:html={dots}
+          data-animate-scroll
+          style="--delay: 1"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- about me -->
+  <section>
+    <div class="inner about">
+      <div class="stack stack--h gap--4xl">
+        <Image src={me} alt="Picture of me. hello!" />
+        <div class="copy stack stack--v">
+          <h2 class="display" data-animate-scroll style="--delay: 0">
+            hey. i’m markus. <br /> nice to meet you.
+          </h2>
+          <p class="lead" data-animate-scroll style="--delay: 1">
+            Born and raised in Hamburg, Germany. <br />
+            I am builder, designer, tech enthusiast that believes he can also do some
+            code. 
+            <br>
+            <br>
+            I fell in love with digital at 12, building my first websites in
+            dreamweaver and learning about css hacks on youtube and vimeo. 
+            <br>
+            <br>
+            that feeling of creating things and showing it to the world stuck with me until today.
+          </p>
+          <div
+            class="buttons stack stack--h gap--lg"
+            data-animate-scroll
+            style="--delay: 2"
+          >
+            <Button
+              href="mailto:hey@markus.design"
+              title="hey@markus.design"
+              size="large"
+              variant="ghost"
+            />
+            <Button
+              href="https://www.linkedin.com/in/markuskammin/"
+              title="LinkedIn"
+              size="large"
+              variant="ghost"
+              icon={ArrowUpRight}
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
