@@ -1,7 +1,56 @@
 ---
 import "./Footer.scss";
+
+const year = new Date().getFullYear();
+// Update the track ID in the URL to change the song
+const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5Yu1hJpkMPMiNn3Ymh4a3c?utm_source=generator";
 ---
 
 <footer class="footer">
-  <p class="footer__copy">&copy; {new Date().getFullYear()} Markus Kammin</p>
+  <div class="footer__inner">
+
+    <div class="footer__grid">
+
+      <!-- on repeat -->
+      <div class="footer__col">
+        <h3 class="footer__heading">on repeat.</h3>
+        <iframe
+          class="footer__spotify"
+          src={spotifyEmbedUrl}
+          width="100%"
+          height="152"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <!-- spacer -->
+      <div class="footer__col footer__col--empty"></div>
+
+      <!-- links -->
+      <div class="footer__col">
+        <p class="footer__col-title">All the links</p>
+        <nav class="footer__nav stack stack--v gap--lg">
+          <a href="/">home</a>
+          <a href="/notes">notes</a>
+          <a href="/cv">cv</a>
+        </nav>
+      </div>
+
+      <!-- contacts -->
+      <div class="footer__col">
+        <p class="footer__col-title">All the contacts</p>
+        <div class="footer__nav stack stack--v gap--lg">
+          <a href="https://www.linkedin.com/in/markuskammin/" target="_blank" rel="noopener noreferrer">linkedin</a>
+          <a href="https://github.com/mrkskmn" target="_blank" rel="noopener noreferrer">github</a>
+          <a href="mailto:hey@markus.design">hey@markus.design</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="footer__subline">&copy; 2025 &ndash; {year} &middot; <a href="/imprint">Imprint</a></p>
+
+  </div>
 </footer>
