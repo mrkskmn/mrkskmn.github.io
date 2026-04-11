@@ -1,0 +1,65 @@
+@use "styles/tokens" as tokens;
+
+@keyframes scribble-draw {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+.about {
+  max-width: tokens.max-width(content);
+
+  > div {
+    align-items: stretch;
+
+    .copy {
+      flex: 0 0 tokens.max-width(slim);
+    }
+  }
+
+  .about__photo {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: tokens.radius(2xl);
+      object-fit: cover;
+      display: block;
+    }
+
+    .svg.scribble {
+      color: tokens.$color-accent;
+      position: absolute;
+      bottom: -3.5rem;
+      left: -8rem;
+      pointer-events: none;
+
+      // Override data-animate-scroll defaults — we handle the reveal ourselves
+      &[data-animate-scroll] {
+        opacity: 1;
+        translate: none;
+        transition: none;
+      }
+
+      svg {
+        animation: scribble-draw 1.6s cubic-bezier(0.33, 0, 0.2, 1) both;
+        animation-play-state: paused;
+      }
+
+      &.is-visible svg {
+        animation-play-state: running;
+      }
+    }
+  }
+
+  .copy {
+    gap: 5rem;
+  }
+
+  .buttons {
+    position: relative;
+    left: -1rem;
+  }
+}

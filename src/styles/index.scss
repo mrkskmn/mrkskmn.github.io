@@ -132,29 +132,6 @@ section {
       }
     }
 
-    &.about {
-      max-width: tokens.max-width(content);
-
-      > div{ align-items: center;}
-
-      img {
-        width: 100%;
-        height: auto;
-        min-width:0;
-        border-radius: tokens.radius(2xl);
-        object-fit: cover;
-        display: block;
-      }
-
-      .copy {
-        gap: 5rem;
-      }
-
-      .buttons {
-        position: relative;
-        left: -1rem;
-      }
-    }
   }
 }
 
@@ -230,25 +207,26 @@ span.pill {
     transition: none;
   }
 
-  svg > g,
-  svg > path {
+  // Dots are grandchildren of svg (wrapped in outer texture <g>)
+  svg > g > g,
+  svg > g > path {
     animation: fade tokens.duration(slow) tokens.easing(out) both;
     animation-play-state: paused;
   }
 
-  &.is-visible svg > g,
-  &.is-visible svg > path {
+  &.is-visible svg > g > g,
+  &.is-visible svg > g > path {
     animation-play-state: running;
   }
 
   @each $id, $step in $dot-order {
-    svg > ##{$id} {
+    svg ##{$id} {
       animation-delay: calc(var(--delay, 0) * tokens.duration(default) + #{($step - 1) * 60}ms);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    svg > g,
-    svg > path { animation: none; }
+    svg > g > g,
+    svg > g > path { animation: none; }
   }
 }

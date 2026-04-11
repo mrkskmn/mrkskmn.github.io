@@ -2,6 +2,9 @@
 import "./Navigation.scss";
 import Button from "@components/Button/Button.astro";
 import { ArrowUpRight } from "@lucide/astro";
+
+const showNotes = false;
+const showCV    = true;
 ---
 
 <nav class="nav">
@@ -10,18 +13,22 @@ import { ArrowUpRight } from "@lucide/astro";
       <li>
         <Button href="/" title="Home" size="compact" variant="ghost" />
       </li>
-      <li>
-        <Button href="/notes" title="Notes" size="compact" variant="ghost" />
-      </li>
-      <li>
-        <Button
-          href="#"
-          title="CV"
-          size="compact"
-          variant="ghost"
-          icon={ArrowUpRight}
-        />
-      </li>
+      {showNotes && (
+        <li>
+          <Button href="/notes" title="Notes" size="compact" variant="ghost" />
+        </li>
+      )}
+      {showCV && (
+        <li>
+          <Button
+            href="#"
+            title="CV"
+            size="compact"
+            variant="ghost"
+            icon={ArrowUpRight}
+          />
+        </li>
+      )}
     </ul>
     <Button
       href="mailto:hey@markus.design"
