@@ -9,6 +9,10 @@
   }
 }
 
+section:has(.about){
+  overflow-x: hidden;
+}
+
 .about {
   max-width: tokens.max-width(content);
 
@@ -92,7 +96,8 @@
         }
 
       .svg.scribble {
-        left: 7rem;
+        left: unset;
+        right: -2rem;
         bottom: -9rem;
       }
     }
