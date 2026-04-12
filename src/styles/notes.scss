@@ -3,7 +3,7 @@
 // ─── Cards grid ──────────────────────────────────────────────────────────────
 
 .notes-cards {
-  max-width: tokens.max-width(content);
+  max-width: tokens.max-width(full);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: tokens.gap(xl);
@@ -49,7 +49,7 @@
 // ─── Featured card ────────────────────────────────────────────────────────────
 
 .note-card--featured {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
   background: linear-gradient(160deg, #c8901a 0%, #7a4f0a 60%, #1a120a 100%);
 
   // Gradient overlay so text stays readable
@@ -106,7 +106,7 @@
 // ─── Text notes list ─────────────────────────────────────────────────────────
 
 .notes-list {
-  // max-width: tokens.max-width(slim);
+  max-width: tokens.max-width(content);
   width: 100%;
   margin-inline: auto;
   margin-top: tokens.gap(3xl);

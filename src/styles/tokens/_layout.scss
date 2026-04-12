@@ -33,7 +33,7 @@ $max-width: (
   slim: 500px,
   content: 980px,   // body text / articles
   wide: 1080px,     // wide sections
-  full: 2000px,     // full-bleed wrapper cap
+  full: 1600px,     // full-bleed wrapper cap
 );
 
 @function max-width($size) {

@@ -96,7 +96,7 @@ section {
 
       .buttons {
         position: relative;
-        left: -1rem;
+        // left: -1rem;
         align-self: flex-start;
       }
     }
@@ -118,12 +118,20 @@ section {
         gap: tokens.gap(lg);
 
         // Top row: two equal halves
-        .work__item:nth-child(1) { grid-column: 1 / 4; }
-        .work__item:nth-child(2) { grid-column: 4 / 7; }
+        .work__item:nth-child(1) {
+          grid-column: 1 / 4;
+        }
+        .work__item:nth-child(2) {
+          grid-column: 4 / 7;
+        }
 
         // Bottom row: narrow left, wide right
-        .work__item:nth-child(3) { grid-column: 1 / 3; }
-        .work__item:nth-child(4) { grid-column: 3 / 7; }
+        .work__item:nth-child(3) {
+          grid-column: 1 / 3;
+        }
+        .work__item:nth-child(4) {
+          grid-column: 3 / 7;
+        }
       }
 
       .work__item {
@@ -132,7 +140,6 @@ section {
         overflow: hidden;
       }
     }
-
   }
 }
 
@@ -155,6 +162,10 @@ section {
         padding-top: 6rem;
         padding-bottom: 4rem;
         gap: 2rem;
+
+        h1 br {
+          display: none;
+        }
       }
 
       &.visual-break {
@@ -173,7 +184,7 @@ section {
           flex-direction: column;
         }
 
-        span.svg.dots{
+        span.svg.dots {
           position: absolute;
           top: 1.375rem;
           right: -14.125rem;
@@ -202,7 +213,9 @@ section {
           .work__item:nth-child(1),
           .work__item:nth-child(2),
           .work__item:nth-child(3),
-          .work__item:nth-child(4) { grid-column: 1; }
+          .work__item:nth-child(4) {
+            grid-column: 1;
+          }
         }
 
         .work__item {
@@ -213,11 +226,7 @@ section {
   }
 
   span.pill {
-    .svg.cursor { display: none; }
-
-    span.avatar {
-      width: 64px;
-    }
+    // .svg.cursor { display: none; }
   }
 
   .svg.dots {
@@ -229,7 +238,7 @@ section {
 
 span.pill {
   padding: 0.25rem 2.5rem 0.25rem 1rem;
-  box-shadow: inset 0 0 0 4px rgba(tokens.$color-text, .05);
+  box-shadow: inset 0 0 0 4px rgba(tokens.$color-text, 0.05);
   border-radius: tokens.radius(full);
   display: inline-flex;
   align-items: baseline;
@@ -237,13 +246,18 @@ span.pill {
   position: relative;
   gap: tokens.gap(lg);
 
+  @include tokens.below(md) {
+    padding-left: 0.5rem;
+    padding-right: 1.375rem;
+  }
+
   .svg.cursor {
     color: tokens.$color-accent;
-    position:absolute;
-    width: 4rem;
+    position: absolute;
+    width: 0.675em;
     aspect-ratio: 1 / 1;
-    top: -3.75rem;
-    right:-2rem;
+    top: -0.5em;
+    right: -0.35em;
 
     animation: fade-up tokens.duration(slow) tokens.easing(out) both;
     animation-delay: 700ms;
@@ -251,10 +265,10 @@ span.pill {
 
   span.avatar {
     color: tokens.$color-accent;
-    width: 91px;
+    width: 0.875em;
     aspect-ratio: 1 / 1;
     position: relative;
-    top: 0.5rem;
+    top: 0.075em;
     flex-shrink: 0;
   }
 }
@@ -269,16 +283,16 @@ span.pill {
   // Change the order of IDs here to control the build-up direction.
   // Step 1 = first to appear, higher = later.
   $dot-order: (
-    "dot-11":  1,
-    "dot-8":  2,
-    "dot-5":  3,
-    "dot-6":  4,
-    "dot-2":  5,
-    "dot-9":  6,
-    "dot-7":  7,
+    "dot-11": 1,
+    "dot-8": 2,
+    "dot-5": 3,
+    "dot-6": 4,
+    "dot-2": 5,
+    "dot-9": 6,
+    "dot-7": 7,
     "dot-13": 8,
-    "dot-3":  9,
-    "dot-1":  10,
+    "dot-3": 9,
+    "dot-1": 10,
     "dot-10": 11,
     "dot-4": 12,
     "dot-12": 13,
@@ -311,12 +325,16 @@ span.pill {
 
   @each $id, $step in $dot-order {
     svg ##{$id} {
-      animation-delay: calc(var(--delay, 0) * tokens.duration(default) + #{($step - 1) * 60}ms);
+      animation-delay: calc(
+        var(--delay, 0) * tokens.duration(default) + #{($step - 1) * 60}ms
+      );
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     svg > g > g,
-    svg > g > path { animation: none; }
+    svg > g > path {
+      animation: none;
+    }
   }
 }

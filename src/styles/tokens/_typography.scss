@@ -1,4 +1,5 @@
 @use "colors" as colors;
+@use "layout" as layout;
 
 // Typography
 // ----------
@@ -19,6 +20,11 @@ h1 {
   letter-spacing: -3px;
   font-weight: 400;
   font-style: normal;
+
+  @include layout.below(md) {
+    font-size: 4rem;
+  }
+
 }
 
 h2,
