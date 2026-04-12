@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@lucide/astro": "^1.8.0",
-    "astro": "^6.1.5"
+    "astro": "^6.1.5",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "sass-embedded": "^1.99.0"
