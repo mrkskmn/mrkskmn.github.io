@@ -79,6 +79,7 @@ section:has(.about){
   .about {
     > div {
       flex-direction: column;
+      gap: tokens.gap(2xl);
 
       .copy {
         flex: unset;

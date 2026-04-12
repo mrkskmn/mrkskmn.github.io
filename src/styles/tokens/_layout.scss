@@ -20,7 +20,7 @@ $breakpoints: (
 
 $page-padding-x: (
   default: 2rem,
-  mobile:  2.5rem,
+  mobile:  1.25rem,
 );
 
 @function page-padding-x($size: default) {
