@@ -1,8 +1,12 @@
 @use "styles/tokens" as tokens;
 
 @keyframes scribble-draw {
-  from { clip-path: inset(0 100% 0 0); }
-  to   { clip-path: inset(0 0% 0 0); }
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
 }
 
 .about {
@@ -61,5 +65,44 @@
   .buttons {
     position: relative;
     left: -1rem;
+    align-self: flex-start;
+  }
+}
+
+// Responsive
+
+@include tokens.below(md) {
+  .about {
+    > div {
+      flex-direction: column;
+
+      .copy {
+        flex: unset;
+        width: 100%;
+      }
+    }
+
+    .about__photo {
+    
+        img {
+      width: 100%;
+      max-height: 360px;
+
+      object-position: 0 -2.5rem;
+        }
+
+      .svg.scribble {
+        left: 7rem;
+        bottom: -9rem;
+      }
+    }
+
+    .copy {
+      gap: 2.5rem;
+    }
+
+    .buttons {
+      flex-wrap: wrap;
+    }
   }
 }

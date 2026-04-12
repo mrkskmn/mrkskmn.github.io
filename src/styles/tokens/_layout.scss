@@ -1,7 +1,31 @@
 @use "sass:map";
 
+// Breakpoints
+
+$breakpoints: (
+  md: 768px,
+  sm: 480px,
+);
+
+@mixin below($bp) {
+  @media (max-width: #{map.get($breakpoints, $bp)}) {
+    @content;
+  }
+}
+
 // Spacing, Sizes & Layout
 // ----------------
+
+// Page padding
+
+$page-padding-x: (
+  default: 2rem,
+  mobile:  2.5rem,
+);
+
+@function page-padding-x($size: default) {
+  @return map.get($page-padding-x, $size);
+}
 
 // Layout
 
@@ -47,6 +71,36 @@ $gap: (
   .gap--#{$name} {
     gap: $value;
   }
+}
+
+// Z-index
+//
+// Named layers in stacking order:
+//
+//  below      (-1)  — decorative elements that sit behind normal flow
+//                     (button hover bg, dot texture decoration)
+//  base        (0)  — default document stacking, no explicit z-index needed
+//  raised      (1)  — content that must clear a local overlay
+//                     (card text above ::after gradient, button label above .btn__bg)
+//  dropdown  (100)  — floating menus, tooltips (reserved)
+//  overlay   (200)  — drawers, sheets (reserved)
+//  modal     (300)  — dialogs (reserved)
+//  toast     (400)  — notifications (reserved)
+//  nav      (1000)  — sticky / fixed navigation bar
+
+$z-index: (
+  below:    -1,
+  base:      0,
+  raised:    1,
+  dropdown: 100,
+  overlay:  200,
+  modal:    300,
+  toast:    400,
+  nav:     1000,
+);
+
+@function z($layer) {
+  @return map.get($z-index, $layer);
 }
 
 // Border radius

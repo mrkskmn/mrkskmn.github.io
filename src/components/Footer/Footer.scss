@@ -80,3 +80,32 @@
     }
   }
 }
+
+// Responsive
+
+@include tokens.below(md) {
+  .footer {
+    padding: 0 tokens.page-padding-x(mobile) 4rem;
+
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__col--spotify {
+      grid-column: 1 / -1;
+    }
+
+    &__col--empty {
+      display: none;
+    }
+
+    &__spotify {
+      min-width: unset;
+      width: 100%;
+    }
+
+    &__col-title {
+      padding-top: 2rem;
+    }
+  }
+}

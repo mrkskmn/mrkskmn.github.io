@@ -10,7 +10,7 @@
   top: 0;
   background-color: rgba(tokens.$color-canvas, 0.95);
   backdrop-filter: blur(1rem);
-  z-index: 1000;
+  z-index: tokens.z(nav);
 
   .inner {
     width: 100%;
@@ -30,7 +30,7 @@
     align-items: center;
     gap: .125rem;
     list-style: none;
-    position: relative; 
+    position: relative;
     left: -.75rem; // Adjust for button padding
 
     a {
@@ -44,6 +44,18 @@
       &:hover {
         opacity: 1;
       }
+    }
+  }
+}
+
+// Responsive
+
+@include tokens.below(md) {
+  .nav {
+    padding: 0.75rem tokens.page-padding-x(mobile);
+
+    .nav__email {
+      display: none;
     }
   }
 }

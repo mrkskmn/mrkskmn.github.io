@@ -30,7 +30,7 @@
   .btn__bg {
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: tokens.z(below);
     border-radius: tokens.radius(md);
     transform: scale(0);
     opacity: 0;
@@ -41,7 +41,7 @@
   // Keep text and icon above the background
   > :not(.btn__bg) {
     position: relative;
-    z-index: 1;
+    z-index: tokens.z(raised);
   }
 
   &:hover .btn__bg {
