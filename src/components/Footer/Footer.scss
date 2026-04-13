@@ -8,7 +8,7 @@
     max-width: tokens.max-width(content);
     margin: 0 auto;
     padding-top: 3.5rem;
-    border-top: 1px solid rgba(tokens.$color-text, 0.12);
+    border-top: 1px solid tokens.color-alpha(tokens.$color-text, 0.12);
     display: flex;
     flex-direction: column;
     gap: 4rem;

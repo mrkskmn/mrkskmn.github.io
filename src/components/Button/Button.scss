@@ -54,15 +54,15 @@
     color: tokens.$color-text;
 
     .btn__bg {
-      background-color: rgba(tokens.$color-mid, 0.9);
+      background-color: tokens.color-alpha(tokens.$color-mid, 0.9);
       transform: scale(1);
       opacity: 1;
     }
 
     &:hover {
-      box-shadow: 0 0 0 0.125rem rgba(tokens.$color-mid, 1);
+      box-shadow: 0 0 0 0.125rem tokens.$color-mid;
       .btn__bg {
-        background-color: rgba(tokens.$color-mid, 1);
+        background-color: tokens.$color-mid;
       }
     }
   }
@@ -71,7 +71,7 @@
     color: tokens.$color-text;
 
     .btn__bg {
-      background-color: rgba(tokens.$color-mid, 0.95);
+      background-color: tokens.color-alpha(tokens.$color-mid, 0.95);
     }
   }
 }

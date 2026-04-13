@@ -13,12 +13,12 @@ import dots from "../assets/dots.svg?raw";
 <BaseLayout title="Start">
   <!-- Hero & value proposition -->
   <section>
-    <div class="inner hero">
+    <div class="inner inner--hero">
       <h1 class="display" data-animate style="--delay: 0">
         I am
         <span class="pill">
-          <span class="svg cursor" set:html={cursor} />
-          <span class="svg avatar" set:html={avatar} />
+          <span class="svg--cursor" set:html={cursor} />
+          <span class="avatar" set:html={avatar} />
           Markus
         </span>
 
@@ -42,20 +42,21 @@ import dots from "../assets/dots.svg?raw";
           icon={ArrowUpRight}
           data-animate
           style="--delay: 2"
+        />
       </div>
     </div>
   </section>
 
   <!-- Visual breaker -->
   <section>
-    <div class="inner visual-break" data-animate style="--delay: 2">
+    <div class="inner inner--visual-break" data-animate style="--delay: 2">
       <Image src={blueNoise} height={800} alt="" />
     </div>
   </section>
 
   <!-- Core section -->
   <section class="section--core">
-    <div class="inner core">
+    <div class="inner inner--core">
       <div class="stack stack--h">
         <div class="copy stack stack--v">
           <h2 class="display" data-animate-scroll style="--delay: 0">
@@ -90,7 +91,7 @@ import dots from "../assets/dots.svg?raw";
           </div>
         </div>
         <span
-          class="svg dots"
+          class="svg--dots"
           set:html={dots}
           data-animate-scroll
           style="--delay: 1"
@@ -101,7 +102,7 @@ import dots from "../assets/dots.svg?raw";
 
   <!-- work grid -->
   <section>
-    <div class="inner work">
+    <div class="inner inner--work">
       <div class="work__grid">
         <div class="work__item"></div>
         <div class="work__item"></div>
