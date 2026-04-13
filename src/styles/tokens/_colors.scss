@@ -19,7 +19,7 @@ $color-surface: #1B1818;
 :root,
 [data-theme="dark"] {
   --color-canvas:     #{$color-dark};
-  --color-surface:    #{rgba($color-light, 0.02)};
+  --color-surface:    #{rgba($color-light, 0.035)};
   --color-mid:        #{$color-mid};
   --color-text:       #{$color-light};
   --color-text-muted: #{rgba($color-light, 0.5)};
@@ -28,7 +28,7 @@ $color-surface: #1B1818;
 
 [data-theme="light"] {
   --color-canvas:     #{$color-light};
-  --color-surface:    #{rgba($color-dark, 0.02)};
+  --color-surface:    #{rgba($color-dark, 0.035)};
   --color-mid:        #{rgba($color-mid, 0.08)};
   --color-text:       #{$color-dark};
   --color-text-muted: #{rgba($color-dark, 0.5)};
