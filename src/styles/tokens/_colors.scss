@@ -1,20 +1,54 @@
 // Colors
 // ------
-// canvas   – page background
-// surface  – card / panel background
-// border   – dividers and outlines
+// canvas        – page background
+// surface       – card / panel background
+// text          – primary text
+// text-muted    – secondary / dimmed text
+// accent        – brand orange
 
-// Base colors
+// ─── Raw palette ─────────────────────────────────────────────────────────────
 
-$color-dark: #141412;
-$color-mid: #201E1E;
-$color-light: #f4f0eb;
-
-// UI colors
-
-$color-canvas: $color-dark;
-$color-surface: rgba($color-light, 0.02);
-$color-text: $color-light;
-$color-text-muted: rgba($color-text, 0.5);
-
+$color-dark:   #141412;
+$color-mid:    #201E1E;
+$color-light:  #f4f0eb;
 $color-accent: #ff7300;
+$color-surface: #100E0E;
+
+// ─── Theme definitions ───────────────────────────────────────────────────────
+
+:root,
+[data-theme="dark"] {
+  --color-canvas:     #{$color-dark};
+  --color-surface:    #{$color-surface};
+  --color-mid:        #{$color-mid};
+  --color-text:       #{$color-light};
+  --color-text-muted: #{rgba($color-light, 0.5)};
+  --color-accent:     #{$color-accent};
+}
+
+[data-theme="light"] {
+  --color-canvas:     #{$color-light};
+  --color-surface:    #{rgba($color-surface, 0.05)};
+  --color-mid:        #{rgba($color-mid, 0.08)};
+  --color-text:       #{$color-dark};
+  --color-text-muted: #{rgba($color-dark, 0.5)};
+  --color-accent:     #{$color-accent};
+}
+
+// ─── SCSS aliases → CSS custom properties ────────────────────────────────────
+// All existing token consumers continue to work unchanged.
+
+$color-canvas:     var(--color-canvas);
+$color-surface:    var(--color-surface);
+$color-mid:        var(--color-mid);
+$color-text:       var(--color-text);
+$color-text-muted: var(--color-text-muted);
+$color-accent:     var(--color-accent);
+
+// ─── Alpha helper ─────────────────────────────────────────────────────────────
+// Replaces rgba(tokens.$color-X, 0.5) which breaks with CSS custom properties.
+// Usage: tokens.color-alpha(tokens.$color-text, 0.5)
+
+@function color-alpha($color, $alpha) {
+  @return color-mix(in srgb, #{$color} #{$alpha * 100%}, transparent);
+}

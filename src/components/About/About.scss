@@ -1,15 +1,13 @@
 @use "styles/tokens" as tokens;
 
 @keyframes scribble-draw {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0% 0 0);
-  }
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
 }
 
-section:has(.about){
+// Clip overflow so the scribble SVG doesn't cause horizontal scroll.
+// Applied to the wrapping section via :has() since About is a component.
+section:has(.about) {
   overflow-x: hidden;
 }
 
@@ -24,7 +22,7 @@ section:has(.about){
     }
   }
 
-  .about__photo {
+  &__photo {
     position: relative;
     flex: 1;
     min-width: 0;
@@ -37,7 +35,7 @@ section:has(.about){
       display: block;
     }
 
-    .svg.scribble {
+    .svg--scribble {
       color: tokens.$color-accent;
       position: absolute;
       bottom: -3.5rem;
@@ -73,7 +71,7 @@ section:has(.about){
   }
 }
 
-// Responsive
+// ─── Responsive ───────────────────────────────────────────────────────────────
 
 @include tokens.below(md) {
   .about {
@@ -87,16 +85,14 @@ section:has(.about){
       }
     }
 
-    .about__photo {
-    
-        img {
-      width: 100%;
-      max-height: 360px;
+    &__photo {
+      img {
+        width: 100%;
+        max-height: 360px;
+        object-position: 0 -2.5rem;
+      }
 
-      object-position: 0 -2.5rem;
-        }
-
-      .svg.scribble {
+      .svg--scribble {
         left: unset;
         right: -2rem;
         bottom: -9rem;
