@@ -3,9 +3,9 @@ import "../styles/notes.scss";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import About from "@components/About/About.astro";
-import bluenoise from "../assets/bluenoise.jpg";
-import orangenoise from "../assets/orangenoise.jpg";
-import noise1 from "../assets/noise-1.jpg";
+import bluenoise from "../assets/bluenoise.jpg?url";
+import orangenoise from "../assets/orangenoise.jpg?url";
+import noise1 from "../assets/noise-1.jpg?url";
 ---
 
 <BaseLayout title="Notes">
@@ -24,7 +24,7 @@ import noise1 from "../assets/noise-1.jpg";
       <article class="note-card" data-animate style="--delay: 3">
         <div
           class="note-card__image"
-          style={`background-image: url("${bluenoise.src});"`}
+          style={`background-image: url("${bluenoise}");`}
         >
         </div>
 
@@ -37,7 +37,7 @@ import noise1 from "../assets/noise-1.jpg";
       <article class="note-card" data-animate style="--delay: 4">
         <div
           class="note-card__image"
-          style={`background-image: url("${noise1.src});"`}
+          style={`background-image: url("${noise1}");`}
         >
         </div>
         <div class="note-card__content">
@@ -50,7 +50,7 @@ import noise1 from "../assets/noise-1.jpg";
       <article class="note-card" data-animate style="--delay: 5">
         <div
           class="note-card__image"
-          style={`background-image: url("${orangenoise.src});"`}
+          style={`background-image: url("${orangenoise}");`}
         >
         </div>
         <div class="note-card__content">
@@ -63,7 +63,7 @@ import noise1 from "../assets/noise-1.jpg";
       <article class="note-card" data-animate style="--delay: 6">
         <div
           class="note-card__image"
-          style={`background-image: url("${noise1.src});"`}
+          style={`background-image: url("${noise1}");`}
         >
         </div>
         <div class="note-card__content">
