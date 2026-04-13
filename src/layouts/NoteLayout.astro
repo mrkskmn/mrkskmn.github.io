@@ -1,0 +1,45 @@
+---
+import "../styles/note.scss";
+import BaseLayout from "./BaseLayout.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  note: CollectionEntry<"notes">;
+}
+
+const { note } = Astro.props;
+const { title, subline, image, publishedAt, updatedAt } = note.data;
+
+const formatted = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<BaseLayout title={title}>
+
+  <!-- Hero image -->
+  <section class="note-hero">
+    <img src={image} alt={title} class="note-hero__image" />
+  </section>
+
+  <!-- Header -->
+  <section>
+    <div class="inner inner--note-header">
+      <p class="note-meta" data-animate style="--delay: 0">
+        {formatted(publishedAt)}
+        {updatedAt && <span class="note-meta__updated"> · Updated {formatted(updatedAt)}</span>}
+      </p>
+      <h1 class="display" data-animate style="--delay: 1">{title}</h1>
+      <p class="note-subline lead" data-animate style="--delay: 2">{subline}</p>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <section>
+    <div class="inner inner--note-body">
+      <div class="note-body">
+        <slot />
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

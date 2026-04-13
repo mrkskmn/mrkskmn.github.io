@@ -1,0 +1,165 @@
+@use "styles/tokens" as tokens;
+
+// ─── Hero image ───────────────────────────────────────────────────────────────
+
+.note-hero {
+  width: 100%;
+  padding: 0 2rem;
+  overflow: hidden;
+
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 21 / 9;
+    border-radius: tokens.radius(2xl);
+    max-width: tokens.max-width(full);
+    margin: 0 auto;
+  }
+}
+
+// ─── Header ──────────────────────────────────────────────────────────────────
+
+.inner.inner--note-header{
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.inner--note-header {
+  max-width: tokens.max-width(content);
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+}
+
+.note-meta {
+  font-family: tokens.$font-family-body;
+  font-size: 0.875rem;
+  color: tokens.$color-text-muted;
+
+  &__updated {
+    opacity: 0.7;
+  }
+}
+
+.note-subline {
+  color: tokens.$color-text-muted;
+  max-width: tokens.max-width(slim);
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
+.inner--note-body {
+  max-width: tokens.max-width(content);
+  padding-bottom: 10rem;
+}
+
+.note-body {
+  max-width: tokens.max-width(content);
+  max-width: 680px;;
+  margin: 0 auto;
+
+  // Spacing only — font sizes and families come from global typography
+  h2 { margin-top: 3.5rem;  margin-bottom: 1rem; }
+  h3 { margin-top: 2.5rem;  margin-bottom: 0.75rem; }
+  h4 { margin-top: 2rem;    margin-bottom: 0.5rem; }
+
+  p  { margin-bottom: 1.5rem; }
+
+  a {
+    color: tokens.$color-text;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.8;
+
+    &:hover { opacity: 1; }
+  }
+
+  img {
+    width: 100%;
+    border-radius: tokens.radius(xl);
+    margin: 2rem 0;
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+
+    li { margin-bottom: 0.5rem; }
+  }
+
+  blockquote {
+    border-left: 2px solid tokens.$color-accent;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: tokens.$color-text-muted;
+    font-style: italic;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid tokens.color-alpha(tokens.$color-text, 0.1);
+    margin: 3rem 0;
+  }
+
+  code {
+    font-size: 0.875em;
+    background: tokens.color-alpha(tokens.$color-text, 0.06);
+    padding: 0.15em 0.4em;
+    border-radius: tokens.radius(sm);
+  }
+
+  pre {
+    background: tokens.color-alpha(tokens.$color-text, 0.06);
+    padding: 1.5rem;
+    border-radius: tokens.radius(lg);
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+
+    code { background: none; padding: 0; }
+  }
+}
+
+// ─── Wide layout block (MDX component) ───────────────────────────────────────
+// Usage inside .mdx: <Wide> ...content... </Wide>
+
+.note-wide {
+  // Break out of the slim note body column, capped at 1200px and centered.
+  // min(1200px, 100vw) ensures it never exceeds the viewport on small screens.
+  // margin-left shifts by 50% of parent minus 50% of own width to center it.
+  $wide-max: 1200px;
+  width: min(#{$wide-max}, 100vw);
+  margin-left: calc(50% - min(#{$wide-max} / 2, 50vw));
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+  padding: 0 tokens.page-padding-x(default);
+
+  img {
+    width: 100%;
+    border-radius: tokens.radius(xl);
+    margin: 0;
+  }
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@include tokens.below(md) {
+  .note-hero__image {
+    height: 40vh;
+  }
+
+  .inner--note-header {
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+    gap: 1rem;
+
+  }
+
+  .note-wide {
+    padding: 0 tokens.page-padding-x(mobile);
+  }
+}

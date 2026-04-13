@@ -1,0 +1,11 @@
+---
+// Wide — breaks out of the note body column for full-width content.
+// Usage inside any .mdx file:
+//   import Wide from "@components/Note/Wide.astro"
+//   <Wide> ![image](./image.jpg) </Wide>
+//   <Wide> <CustomContent /> </Wide>
+---
+
+<div class="note-wide">
+  <slot />
+</div>
