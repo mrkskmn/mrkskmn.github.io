@@ -6,6 +6,7 @@
   max-width: tokens.max-width(full);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   align-items: start;
   gap: tokens.gap(2xl);
 
@@ -23,9 +24,15 @@
   text-decoration: none;
   color: tokens.$color-text;
   transition: opacity tokens.duration(fast) tokens.easing(out);
+  max-width: tokens.max-width(content);
+  margin: 0 auto;
 
   &:hover {
     opacity: 0.8;
+
+    img{
+      transform: scale(1.05);
+    } 
   }
 
   &__image {
@@ -40,6 +47,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform tokens.duration(default) tokens.easing(in-out);
     }
   }
 
