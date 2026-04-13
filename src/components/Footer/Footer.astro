@@ -2,9 +2,14 @@
 import "./Footer.scss";
 
 const year = new Date().getFullYear();
-// Update the track ID in the URL to change the song
-const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5Yu1hJpkMPMiNn3Ymh4a3c";
+
+const spotifyTracks = [
+  "https://open.spotify.com/embed/track/5Yu1hJpkMPMiNn3Ymh4a3c",
+  "https://open.spotify.com/embed/track/1x6wjqiZIx47WgVrCY15k2",
+  "https://open.spotify.com/embed/track/5wMhlHcon8U2WNA05QMUb6",
+];
 ---
+
 
 <footer class="footer">
   <div class="footer__inner">
@@ -15,10 +20,12 @@ const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5Yu1hJpkMPMiNn3Ymh
       <div class="footer__col footer__col--spotify">
         <h3 class="footer__heading">on repeat.</h3>
         <iframe
+          id="spotify-embed"
           class="footer__spotify"
-          src={spotifyEmbedUrl}
+          src={spotifyTracks[0]}
+          data-tracks={JSON.stringify(spotifyTracks)}
           width="100%"
-          height=152"
+          height="152"
           frameborder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="eager"
@@ -54,3 +61,17 @@ const spotifyEmbedUrl = "https://open.spotify.com/embed/track/5Yu1hJpkMPMiNn3Ymh
 
   </div>
 </footer>
+
+<script>
+  function randomiseSpotify() {
+    const iframe = document.getElementById("spotify-embed") as HTMLIFrameElement;
+    if (!iframe) return;
+    const tracks: string[] = JSON.parse(iframe.dataset.tracks ?? "[]");
+    if (!tracks.length) return;
+    const pick = tracks[Math.floor(Math.random() * tracks.length)];
+    iframe.src = pick;
+  }
+
+  // Run on initial load and after every client-side navigation
+  document.addEventListener("astro:page-load", randomiseSpotify);
+</script>
