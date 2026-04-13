@@ -111,7 +111,7 @@ section {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: 4fr 3fr;
-        gap: tokens.gap(lg);
+        gap: tokens.gap(xl);
 
         // Top row: two equal halves
         .work__item:nth-child(1) { grid-column: 1 / 4; }

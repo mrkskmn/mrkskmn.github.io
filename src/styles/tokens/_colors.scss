@@ -9,17 +9,17 @@
 // ─── Raw palette ─────────────────────────────────────────────────────────────
 
 $color-dark:   #141412;
-$color-mid:    #201E1E;
+$color-mid:    #292828;
 $color-light:  #f4f0eb;
 $color-accent: #ff7300;
-$color-surface: #100E0E;
+$color-surface: #1B1818;
 
 // ─── Theme definitions ───────────────────────────────────────────────────────
 
 :root,
 [data-theme="dark"] {
   --color-canvas:     #{$color-dark};
-  --color-surface:    #{$color-surface};
+  --color-surface:    #{rgba($color-light, 0.02)};
   --color-mid:        #{$color-mid};
   --color-text:       #{$color-light};
   --color-text-muted: #{rgba($color-light, 0.5)};
@@ -28,7 +28,7 @@ $color-surface: #100E0E;
 
 [data-theme="light"] {
   --color-canvas:     #{$color-light};
-  --color-surface:    #{rgba($color-surface, 0.05)};
+  --color-surface:    #{rgba($color-dark, 0.02)};
   --color-mid:        #{rgba($color-mid, 0.08)};
   --color-text:       #{$color-dark};
   --color-text-muted: #{rgba($color-dark, 0.5)};

@@ -25,6 +25,7 @@
   text-decoration: none;
   color: tokens.$color-text;
   position: relative;
+  color: var(--color-text);
 
   .note-card__content {
     padding: 4rem;
@@ -47,16 +48,16 @@
 
 .note-card--featured {
   aspect-ratio: 16 / 9;
-  background: linear-gradient(160deg, #c8901a 0%, #7a4f0a 60%, #1a120a 100%);
-  color: #fff;
+  // background: linear-gradient(160deg, #c8901a 0%, #7a4f0a 60%, #1a120a 100%);
+  background: var(--color-surface);
 
   // Gradient overlay so text stays readable
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   inset: 0;
+  //   background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+  // } 
 
 }
 
@@ -64,15 +65,15 @@
 
 .note-card--image {
   aspect-ratio: 16 / 9;
-  background: linear-gradient(160deg, #2a3d6e 0%, #0e1a3a 60%, #060d1f 100%);
-  color: #fff;
+  // background: linear-gradient(160deg, #2a3d6e 0%, #0e1a3a 60%, #060d1f 100%);
+  background: var(--color-surface);
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   inset: 0;
+  //   background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+  // }
 }
 
 // ─── Tip card ─────────────────────────────────────────────────────────────────
