@@ -69,6 +69,8 @@
     font-family: tokens.$font-family-body;
     font-size: 0.875rem;
     color: tokens.$color-text-muted;
+    display:flex;
+    gap: tokens.gap(lg);
 
     a {
       color: tokens.$color-text-muted;
