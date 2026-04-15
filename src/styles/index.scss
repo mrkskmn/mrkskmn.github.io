@@ -248,6 +248,23 @@ section {
   }
 }
 
+// ─── Theme transition ─────────────────────────────────────────────────────────
+// Temporarily applied by JS during a theme switch so color changes animate
+// without permanently overriding transitions on other elements.
+
+.is-theme-transitioning {
+  *,
+  *::before,
+  *::after {
+    transition:
+      color tokens.duration(default) tokens.easing(out),
+      background-color tokens.duration(default) tokens.easing(out),
+      border-color tokens.duration(default) tokens.easing(out),
+      box-shadow tokens.duration(default) tokens.easing(out),
+      fill tokens.duration(default) tokens.easing(out) !important;
+  }
+}
+
 // ─── Pill ─────────────────────────────────────────────────────────────────────
 
 .pill {
@@ -284,6 +301,7 @@ section {
     position: relative;
     top: 0.075em;
     flex-shrink: 0;
+    user-select: none;
   }
 }
 

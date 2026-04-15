@@ -47,7 +47,7 @@ h2 {
 // Applied to large hero text for custom selection styling
 
 .display {
-  pointer-events: none;
+  user-select: none;
   &::selection,
   & *::selection {
     background-color: transparent;
@@ -57,7 +57,7 @@ h2 {
 
 // Regular text stylings
 
-p{
+p, ul, li{
   font-family: $font-family-body;
   line-height: 1.45;
   font-size: 1.25rem;

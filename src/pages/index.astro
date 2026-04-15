@@ -116,3 +116,35 @@ import dots from "../assets/dots.svg?raw";
   <About />
 
 </BaseLayout>
+
+<script>
+  let clicks = 0;
+  let timer: ReturnType<typeof setTimeout>;
+
+  function initThemeEasterEgg() {
+    const avatar = document.querySelector(".avatar");
+    if (!avatar) return;
+
+    clicks = 0; // reset count on each page load
+
+    avatar.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      clicks++;
+      clearTimeout(timer);
+      timer = setTimeout(() => { clicks = 0; }, 2000);
+
+      if (clicks >= 3) {
+        clicks = 0;
+        const html = document.documentElement;
+        const next = html.dataset.theme === "dark" ? "light" : "dark";
+        html.classList.add("is-theme-transitioning");
+        html.dataset.theme = next;
+        localStorage.setItem("theme", next);
+        setTimeout(() => html.classList.remove("is-theme-transitioning"), 300);
+      }
+    });
+  }
+
+  // Re-attach on every page load since view transitions replace the DOM
+  document.addEventListener("astro:page-load", initThemeEasterEgg);
+</script>

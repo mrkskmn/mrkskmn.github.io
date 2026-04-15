@@ -22,6 +22,7 @@ $color-surface: #1B1818;
   --color-surface:    #{rgba($color-light, 0.035)};
   --color-mid:        #{$color-mid};
   --color-text:       #{$color-light};
+  --color-border:     #{rgba($color-light, 0.1)};
   --color-text-muted: #{rgba($color-light, 0.5)};
   --color-accent:     #{$color-accent};
 }
@@ -31,6 +32,7 @@ $color-surface: #1B1818;
   --color-surface:    #{rgba($color-dark, 0.035)};
   --color-mid:        #{rgba($color-mid, 0.08)};
   --color-text:       #{$color-dark};
+  --color-border:     #{rgba($color-dark, 0.1)};
   --color-text-muted: #{rgba($color-dark, 0.5)};
   --color-accent:     #{$color-accent};
 }

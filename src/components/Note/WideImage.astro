@@ -1,0 +1,34 @@
+---
+// WideImage — breaks out of the note body column to render a wide image.
+// Usage inside any .mdx file:
+//   import WideImage from "@components/Note/WideImage.astro"
+//   <WideImage src="/image.jpg" />
+//   <WideImage src="/image.jpg" ratio="16/9" />
+//   <WideImage src={rawSvgString} ratio="2/1" />   (SVGs imported with ?raw are inlined so CSS vars work)
+
+interface ImageObject { src: string; [key: string]: unknown }
+
+interface Props {
+  src?: string | ImageObject;
+  ratio?: string;   // CSS aspect-ratio value, e.g. "16/9", "4/3", "3/2"
+  style?: string;   // passthrough inline styles on the outer wrapper
+}
+
+const { src: srcProp, ratio, style } = Astro.props;
+
+// Raw SVG strings (from ?raw imports) start with "<svg" — inline them so CSS vars apply.
+const isRawSvg = typeof srcProp === "string" && srcProp.trimStart().startsWith("<svg");
+const src = isRawSvg ? null : (typeof srcProp === "string" ? srcProp : srcProp?.src);
+---
+
+<div class="note-wide" style={style}>
+  <div
+    class:list={["note-wide__frame", ratio && "note-wide__frame--ratio"]}
+    style={ratio ? `aspect-ratio: ${ratio}` : undefined}
+  >
+    {srcProp && (isRawSvg
+      ? <Fragment set:html={srcProp} />
+      : <img src={src!} alt="" loading="lazy" />
+    )}
+  </div>
+</div>

@@ -1,0 +1,43 @@
+---
+// WidePair — two-column wide media block, breaks out of the note body column.
+// Usage inside any .mdx file:
+//   import WidePair from "@components/Note/WidePair.astro"
+//   <WidePair srcs={[img1, img2]} />
+//   <WidePair srcs={[img1, img2]} ratio="3/2" />
+//   <WidePair srcs={[rawSvg, img1]} ratio="4/3" />   (?raw SVGs are inlined so CSS vars work)
+
+interface ImageObject { src: string; [key: string]: unknown }
+type Source = string | ImageObject;
+
+interface Props {
+  srcs: [Source, Source];
+  ratio?: string;   // CSS aspect-ratio value applied to both frames, e.g. "16/9", "4/3"
+  style?: string;   // passthrough inline styles on the outer wrapper
+}
+
+const { srcs, ratio, style } = Astro.props;
+
+function resolveSrc(s: Source): { isRawSvg: boolean; src: string | null } {
+  const isRawSvg = typeof s === "string" && s.trimStart().startsWith("<svg");
+  const src = isRawSvg ? null : (typeof s === "string" ? s : s.src);
+  return { isRawSvg, src };
+}
+
+const [a, b] = srcs.map(resolveSrc);
+---
+
+<div class="note-wide" style={style}>
+  <div class="note-wide-pair">
+    {[a, b].map(({ isRawSvg, src }, i) => (
+      <div
+        class:list={["note-wide__frame", ratio && "note-wide__frame--ratio"]}
+        style={ratio ? `aspect-ratio: ${ratio}` : undefined}
+      >
+        {isRawSvg
+          ? <Fragment set:html={srcs[i]} />
+          : <img src={src!} alt="" loading="lazy" />
+        }
+      </div>
+    ))}
+  </div>
+</div>

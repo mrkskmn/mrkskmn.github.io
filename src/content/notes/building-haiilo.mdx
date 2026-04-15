@@ -5,7 +5,10 @@ image: "/notes/noise-1.jpg"
 publishedAt: 2026-04-03
 ---
 
-import Wide from "@components/Note/Wide.astro";
+import WideImage from "@components/Note/WideImage.astro";
+import WideGrid from "@components/Note/WideGrid.astro"
+import orangenoise from "../../assets/orangenoise.jpg";
+import handBuilding from "../../assets/hand-building.svg?raw";
 
 ## Where it started
 
@@ -15,15 +18,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
 
-<Wide>
-  ![A wide image caption](../../assets/orangenoise.jpg)
-</Wide>
+<WideImage src={handBuilding} ratio="2 / 1"/>
+<WideGrid amount={3} columns={3} ratio="4 / 3"/>
 
 ## What I learned
 
 Sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
 
-> Design culture isn't built top-down. It emerges from the small decisions made every day.
+---
+
+> "Markus is one of the most talented UX designers and leaders I’ve worked with. He combines a natural, effective leadership style with a hands-on passion for solving complex UX challenges, delivering creative solutions at remarkable speed. Haiilo’s reputation for ease of use is in large part thanks to Markus and the outstanding UX team he has built around him."
+> - !["gary bennion"](https://media.licdn.com/dms/image/v2/D4E03AQEEixJgeTrsNQ/profile-displayphoto-scale_200_200/B4EZt_.PLkGQAY-/0/1767378582168?e=2147483647&v=beta&t=lkDACtrxjRwjns_XIAi93RH78S_TTXsH1Qf7Q-N3zd8) Gary Bannion, former CPTO of Haiilo
+
+---
 
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
 
@@ -33,3 +40,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 * Item B
 * Item C
 * Item D
+
+> "Very simple: Markus is the best product & UI designer I've worked with. He is the mastermind behind Haiilo's strong position and USP in UI/UX which is widely appreciated by our customers. He's not only an exceptional designer. He also has great understanding for product and market, which he transfers into product visuals that convey a product and design vision for everyone in the company. Over the many years we worked together he kept showing above average dedication and was always ready to go the extra mile. He successfully grew into a people leadership role while maintaining a close connection to the everyday design work. He advanced our design processes with modern tools and best practices."
+> - !["jan marius marquardt"](https://media.licdn.com/dms/image/v2/D4E03AQGgNeV0adjtYg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1731570268496?e=2147483647&v=beta&t=1NLbzpVpHMylv_lEnn-jwrlaOI5ulti03x1Dda63JyE) Jan Marquardt, Founder and former CEO of Haiilo
+
+
+<WideGrid amount={2} ratio="4 / 3"/>

@@ -1,0 +1,48 @@
+---
+// WideGrid — multi-item wide media grid, breaks out of the note body column.
+// Usage inside any .mdx file:
+//   import WideGrid from "@components/Note/WideGrid.astro"
+//   <WideGrid amount={4} columns={2} srcs={[img1, img2, img3, img4]} ratio="3/2" />
+//   <WideGrid amount={3} columns={3} srcs={[img1, img2]} ratio="4/3" />   (3rd slot is empty)
+//   <WideGrid amount={4} columns={2} ratio="1/1" />                       (all empty cards)
+//
+// On mobile: always single column.
+// ?raw SVG imports are inlined so CSS variables (theming) apply.
+
+interface ImageObject { src: string; [key: string]: unknown }
+type Source = string | ImageObject;
+
+interface Props {
+  amount: number;
+  columns?: number;  // number of columns in the grid, default 2
+  srcs?: (Source | undefined | null)[];
+  ratio?: string;    // CSS aspect-ratio value applied to all frames, e.g. "3/2", "1/1"
+  style?: string;    // passthrough inline styles on the outer wrapper
+}
+
+const { amount, columns = 2, srcs = [], ratio, style } = Astro.props;
+
+const items = Array.from({ length: amount }, (_, i) => {
+  const s = srcs[i];
+  if (!s) return { empty: true, isRawSvg: false, src: null, raw: null };
+  const isRawSvg = typeof s === "string" && s.trimStart().startsWith("<svg");
+  const src = isRawSvg ? null : (typeof s === "string" ? s : s.src);
+  return { empty: false, isRawSvg, src, raw: s };
+});
+---
+
+<div class="note-wide" style={style}>
+  <div class="note-wide-grid" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+    {items.map(({ empty, isRawSvg, src, raw }) => (
+      <div
+        class:list={["note-wide__frame", ratio && "note-wide__frame--ratio"]}
+        style={ratio ? `aspect-ratio: ${ratio}` : undefined}
+      >
+        {!empty && (isRawSvg
+          ? <Fragment set:html={raw} />
+          : <img src={src!} alt="" loading="lazy" />
+        )}
+      </div>
+    ))}
+  </div>
+</div>
