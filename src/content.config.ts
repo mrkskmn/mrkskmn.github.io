@@ -3,10 +3,10 @@ import { glob } from "astro/loaders";
 
 const notes = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/notes" }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     subline: z.string(),
-    image: z.string(), // path relative to /public, e.g. "/notes/my-image.jpg"
+    image: image(),
     publishedAt: z.date(),
     updatedAt: z.date().optional(),
   }),

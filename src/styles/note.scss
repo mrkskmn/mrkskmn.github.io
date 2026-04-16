@@ -117,6 +117,7 @@
     ul{
       // margin: 0;
       padding: 0;
+      list-style-type: none;
 
       li{
         &::marker{ content:"—";}
@@ -141,7 +142,7 @@
     p {
       font-family: tokens.$font-family-head;
       font-size: 2rem;
-      line-height: 1;
+      line-height: 1.15;
     }
   }
 
@@ -219,6 +220,7 @@
     width: auto;
     height: auto;
     display: block;
+    padding: tokens.gap(2xl);
   }
 
   &--ratio img {
@@ -230,7 +232,7 @@
 
 .note-wide-grid {
   display: grid;
-  // grid-template-columns set inline via columns prop
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
   gap: tokens.gap(xl);
 }
 

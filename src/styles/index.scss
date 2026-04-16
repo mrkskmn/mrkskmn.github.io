@@ -123,6 +123,7 @@ section {
 
       .copy {
         max-width: tokens.max-width(slim);
+        width: 100%;
         gap: 5rem;
       }
 
@@ -160,6 +161,9 @@ section {
         background: tokens.$color-surface;
         border-radius: tokens.radius(2xl);
         overflow: hidden;
+
+        @include tokens.below(md){ border-radius: tokens.radius(xl); }
+        
       }
     }
   }
@@ -180,7 +184,7 @@ section {
       padding-bottom: 4.5rem;
 
       &--hero {
-        height: auto;
+        height: 75vh;
         padding-top: 6rem;
         padding-bottom: 4rem;
         gap: 2rem;

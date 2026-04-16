@@ -3,6 +3,7 @@ import "../styles/notes.scss";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import About from "@components/About/About.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 const notes = await getCollection("notes");
 const sorted = notes.sort(
@@ -34,7 +35,7 @@ const formatted = (d: Date) =>
           style={`--delay: ${i + 2}`}
         >
           <div class="note-card__image">
-            <img src={note.data.image} alt={note.data.title} />
+            <Image src={note.data.image} alt={note.data.title} />
           </div>
           <div class="note-card__content">
             {note.data.publishedAt && <p class="note-card__subline">{formatted(note.data.publishedAt)}</p>}

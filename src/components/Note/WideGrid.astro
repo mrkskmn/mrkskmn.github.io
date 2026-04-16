@@ -32,7 +32,7 @@ const items = Array.from({ length: amount }, (_, i) => {
 ---
 
 <div class="note-wide" style={style}>
-  <div class="note-wide-grid" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+  <div class="note-wide-grid" style={`--cols: ${columns}`}>
     {items.map(({ empty, isRawSvg, src, raw }) => (
       <div
         class:list={["note-wide__frame", ratio && "note-wide__frame--ratio"]}
