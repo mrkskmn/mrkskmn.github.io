@@ -4,8 +4,9 @@
 
 .note-hero {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0 tokens.page-padding-x(default);
   overflow: hidden;
+  margin-top: tokens.gap(xl);
 
   &__image {
     width: 100%;
@@ -16,6 +17,10 @@
     border-radius: tokens.radius(2xl);
     max-width: tokens.max-width(full);
     margin: 0 auto;
+
+    @include tokens.below(md) {
+      border-radius: tokens.radius(xl);
+    }
   }
 }
 
@@ -24,6 +29,10 @@
 .inner.inner--note-header {
   padding-top: 5rem;
   padding-bottom: 5rem;
+
+  @include tokens.below(md) {
+    padding-top: tokens.gap(2xl);
+  }
 }
 
 .inner--note-header {
@@ -51,7 +60,7 @@
 
 .note-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: tokens.gap(lg);
   padding: tokens.gap(2xl) 0;
   margin-top: tokens.gap(2xl);
@@ -76,17 +85,21 @@
     padding-right: 0;
   }
 
+  @include tokens.below(md) {
+    padding: tokens.gap(lg) 0;
+  }
+
   p {
     font-size: inherit;
 
     &.head {
-      font-weight: 500;      
+      font-weight: 500;
       // text-transform: uppercase;
       // color: tokens.$color-text-muted;
       font-size: inherit;
     }
 
-    &.value{
+    &.value {
       color: tokens.$color-text-muted;
     }
   }
@@ -193,6 +206,10 @@
   border-radius: tokens.radius(xl);
   margin: 2rem 0;
 
+  @include tokens.below(md) {
+    padding: 1.5rem;
+  }
+
   blockquote {
     padding: 0;
     border: none;
@@ -205,6 +222,10 @@
     font-size: 2rem;
     line-height: 1.15;
     margin: 0;
+
+    @include tokens.below(md) {
+      font-size: 1.75rem;
+    }
   }
 
   figcaption {
@@ -285,6 +306,10 @@
     height: auto;
     display: block;
     padding: tokens.gap(2xl);
+
+    @include tokens.below(md) {
+      padding: tokens.gap(xl);
+    }
   }
 
   &--ratio img {
