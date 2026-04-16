@@ -9,6 +9,9 @@ const notes = defineCollection({
     image: image(),
     publishedAt: z.date(),
     updatedAt: z.date().optional(),
+    timeline: z.string().optional(),
+    role: z.string().optional(),
+    areas: z.string().optional(),
   }),
 });
 

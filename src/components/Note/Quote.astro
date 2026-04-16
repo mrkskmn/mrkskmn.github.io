@@ -1,0 +1,42 @@
+---
+// Quote — pull-quote block for use inside note MDX files.
+// Usage:
+//   import Quote from "@components/Note/Quote.astro"
+//   <Quote quote="..." authorName="..." authorFunction="..." authorImage="https://..." />
+
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  quote: string;
+  authorName?: string;
+  authorFunction?: string;
+  authorImage?: string | ImageMetadata;  // external URL string or Astro imported image
+  wide?: boolean;
+}
+
+const { quote, authorName, authorFunction, authorImage, wide = false } = Astro.props;
+
+const hasAuthor = authorName || authorFunction || authorImage;
+const isImageObject = authorImage && typeof authorImage !== "string";
+---
+
+<figure class:list={["note-quote", wide && "note-wide"]}>
+  <blockquote>
+    <p>{quote}</p>
+  </blockquote>
+
+  {hasAuthor && (
+    <figcaption>
+      {authorImage && (
+        isImageObject
+          ? <Image src={authorImage as ImageMetadata} alt={authorName ?? ""} />
+          : <img src={authorImage as string} alt={authorName ?? ""} />
+      )}
+      <div class="note-quote__author">
+        {authorName && <span class="note-quote__name">{authorName}</span>}
+        {authorFunction && <span class="note-quote__function">{authorFunction}</span>}
+      </div>
+    </figcaption>
+  )}
+</figure>

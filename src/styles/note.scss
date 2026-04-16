@@ -36,7 +36,7 @@
 
 .note-meta {
   font-family: tokens.$font-family-body;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: tokens.$color-text-muted;
 
   &__updated {
@@ -47,6 +47,49 @@
 .note-subline {
   color: tokens.$color-text-muted;
   max-width: tokens.max-width(slim);
+}
+
+.note-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: tokens.gap(lg);
+  padding: tokens.gap(2xl) 0;
+  margin-top: tokens.gap(2xl);
+  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+}
+
+.note-info {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.gap(md);
+  font-size: 1rem;
+  padding: tokens.gap(xl);
+  // border:1px solid var(--color-border);
+  // border-radius: tokens.radius(lg);
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+
+  p {
+    font-size: inherit;
+
+    &.head {
+      font-weight: 500;      
+      // text-transform: uppercase;
+      // color: tokens.$color-text-muted;
+      font-size: inherit;
+    }
+
+    &.value{
+      color: tokens.$color-text-muted;
+    }
+  }
 }
 
 // ─── Body ─────────────────────────────────────────────────────────────────────
@@ -108,42 +151,11 @@
   }
 
   blockquote {
-    // border-left: 2px solid tokens.$color-text-muted;
-    padding: 2rem 0;
+    // Plain markdown blockquotes — minimal styling.
+    padding: 1rem 0 1rem 1.5rem;
+    border-left: 2px solid tokens.color-alpha(tokens.$color-text, 0.15);
+    color: tokens.$color-text-muted;
     margin: 2rem 0;
-    // color: tokens.$color-text-muted;
-    // font-style: italic;
-
-    ul{
-      // margin: 0;
-      padding: 0;
-      list-style-type: none;
-
-      li{
-        &::marker{ content:"—";}
-        &::marker{ content:"";}
-        padding-left: 1rem;
-        padding-left: 0rem;
-        // color: var(--color-text-muted);
-
-        img{
-          width: 1.75rem;
-          aspect-ratio: 1 / 1;
-          border-radius: tokens.radius(md);
-          margin: 0;
-          vertical-align: middle;
-          position: relative;
-          bottom: 2px;
-          margin-right: .5rem;
-        }
-      }
-    }
-
-    p {
-      font-family: tokens.$font-family-head;
-      font-size: 2rem;
-      line-height: 1.15;
-    }
   }
 
   hr {
@@ -173,6 +185,58 @@
   }
 }
 
+// ─── Quote component ──────────────────────────────────────────────────────────
+
+.note-quote {
+  padding: 3.5rem;
+  background: tokens.$color-surface;
+  border-radius: tokens.radius(xl);
+  margin: 2rem 0;
+
+  blockquote {
+    padding: 0;
+    border: none;
+    color: inherit;
+    margin: 0;
+  }
+
+  blockquote p {
+    font-family: tokens.$font-family-head;
+    font-size: 2rem;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+
+    img {
+      height: 3.5rem;
+      width: auto;
+      aspect-ratio: 4 / 5;
+      border-radius: tokens.radius(md);
+      object-fit: cover;
+      margin: 0;
+      flex-shrink: 0;
+    }
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    font-weight: 500;
+  }
+
+  &__function {
+    color: tokens.$color-text-muted;
+  }
+}
+
 // ─── WideImage / WideGrid (MDX components) ───────────────────────────────────
 // Usage inside .mdx: <WideImage src="/image.jpg" />
 //                    <WideGrid amount={3} srcs={[img1, img2, img3]} ratio="3/2" />
@@ -188,11 +252,11 @@
   margin-bottom: 6rem;
   padding: 0 tokens.page-padding-x(default);
 
-  &:has(+ .note-wide){
+  &:has(+ .note-wide) {
     margin-bottom: tokens.gap(xl);
   }
 
-  + .note-wide{
+  + .note-wide {
     margin-top: tokens.gap(xl);
   }
 }

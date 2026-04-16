@@ -9,14 +9,18 @@ interface Props {
 }
 
 const { note } = Astro.props;
-const { title, subline, image, publishedAt, updatedAt } = note.data;
+const { title, subline, image, publishedAt, updatedAt, role, timeline, areas } =
+  note.data;
 
 const formatted = (d: Date) =>
-  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 ---
 
 <BaseLayout title={title}>
-
   <!-- Hero image -->
   <section class="note-hero">
     <Image src={image} alt={title} class="note-hero__image" />
@@ -27,10 +31,44 @@ const formatted = (d: Date) =>
     <div class="inner inner--note-header">
       <p class="note-meta" data-animate style="--delay: 0">
         {formatted(publishedAt)}
-        {updatedAt && <span class="note-meta__updated"> · Updated {formatted(updatedAt)}</span>}
+        {
+          updatedAt && (
+            <span class="note-meta__updated">
+              {" "}
+              · Updated {formatted(updatedAt)}
+            </span>
+          )
+        }
       </p>
       <h1 class="display" data-animate style="--delay: 1">{title}</h1>
-      <p class="note-subline lead" data-animate style="--delay: 2">{subline}</p>
+      <!-- <p class="note-subline lead" data-animate style="--delay: 2">{subline}</p> -->
+
+      <div class="note-info-grid" data-animate style="--delay: 2">
+        {
+          role && (
+            <div class="note-info role">
+              <p class="head">My Role</p>
+              <p class="value" set:html={role} />
+            </div>
+          )
+        }
+        {
+          areas && (
+            <div class="note-info areas">
+              <p class="head">Focus</p>
+              <p class="value" set:html={areas} />
+            </div>
+          )
+        }
+        {
+          timeline && (
+            <div class="note-info timeline">
+              <p class="head">Timeline</p>
+              <p class="value">{timeline}</p>
+            </div>
+          )
+        }
+      </div>
     </div>
   </section>
 
@@ -42,5 +80,4 @@ const formatted = (d: Date) =>
       </div>
     </div>
   </section>
-
 </BaseLayout>
