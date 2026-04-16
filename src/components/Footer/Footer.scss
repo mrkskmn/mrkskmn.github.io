@@ -70,7 +70,17 @@
     font-size: 0.875rem;
     color: tokens.$color-text-muted;
     display:flex;
+    flex-wrap: wrap;
     gap: tokens.gap(lg);
+
+    .build-with-love {
+      flex-grow: 1;
+      text-align: right;
+
+      @include tokens.below(md) {
+        text-align: left;
+      }
+    }
 
     a {
       color: tokens.$color-text-muted;
