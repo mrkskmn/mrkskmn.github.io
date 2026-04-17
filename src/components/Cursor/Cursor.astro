@@ -13,11 +13,13 @@ const {
   offsetX = 8,
   offsetY = 20,
 } = Astro.props;
+
+import { Image } from "astro:assets";
+import goose from "src/assets/goose.png";
 ---
 
 <div id="multiplayer-cursor-label">
-  <img src="src/assets/goose.png" alt="Cursor avatar" />
-  <!-- src="https://mockmind-api.uifaces.co/content/abstract/51.jpg" -->
+  <Image src={goose} alt="Cursor avatar" loading="eager" />
   <span id="cursor-label-text">{label}</span>
 </div>
 
