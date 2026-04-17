@@ -22,14 +22,14 @@ const formatted = (d: Date) =>
 
 <BaseLayout title={title}>
   <!-- Hero image -->
-  <section class="note-hero">
-    <Image src={image} alt={title} class="note-hero__image" />
+  <section class="note-hero" data-animate style="--delay: 0">
+    <Image src={image} alt={title} class="note-hero__image" loading={"eager"}/>
   </section>
 
   <!-- Header -->
   <section>
     <div class="inner inner--note-header">
-      <p class="note-meta" data-animate style="--delay: 0">
+      <p class="note-meta" data-animate style="--delay: 1">
         {formatted(publishedAt)}
         {
           updatedAt && (
@@ -40,10 +40,9 @@ const formatted = (d: Date) =>
           )
         }
       </p>
-      <h1 class="display" data-animate style="--delay: 1">{title}</h1>
-      <!-- <p class="note-subline lead" data-animate style="--delay: 2">{subline}</p> -->
+      <h1 class="display" data-animate style="--delay: 2">{title}</h1>
 
-      <div class="note-info-grid" data-animate style="--delay: 2">
+      <div class="note-info-grid" data-animate style="--delay: 3">
         {
           role && (
             <div class="note-info role">

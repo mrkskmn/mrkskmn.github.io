@@ -52,6 +52,7 @@
   // Variants
   &--primary {
     color: tokens.$color-text;
+    box-shadow: 0 0 0 0 tokens.$color-mid;
 
     .btn__bg {
       background-color: tokens.color-alpha(tokens.$color-mid, 0.9);

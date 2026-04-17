@@ -372,3 +372,13 @@ section {
     svg > g > path { animation: none; }
   }
 }
+
+// ─── Custom cursor ─────────────────────────────────────────────────────────
+// Prototype for now. Replaces default with custom multiplayer-inspired cursor.
+
+.custom-cursor{
+  height:24px;
+  width:24px;
+  border-radius:999px;
+  background-color: tokens.$color-accent;
+}

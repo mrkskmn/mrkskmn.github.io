@@ -3,6 +3,7 @@ import "@styles/index.scss";
 import Navigation from "@components/Navigation/Navigation.astro";
 import Footer from "@components/Footer/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+import Cursor from "@components/Cursor/Cursor.astro";
 
 interface Props {
   title: string;
@@ -59,6 +60,7 @@ const { title } = Astro.props;
 
   <body>
     <Navigation />
+    <Cursor labels={["Visitor", "You", "Curious goose", "Goose on the loose"]} />
     <slot />
     <Footer />
   </body>

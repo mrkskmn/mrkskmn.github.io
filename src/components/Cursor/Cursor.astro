@@ -1,0 +1,130 @@
+---
+interface Props {
+  label?: string;
+  labels?: string[];
+  color?: string;
+  offsetX?: number;
+  offsetY?: number;
+}
+
+const {
+  label = "You",
+  labels,
+  color = "rgba(255, 255, 255, 0.25)",
+  offsetX = 8,
+  offsetY = 20,
+} = Astro.props;
+---
+
+<div id="multiplayer-cursor-label">
+  <img src="src/assets/goose.png" alt="Cursor avatar" />
+  <!-- src="https://mockmind-api.uifaces.co/content/abstract/51.jpg" -->
+  <span id="cursor-label-text">{label}</span>
+</div>
+
+<style lang="scss">
+  @use "styles/tokens" as tokens;
+  #multiplayer-cursor-label {
+    display:flex;
+    align-items: center;
+    gap: .5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 4px 12px 4px 4px;
+    border-radius: tokens.radius(full);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    will-change: transform;
+    opacity: 0;
+    filter: blur(0.5rem);
+    backdrop-filter: blur(0.25rem);
+    transition:
+      opacity 0.35s,
+      filter 0.25s;
+    z-index: 9999;
+    color: var(--color-text);
+    background-color: tokens.color-alpha(var(--color-text), 0.15);
+
+    img{
+        width: 24px;
+        aspect-ratio: 1;
+        border-radius: tokens.radius(full);
+        background-color: var(--color-accent);
+        background-color: rgb(145, 159, 235);
+    }
+
+    @include tokens.below(md) {
+      display: none;
+    }
+  }
+</style>
+
+<script define:vars={{ offsetX, offsetY, labels }}>
+  let mouseX = 0;
+  let mouseY = 0;
+  let isInside = false;
+  let handlers = null;
+
+  function initCursor() {
+    const label = document.getElementById("multiplayer-cursor-label");
+    if (!label) return;
+
+    // Pick a random label from the array on each navigation.
+    if (labels?.length) {
+      const labelText = document.getElementById("cursor-label-text");
+      if (labelText) {
+        labelText.textContent = labels[Math.floor(Math.random() * labels.length)];
+      }
+    }
+
+    // Remove stale listeners from the previous page before re-attaching.
+    if (handlers) {
+      document.removeEventListener("mousemove", handlers.move);
+      document.removeEventListener("mouseenter", handlers.enter);
+      document.removeEventListener("mouseleave", handlers.leave);
+      window.removeEventListener("scroll", handlers.scroll);
+    }
+
+    function updatePosition() {
+      label.style.transform = `translate(${mouseX + offsetX}px, ${mouseY + offsetY}px)`;
+    }
+
+    handlers = {
+      move(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        updatePosition();
+      },
+      scroll() {
+        updatePosition();
+      },
+      enter() {
+        isInside = true;
+        label.style.opacity = "1";
+        label.style.filter = "blur(0)";
+      },
+      leave() {
+        isInside = false;
+        label.style.opacity = "0";
+        label.style.filter = "blur(.5rem)";
+      },
+    };
+
+    document.addEventListener("mousemove", handlers.move);
+    window.addEventListener("scroll", handlers.scroll, { passive: true });
+    document.addEventListener("mouseenter", handlers.enter);
+    document.addEventListener("mouseleave", handlers.leave);
+
+    // Mouse was already inside the window before navigation — restore visible state.
+    if (isInside) {
+      updatePosition();
+      label.style.opacity = "1";
+      label.style.filter = "blur(0)";
+    }
+  }
+
+  document.addEventListener("astro:page-load", initCursor);
+</script>
