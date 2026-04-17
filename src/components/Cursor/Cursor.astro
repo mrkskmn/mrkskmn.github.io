@@ -10,7 +10,6 @@ interface Props {
 const {
   label = "You",
   labels,
-  color = "rgba(255, 255, 255, 0.25)",
   offsetX = 8,
   offsetY = 20,
 } = Astro.props;
@@ -40,13 +39,14 @@ const {
     will-change: transform;
     opacity: 0;
     filter: blur(0.5rem);
-    backdrop-filter: blur(0.25rem);
+    backdrop-filter: blur(0.5rem);
     transition:
       opacity 0.35s,
       filter 0.25s;
     z-index: 9999;
     color: var(--color-text);
     background-color: tokens.color-alpha(var(--color-text), 0.15);
+    text-shadow: 0 0 3px var(--color-canvas);
 
     img{
         width: 24px;

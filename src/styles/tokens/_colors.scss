@@ -25,6 +25,7 @@ $color-surface: #1B1818;
   --color-border:     #{rgba($color-light, 0.1)};
   --color-text-muted: #{rgba($color-light, 0.5)};
   --color-accent:     #{$color-accent};
+  --color-contrast:   #{$color-light};
 }
 
 [data-theme="light"] {
@@ -35,6 +36,7 @@ $color-surface: #1B1818;
   --color-border:     #{rgba($color-dark, 0.1)};
   --color-text-muted: #{rgba($color-dark, 0.5)};
   --color-accent:     #{$color-accent};
+  --color-contrast:   #{$color-dark};
 }
 
 // ─── SCSS aliases → CSS custom properties ────────────────────────────────────
