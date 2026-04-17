@@ -14,13 +14,14 @@ type Source = string | ImageObject;
 
 interface Props {
   amount: number;
-  columns?: number;  // number of columns in the grid, default 2
+  columns?: number;      // number of columns in the grid, default 2
   srcs?: (Source | undefined | null)[];
-  ratio?: string;    // CSS aspect-ratio value applied to all frames, e.g. "3/2", "1/1"
-  style?: string;    // passthrough inline styles on the outer wrapper
+  ratio?: string;        // CSS aspect-ratio value applied to all frames, e.g. "3/2", "1/1"
+  mobileRatio?: string;  // overrides ratio on all frames at the mobile breakpoint
+  style?: string;        // passthrough inline styles on the outer wrapper
 }
 
-const { amount, columns = 2, srcs = [], ratio, style } = Astro.props;
+const { amount, columns = 2, srcs = [], ratio, mobileRatio, style } = Astro.props;
 
 const items = Array.from({ length: amount }, (_, i) => {
   const s = srcs[i];
@@ -35,8 +36,8 @@ const items = Array.from({ length: amount }, (_, i) => {
   <div class="note-wide-grid" style={`--cols: ${columns}`}>
     {items.map(({ empty, isRawSvg, src, raw }) => (
       <div
-        class:list={["note-wide__frame", ratio && "note-wide__frame--ratio"]}
-        style={ratio ? `aspect-ratio: ${ratio}` : undefined}
+        class:list={["note-wide__frame", ratio && "note-wide__frame--ratio", mobileRatio && "note-wide__frame--mobile-ratio"]}
+        style={[ratio && `--ratio: ${ratio}`, mobileRatio && `--mobile-ratio: ${mobileRatio}`].filter(Boolean).join("; ") || undefined}
       >
         {!empty && (isRawSvg
           ? <Fragment set:html={raw} />

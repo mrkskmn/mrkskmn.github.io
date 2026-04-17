@@ -324,10 +324,14 @@
     }
   }
 
-  &--ratio img {
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  &--ratio {
+    aspect-ratio: var(--ratio);
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 }
 
@@ -356,6 +360,16 @@
 
   .note-wide-grid {
     grid-template-columns: 1fr;
+  }
+
+  .note-wide__frame--mobile-ratio {
+    aspect-ratio: var(--mobile-ratio);
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 
   .note-body{
