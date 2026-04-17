@@ -55,13 +55,13 @@ $max-width: (
 
 $gap: (
   none: 0,
-  sm: 4px,
-  md: 8px,
-  lg: 12px,
-  xl: 24px,
-  2xl: 48px,
-  3xl: 80px,
-  4xl: 112px,
+  sm: 0.25rem,
+  md: 0.5rem,
+  lg: 0.75rem,
+  xl: 1.5rem,
+  2xl: 3rem,
+  3xl: 5rem,
+  4xl: 7rem,
 );
 
 @function gap($size) {

@@ -53,7 +53,16 @@
 
 @include tokens.below(md) {
   .nav {
-    padding: 0.75rem tokens.page-padding-x(mobile);
+    padding: 1rem tokens.page-padding-x(mobile);
+
+    // .inner{ 
+    //   justify-content: center;
+
+    //   .nav__links {
+    //     left:unset;
+    //   }
+      
+    //  }
 
     .nav__email {
       display: none;

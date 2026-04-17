@@ -8,6 +8,10 @@
   overflow: hidden;
   margin-top: tokens.gap(xl);
 
+  @include tokens.below(md) {
+    padding: 0 tokens.page-padding-x(mobile);
+  }
+
   &__image {
     width: 100%;
     height: auto;
@@ -32,6 +36,9 @@
 
   @include tokens.below(md) {
     padding-top: tokens.gap(2xl);
+    padding-bottom: tokens.gap(xl);
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
 }
 
@@ -88,7 +95,6 @@
   @include tokens.below(md) {
     padding: tokens.gap(lg) 0;
   }
-
   p {
     font-size: inherit;
 
@@ -223,8 +229,14 @@
     line-height: 1.15;
     margin: 0;
 
+    &:before, &:after {
+      content:'"';
+    }
+
     @include tokens.below(md) {
-      font-size: 1.75rem;
+      font-size: 1.25rem;
+      line-height: 1.45;
+      font-family: tokens.$font-family-body;
     }
   }
 
@@ -344,5 +356,12 @@
 
   .note-wide-grid {
     grid-template-columns: 1fr;
+  }
+
+  .note-body{
+    > *:not(.note-wide) {
+      padding-left: 1.75rem;
+      padding-right: 1.75rem;
+    }
   }
 }
