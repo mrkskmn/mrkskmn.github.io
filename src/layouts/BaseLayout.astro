@@ -12,6 +12,12 @@ interface Props {
 const { title } = Astro.props;
 ---
 
+<!-- 
+Hey! You're looking at the source. 
+Nice. Want to chat about how this was built? 
+Reach out: hey@markus.design 
+-->
+
 <html lang="en" data-theme="dark">
   <head>
     <script is:inline>
@@ -60,7 +66,13 @@ const { title } = Astro.props;
 
   <body>
     <Navigation />
-    <Cursor labels={["Visitor", "You", "Curious goose", "Goose on the loose"]} />
+    <Cursor
+      labels={["Visitor", "You", "Curious goose", "Goose on the loose"]}
+      timeLabels={[
+        { from: 22, to: 4, labels: ["Night owl", "Sleepy goose"] },
+        { from: 5, to: 8, labels: ["Early bird", "Morning goose"] },
+      ]}
+    />
     <slot />
     <Footer />
   </body>

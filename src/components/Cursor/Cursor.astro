@@ -2,6 +2,7 @@
 interface Props {
   label?: string;
   labels?: string[];
+  timeLabels?: { from: number; to: number; labels: string[] }[];  // from/to: 0–23, wraps midnight if from > to
   color?: string;
   offsetX?: number;
   offsetY?: number;
@@ -10,6 +11,7 @@ interface Props {
 const {
   label = "You",
   labels,
+  timeLabels,
   offsetX = 8,
   offsetY = 20,
 } = Astro.props;
@@ -18,7 +20,7 @@ import { Image } from "astro:assets";
 import goose from "src/assets/goose.png";
 ---
 
-<div id="multiplayer-cursor-label">
+<div id="multiplayer-cursor-label" transition:persist>
   <Image src={goose} alt="Cursor avatar" loading="eager" />
   <span id="cursor-label-text">{label}</span>
 </div>
@@ -43,8 +45,8 @@ import goose from "src/assets/goose.png";
     filter: blur(0.5rem);
     backdrop-filter: blur(0.5rem);
     transition:
-      opacity 0.35s,
-      filter 0.25s;
+      opacity 0.35s tokens.easing(out),
+      filter 0.25s tokens.easing(out);
     z-index: 9999;
     color: var(--color-text);
     background-color: tokens.color-alpha(var(--color-text), 0.15);
@@ -58,28 +60,94 @@ import goose from "src/assets/goose.png";
         background-color: rgb(145, 159, 235);
     }
 
+    span {
+      display: inline-block;
+      transition: opacity 0.15s, filter 0.15s, width 0.22s tokens.easing(out);
+    }
+
     @include tokens.below(md) {
       display: none;
     }
   }
 </style>
 
-<script define:vars={{ offsetX, offsetY, labels }}>
+<script define:vars={{ offsetX, offsetY, labels, timeLabels }}>
+  // ── Animation timing constants ─────────────────────────────────────────────
+  // Keep these in sync with the span's CSS transition values in the <style> block.
+  const FADE_MS   = 150;  // opacity + filter transition on the span
+  const WIDTH_MS  = 220;  // width transition on the span
+  const SWAP_DELAY   = 150;  // wait for fade-out before swapping text
+  const FADE_IN_DELAY = 70;  // head-start for width before fading text back in
+
   let mouseX = 0;
   let mouseY = 0;
   let isInside = false;
   let handlers = null;
+  let meHandlers = null;
 
   function initCursor() {
     const label = document.getElementById("multiplayer-cursor-label");
-    if (!label) return;
+    const labelText = document.getElementById("cursor-label-text");
+    if (!label || !labelText) return;
 
-    // Pick a random label from the array on each navigation.
-    if (labels?.length) {
-      const labelText = document.getElementById("cursor-label-text");
-      if (labelText) {
-        labelText.textContent = labels[Math.floor(Math.random() * labels.length)];
+    // Picks a random item if passed an array, otherwise uses the string as-is.
+    function resolveText(textOrArray) {
+      return Array.isArray(textOrArray)
+        ? textOrArray[Math.floor(Math.random() * textOrArray.length)]
+        : textOrArray;
+    }
+
+    // Crossfade helper — blur out, swap text, animate width, blur back in.
+    function setLabel(textOrArray) {
+      const text = resolveText(textOrArray);
+
+      // Lock current width so the container doesn't jump.
+      const fromWidth = labelText.getBoundingClientRect().width;
+      labelText.style.width = fromWidth + "px";
+      labelText.style.opacity = "0";
+      labelText.style.filter = "blur(0.5rem)";
+
+      setTimeout(() => {
+        labelText.textContent = text;
+
+        // Measure intrinsic width of the new text.
+        labelText.style.width = "auto";
+        const toWidth = labelText.getBoundingClientRect().width;
+
+        // Snap back to old width, force reflow, then transition to new width.
+        labelText.style.width = fromWidth + "px";
+        labelText.offsetWidth; // trigger reflow
+        labelText.style.width = toWidth + "px";
+
+        // Give width a head start before fading text back in.
+        setTimeout(() => {
+          labelText.style.opacity = "";
+          labelText.style.filter = "";
+        }, FADE_IN_DELAY);
+
+        // Release explicit width once the width transition has finished.
+        setTimeout(() => { labelText.style.width = ""; }, WIDTH_MS);
+      }, SWAP_DELAY);
+    }
+
+    // Merge base labels with any matching time bucket's extras.
+    function getActiveLabels() {
+      const base = labels ?? [];
+      if (timeLabels?.length) {
+        const hour = new Date().getHours();
+        const bucket = timeLabels.find(({ from, to }) =>
+          from <= to ? hour >= from && hour < to   // e.g. 8–18
+                     : hour >= from || hour < to   // wraps midnight, e.g. 22–4
+        );
+        if (bucket) return [...base, ...bucket.labels];
       }
+      return base;
+    }
+
+    // Pick a random label from the active pool on each navigation.
+    const pool = getActiveLabels();
+    if (pool.length) {
+      setLabel(pool[Math.floor(Math.random() * pool.length)]);
     }
 
     // Remove stale listeners from the previous page before re-attaching.
@@ -125,6 +193,22 @@ import goose from "src/assets/goose.png";
       updatePosition();
       label.style.opacity = "1";
       label.style.filter = "blur(0)";
+    }
+
+    // #me hover — swap label while hovering, restore on leave.
+    const meEl = document.getElementById("me");
+    if (meEl) {
+      if (meHandlers) {
+        meEl.removeEventListener("mouseenter", meHandlers.enter);
+        meEl.removeEventListener("mouseleave", meHandlers.leave);
+      }
+      const baseLabel = labelText.textContent;
+      meHandlers = {
+        enter() { setLabel(["Me - Definitely not a goose", "Head goose", "Behind the cursor"]); },
+        leave() { setLabel(baseLabel); },
+      };
+      meEl.addEventListener("mouseenter", meHandlers.enter);
+      meEl.addEventListener("mouseleave", meHandlers.leave);
     }
   }
 
