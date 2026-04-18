@@ -26,5 +26,13 @@ export default defineConfig({
     },
   },
 
+  server: {
+    host: true,
+  },
+
+  devToolbar: {
+    enabled: false,
+  },
+
   integrations: [mdx()],
 });

@@ -10,6 +10,7 @@ interface Props {
   strokeWidth?: number;
   iconSize?: number;
   size?: "compact" | "large";
+  iconPos?: "trailing" | "leading";
   [key: string]: any; // allows data-* and style attributes to pass through
 }
 
@@ -22,6 +23,7 @@ const {
   strokeWidth = 1.5,
   iconSize = 20,
   size = "compact",
+  iconPos = "trailing",
   ...rest
 } = Astro.props;
 
@@ -38,6 +40,7 @@ const rel = resolvedTarget === "_blank" ? "noopener noreferrer" : undefined;
   {...rest}
 >
   <div class="btn__bg"></div>
+  {Icon && iconPos === "leading" && <Icon size={iconSize} stroke-width={strokeWidth} />}
   {title}
-  {Icon && <Icon size={iconSize} stroke-width={strokeWidth} />}
+  {Icon && iconPos === "trailing" && <Icon size={iconSize} stroke-width={strokeWidth} />}
 </a>

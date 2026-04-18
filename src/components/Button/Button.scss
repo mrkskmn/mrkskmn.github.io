@@ -44,9 +44,11 @@
     z-index: tokens.z(raised);
   }
 
-  &:hover .btn__bg {
-    transform: scale(1);
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover .btn__bg {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   // Variants
@@ -60,10 +62,12 @@
       opacity: 1;
     }
 
-    &:hover {
-      box-shadow: 0 0 0 0.25rem tokens.$color-mid;
-      .btn__bg {
-        background-color: tokens.$color-mid;
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 0 0 0.25rem tokens.$color-mid;
+        .btn__bg {
+          background-color: tokens.$color-mid;
+        }
       }
     }
   }

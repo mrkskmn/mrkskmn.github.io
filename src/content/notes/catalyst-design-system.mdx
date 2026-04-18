@@ -3,6 +3,104 @@ title: "Catalyst Design System"
 subline: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 image: "../../assets/notes/bluenoise.jpg"
 publishedAt: 2026-04-13
+role: "Lead Designer"
+timeline: "Q3 2022 - Q2 2023"
+areas: "UI architecture, Design system strategy, Team enablement"
 ---
 
-Hello world!
+import WideImage from "@components/Note/WideImage.astro";
+import WideGrid from "@components/Note/WideGrid.astro";
+import Quote from "@components/Note/Quote.astro";
+
+#### Context
+## Three products merged. <br />Zero consistency.
+ 
+In early 2022 Haiilo was formed by merging COYO, Smarp, and Jubiwee. Each company brought in their expertise: Social intranet, Employee advocacy and internal surveys.
+The goal was simple: Combine them into a single high quality employee engagement suite. 
+
+The reality however was messy. Three products, three design languages, three tech stacks. Put them side by side and they looked like competitors, not a coherent platform.
+ 
+
+---
+ 
+ 
+Customers and prospects picked this up and were concerned about the products they already bought. Will this impact their own plattform and users engangement? Others questioned whether Haiilo actually had a solid product strategy.
+
+Sales worried it would kill deals. <br />
+Product teams worried it would slow down development.
+ 
+---
+ 
+#### The goal
+## Make it clear Haiilo is one company with one vision, not three products duct-taped together.
+ 
+Supporting the G2M strategy by building a design system that unifies the product language without breaking what already works.
+ 
+---
+
+## What we bet on
+ 
+We built Catalyst around four hypotheses:
+ 
+1. **A unified look** will help customers understand Haiilo's value.
+If everything looks like one product, customers will treat it like one product.
+
+2.  **A robust system** will speed up development.  
+Reusable components mean teams stop rebuilding the same things three different ways.
+ 
+3. **Plug-and-play components** will make teams self-sufficient.  
+If it's easy to use, teams won't need constant design support.
+ 
+4. **A shared system** breaks down silos.  
+Merging teams is hard. A shared design language makes it easier.
+ 
+---
+
+## Principles
+ 
+We kept it simple. Four rules guided everything:
+ 
+{/* **Accessible**  
+WCAG AA minimum. No exceptions.
+ 
+**Customizable**  
+Brands need flexibility. Catalyst adapts.
+ 
+**Plug and play**  
+Drop it in. It works. No setup gymnastics.
+ 
+**Easy to maintain**  
+If it's hard to update, it won't get updated. */}
+ 
+*[VISUAL: Icons or simple graphic representing each principle]*
+
+<WideGrid amount={4} columns={4} ratio="4/5" mobileRatio="2/1">
+<Fragment slot="item-0">
+    <strong><p class="reset text-size--md">Accessible</p></strong>
+    <p class="reset caption">WCAG AA minimum. No exceptions.</p>
+  </Fragment>
+  <Fragment slot="item-1">
+    <strong><p class="reset text-size--md">Customizable</p></strong>
+    <p class="reset caption">Brands need flexibility. Catalyst adapts.</p>
+  </Fragment>
+  <Fragment slot="item-2">
+    <strong><p class="reset text-size--md">Plug and play</p></strong>
+    <p class="reset caption">Drop it in. It works. No setup gymnastics.</p>
+  </Fragment>
+  <Fragment slot="item-3">
+    <strong><p class="reset text-size--md">Easy to maintain</p></strong>
+    <p class="reset caption">If it's hard to update, it won't get updated.</p>
+  </Fragment>
+</WideGrid>
+ 
+---
+
+… more content to come 
+ 
+---
+ 
+## Want to know more?
+ 
+This work is under NDA, so I can't show detailed screenshots of the concepts we built. If you want the full story, reach out.
+ 
+[Get in touch](mailto:hey@markus.design)

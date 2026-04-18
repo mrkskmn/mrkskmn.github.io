@@ -13,8 +13,8 @@ const { title } = Astro.props;
 ---
 
 <!-- 
-Hey! You're looking at the source. 
-Nice. Want to chat about how this was built? 
+Hey! You're looking at the source. Nice. 
+Want to chat about how this was built? 
 Reach out: hey@markus.design 
 -->
 
@@ -28,7 +28,7 @@ Reach out: hey@markus.design
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" viewport-fit="content" />
     <meta name="generator" content={Astro.generator} />
     <!-- <meta name="robots" content="noindex, nofollow" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,7 +67,7 @@ Reach out: hey@markus.design
   <body>
     <Navigation />
     <Cursor
-      labels={["Visitor", "You", "Curious goose", "Goose on the loose"]}
+      labels={["Visitor", "You", "Curious goose", "Goose on the loose", "Recruiting goose"]}
       timeLabels={[
         { from: 22, to: 4, labels: ["Night owl", "Sleepy goose"] },
         { from: 5, to: 8, labels: ["Early bird", "Morning goose"] },

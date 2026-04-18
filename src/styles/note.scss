@@ -126,15 +126,20 @@
   // Spacing only — font sizes and families come from global typography
   h2 {
     margin-top: 3.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
   }
   h3 {
     margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
   }
   h4 {
     margin-top: 2rem;
     margin-bottom: 0.5rem;
+
+    + h2 {
+      margin-top: 1rem;
+    }
+
   }
 
   p {
@@ -166,6 +171,12 @@
 
     li {
       margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+
+      @include tokens.below(md) {
+        padding-left: 0.5rem;
+      }
+
     }
   }
 
@@ -229,8 +240,9 @@
     line-height: 1.15;
     margin: 0;
 
-    &:before, &:after {
-      content:'"';
+    &:before,
+    &:after {
+      content: '"';
     }
 
     @include tokens.below(md) {
@@ -341,6 +353,17 @@
   gap: tokens.gap(xl);
 }
 
+// Target any grid item that contains dynamic slot content (prevents bleeding into images grids)
+
+.note-wide-grid > div:has(*) {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: clamp(1.5rem, 3.5vw, 3.5rem);
+  align-items: start;
+  gap: tokens.gap(lg);
+}
+
 // ─── Responsive ───────────────────────────────────────────────────────────────
 
 @include tokens.below(md) {
@@ -372,7 +395,7 @@
     }
   }
 
-  .note-body{
+  .note-body {
     > *:not(.note-wide) {
       padding-left: 1.75rem;
       padding-right: 1.75rem;

@@ -1,10 +1,6 @@
 ---
 // WideGrid — multi-item wide media grid, breaks out of the note body column.
-// Usage inside any .mdx file:
-//   import WideGrid from "@components/Note/WideGrid.astro"
-//   <WideGrid amount={4} columns={2} srcs={[img1, img2, img3, img4]} ratio="3/2" />
-//   <WideGrid amount={3} columns={3} srcs={[img1, img2]} ratio="4/3" />   (3rd slot is empty)
-//   <WideGrid amount={4} columns={2} ratio="1/1" />                       (all empty cards)
+// See src/components/Note/README.md for full usage docs.
 //
 // On mobile: always single column.
 // ?raw SVG imports are inlined so CSS variables (theming) apply.
@@ -24,25 +20,32 @@ interface Props {
 const { amount, columns = 2, srcs = [], ratio, mobileRatio, style } = Astro.props;
 
 const items = Array.from({ length: amount }, (_, i) => {
+  const slotName = `item-${i}`;
+  const hasSlot = Astro.slots.has(slotName);
+  if (hasSlot) return { useSlot: true, slotName, empty: false, isRawSvg: false, src: null, raw: null };
+
   const s = srcs[i];
-  if (!s) return { empty: true, isRawSvg: false, src: null, raw: null };
+  if (!s) return { useSlot: false, slotName, empty: true, isRawSvg: false, src: null, raw: null };
   const isRawSvg = typeof s === "string" && s.trimStart().startsWith("<svg");
   const src = isRawSvg ? null : (typeof s === "string" ? s : s.src);
-  return { empty: false, isRawSvg, src, raw: s };
+  return { useSlot: false, slotName, empty: false, isRawSvg, src, raw: s };
 });
 ---
 
 <div class="note-wide" style={style}>
   <div class="note-wide-grid" style={`--cols: ${columns}`}>
-    {items.map(({ empty, isRawSvg, src, raw }) => (
+    {items.map(({ useSlot, slotName, empty, isRawSvg, src, raw }) => (
       <div
         class:list={["note-wide__frame", ratio && "note-wide__frame--ratio", mobileRatio && "note-wide__frame--mobile-ratio"]}
         style={[ratio && `--ratio: ${ratio}`, mobileRatio && `--mobile-ratio: ${mobileRatio}`].filter(Boolean).join("; ") || undefined}
       >
-        {!empty && (isRawSvg
-          ? <Fragment set:html={raw} />
-          : <img src={src!} alt="" loading="lazy" />
-        )}
+        {useSlot
+          ? <Fragment set:html={await Astro.slots.render(slotName)} />
+          : (!empty && (isRawSvg
+              ? <Fragment set:html={raw} />
+              : <img src={src!} alt="" loading="lazy" />
+            ))
+        }
       </div>
     ))}
   </div>

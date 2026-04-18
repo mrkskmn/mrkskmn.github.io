@@ -2,6 +2,8 @@
 import "./Navigation.scss";
 import Button from "@components/Button/Button.astro";
 import { ArrowUpRight } from "@lucide/astro";
+import { Menu } from "@lucide/astro";
+import { X } from "@lucide/astro";
 
 const showNotes = true;
 const showCV    = true;
@@ -9,6 +11,16 @@ const showCV    = true;
 
 <nav class="nav">
   <div class="inner">
+    <ul class="nav__links mobile">
+      <li>
+        <button class="btn btn--ghost btn--large btn--menu" data-menu-btn aria-expanded="false">
+          <div class="btn__bg"></div>
+          <span class="icon-menu"><Menu size={20} stroke-width={1.5} /></span>
+          <span class="icon-close"><X size={20} stroke-width={1.5} /></span>
+          <span data-menu-label>Menu</span>
+        </button>
+      </li>
+    </ul>
     <ul class="nav__links">
       <li>
         <Button href="/" title="Home" size="compact" variant="ghost" />
@@ -39,4 +51,53 @@ const showCV    = true;
       />
     </div>
   </div>
+  <div class="mobile-nav" data-mobile-nav>
+    <ul class="inner__mobile">
+      <li>
+        <Button href="/" title="Home" size="large" variant="ghost" />
+      </li>
+      {showNotes && (
+        <li>
+          <Button href="/notes" title="Notes" size="large" variant="ghost" />
+        </li>
+      )}
+      {showCV && (
+        <li>
+          <Button
+            href="https://drive.google.com/file/d/1M9tVn5dJqL9ZdZsqwBUC2zS8bFn3vvTq/view"
+            title="CV"
+            size="large"
+            variant="ghost"
+            icon={ArrowUpRight}
+          />
+        </li>
+      )}
+    </ul>
+  </div>
 </nav>
+
+<script>
+  function initMobileNav() {
+    const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-btn]");
+    const mobileNav = document.querySelector<HTMLElement>("[data-mobile-nav]");
+    const menuLabel = document.querySelector<HTMLElement>("[data-menu-label]");
+
+    function close() {
+      mobileNav?.classList.remove("is-open");
+      menuBtn?.classList.remove("is-open");
+      menuBtn?.setAttribute("aria-expanded", "false");
+      if (menuLabel) menuLabel.textContent = "Menu";
+    }
+
+    close();
+
+    menuBtn?.addEventListener("click", () => {
+      const isOpen = mobileNav?.classList.toggle("is-open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      if (menuLabel) menuLabel.textContent = isOpen ? "Close" : "Menu";
+      menuBtn.classList.toggle("is-open", isOpen);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMobileNav);
+</script>

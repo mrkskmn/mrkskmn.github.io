@@ -53,6 +53,11 @@ $max-width: (
   }
 }
 
+.reset{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 $gap: (
   none: 0,
   sm: 0.25rem,
@@ -112,6 +117,7 @@ $border-radius: (
   md: 8px,
   lg: 12px,
   xl: 24px,
+  1.5xl: 32px,
   2xl: 48px,
   3xl: 80px,
   full: 9999px,

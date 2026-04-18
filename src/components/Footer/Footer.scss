@@ -97,7 +97,7 @@
 
 @include tokens.below(md) {
   .footer {
-    padding: 0 tokens.page-padding-x(mobile) 4rem;
+    padding: 0 tokens.page-padding-x(mobile) 6rem;
 
     &__grid {
       grid-template-columns: repeat(2, 1fr);

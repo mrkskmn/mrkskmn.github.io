@@ -29,10 +29,21 @@
   &__links {
     display: flex;
     align-items: center;
-    gap: .125rem;
+    gap: 0.125rem;
     list-style: none;
     position: relative;
-    left: -.75rem; // Adjust for button padding
+    left: -0.75rem; // Adjust for button padding
+
+    @include tokens.below(md) {
+      display: none;
+    }
+
+    &.mobile {
+      display: none;
+      @include tokens.below(md) {
+        display: initial;
+      }
+    }
 
     a {
       font-family: tokens.$font-family-body;
@@ -49,23 +60,115 @@
   }
 }
 
+// Menu button (mobile trigger)
+.btn--menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: tokens.$font-family-body;
+  font-size: 1rem;
+  color: tokens.$color-text;
+
+  .icon-close {
+    display: none;
+  }
+
+  .icon-menu {
+    display: flex;
+  }
+
+  &.is-open {
+    .icon-close {
+      display: flex;
+    }
+
+    .icon-menu {
+      display: none;
+    }
+  }
+}
+
+// Mobile nav wrapper — animated via grid-template-rows trick
+.mobile-nav {
+  display: none;
+}
+
 // Responsive
 
 @include tokens.below(md) {
   .nav {
-    padding: 1rem tokens.page-padding-x(mobile);
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    position: fixed;
+    bottom: 0;
+    top: unset;
+    margin: 0 tokens.page-padding-x(default);
+    margin-bottom: .25rem;
+    width: calc(100% - (tokens.page-padding-x(default) * 2));
+    border-radius: tokens.radius(1.5xl);
 
-    // .inner{ 
-    //   justify-content: center;
+    outline: 1px solid tokens.color-alpha(tokens.$color-text, 0.03);
 
-    //   .nav__links {
-    //     left:unset;
-    //   }
-      
-    //  }
+    transition: all tokens.duration(default) tokens.easing(default);
+
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0;
+
+    .mobile-nav {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows tokens.duration(default) tokens.easing(out);
+      width: 100%;
+
+      &.is-open {
+        grid-template-rows: 1fr;
+      }
+
+      ul.inner__mobile {
+        overflow: hidden;
+        list-style: none;
+        width: 100%;
+        position: relative;
+        left: -0.75rem; // Adjust for button padding
+        width: calc(100% + 0.75rem); // Adjust for button padding
+
+        li {
+          opacity: 0;
+          filter: blur(0.5rem);
+          transition:
+            opacity tokens.duration(default) tokens.easing(out),
+            filter tokens.duration(default) tokens.easing(out);
+        }
+
+        li > * {
+          width: 100%;
+        }
+      }
+
+      &.is-open ul.inner__mobile {
+        li {
+          opacity: 1;
+          filter: blur(0);
+        }
+
+        @for $i from 1 through 5 {
+          li:nth-child(#{$i}) {
+            transition-delay: calc(tokens.duration(default) + (#{$i - 1} * 60ms));
+          }
+        }
+      }
+    }
+
+    // Add spacing between nav items and inner when open
+    &:has(.mobile-nav.is-open) {
+      gap: 1.5rem;
+    }
 
     .nav__email {
-      display: none;
+      // display: none;
     }
   }
 }
