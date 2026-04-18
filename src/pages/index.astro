@@ -8,6 +8,7 @@ import blueNoise from "../assets/bluenoise.jpg";
 import cursor from "../assets/cursor.svg?raw";
 import avatar from "../assets/avatar.svg?raw";
 import dots from "../assets/dots.svg?raw";
+import * as content from "@consts";
 ---
 
 <BaseLayout title="Start">
@@ -36,7 +37,7 @@ import dots from "../assets/dots.svg?raw";
         />
         <Button
           href="https://www.linkedin.com/in/markuskammin/"
-          title="LinkedIn"
+          title={content.linkedin}
           size="large"
           variant="ghost"
           icon={ArrowUpRight}
@@ -76,13 +77,13 @@ import dots from "../assets/dots.svg?raw";
           >
             <Button
               href="mailto:hey@markus.design"
-              title="Get in touch"
+              title={content.contact}
               size="large"
               variant="primary"
             />
             <Button
               href="https://www.linkedin.com/in/markuskammin/"
-              title="LinkedIn"
+              title={content.linkedin}
               size="large"
               variant="ghost"
               icon={ArrowUpRight}

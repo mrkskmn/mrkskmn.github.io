@@ -1,0 +1,7 @@
+export const home = "Home"
+export const notes = "Selected work"
+export const cv = "CV"
+export const contact = "Get in touch"
+export const linkedin = "LinkedIn"
+export const github = "GitHub"
+export const imprint = "Imprint" 

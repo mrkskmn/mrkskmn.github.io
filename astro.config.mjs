@@ -15,6 +15,7 @@ export default defineConfig({
         "@components": path.resolve(__dirname, "./src/components"),
         "@styles": path.resolve(__dirname, "./src/styles"),
         "@layouts": path.resolve(__dirname, "./src/layouts"),
+        "@consts": path.resolve(__dirname, "./src/consts.ts"),
       },
     },
     css: {

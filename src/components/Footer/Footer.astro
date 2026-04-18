@@ -1,5 +1,6 @@
 ---
 import "./Footer.scss";
+import * as content from "@consts";
 
 const year = new Date().getFullYear();
 
@@ -36,9 +37,9 @@ const spotifyTracks = [
       <div class="footer__col">
         <p class="footer__col-title">All the links</p>
         <nav class="footer__nav stack stack--v gap--lg">
-          <a href="/">Home</a>
-          <a href="/notes">Notes</a>
-          <a href="/cv">CV</a>
+          <a href="/">{content.home}</a>
+          <a href="/notes">{content.notes}</a>
+          <a href="/cv">{content.cv}</a>
         </nav>
       </div>
 
@@ -49,14 +50,14 @@ const spotifyTracks = [
           <a
             href="https://www.linkedin.com/in/markuskammin/"
             target="_blank"
-            rel="noopener noreferrer">LinkedIn</a
+            rel="noopener noreferrer">{content.linkedin}</a
           >
           <a
             href="https://github.com/mrkskmn"
             target="_blank"
-            rel="noopener noreferrer">GitHub</a
+            rel="noopener noreferrer">{content.github}</a
           >
-          <a href="mailto:hey@markus.design">hey@markus.design</a>
+          <a href="mailto:hey@markus.design">{content.contact}</a>
         </div>
       </div>
     </div>
@@ -64,7 +65,7 @@ const spotifyTracks = [
     <p class="footer__subline">
       <span>&copy; 2025 &ndash; {year}</span> 
       &middot; 
-      <a href="/imprint">Imprint</a>
+      <a href="/imprint">{content.imprint}</a>
     </p>
   </div>
 </footer>

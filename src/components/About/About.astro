@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { ArrowUpRight } from "@lucide/astro";
 import me from "../../assets/me.png";
 import scribble from "../../assets/scribble.svg?raw";
+import * as content from "@consts";
 ---
 
 <section>
@@ -35,13 +36,13 @@ import scribble from "../../assets/scribble.svg?raw";
         >
           <Button
             href="mailto:hey@markus.design"
-            title="Get in touch"
+            title={content.contact}
             size="large"
             variant="primary"
           />
           <Button
             href="https://www.linkedin.com/in/markuskammin/"
-            title="LinkedIn"
+            title={content.linkedin}
             size="large"
             variant="ghost"
             icon={ArrowUpRight}
