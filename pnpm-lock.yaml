@@ -8,6 +8,15 @@ dependencies:
   '@astrojs/mdx':
     specifier: ^5.0.3
     version: 5.0.3(astro@6.1.5)
+  '@fontsource-variable/figtree':
+    specifier: ^5.2.10
+    version: 5.2.10
+  '@fontsource/instrument-serif':
+    specifier: ^5.2.8
+    version: 5.2.8
+  '@fontsource/libertinus-serif':
+    specifier: ^5.2.1
+    version: 5.2.1
   '@lucide/astro':
     specifier: ^1.8.0
     version: 1.8.0(astro@6.1.5)
@@ -405,6 +414,18 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource-variable/figtree@5.2.10:
+    resolution: {integrity: sha512-a5Gumbpy3mdd+Yg31g6Qb7CmjYbrfyutJa3bWfP5q8A4GclIOwX7mI+ZuSHsJnw/mHvW6r9oh1AHJcJTIxK4JA==}
+    dev: false
+
+  /@fontsource/instrument-serif@5.2.8:
+    resolution: {integrity: sha512-s+bkz+syj2rO00Rmq9g0P+PwuLig33DR1xDR8pTWmovH1pUjwnncrFk++q9mmOex8fUQ7oW80gPpPDaw7V1MMw==}
+    dev: false
+
+  /@fontsource/libertinus-serif@5.2.1:
+    resolution: {integrity: sha512-NguzrKW1PJjePz8o+DMGFoMfoCEB57pE4szdqTxajcOwqG4Rzonv4iFu3/5luEg3ZAsvek8azonpw1PkYQDwoQ==}
+    dev: false
 
   /@img/colour@1.1.0:
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}

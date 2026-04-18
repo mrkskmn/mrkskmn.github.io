@@ -17,9 +17,13 @@ interface Props {
 
 const { src: srcProp, ratio, mobileRatio, style } = Astro.props;
 
-// Raw SVG strings (from ?raw imports) start with "<svg" — inline them so CSS vars apply.
+const VIDEO_EXTENSIONS = ["mp4", "webm", "ogg", "mov"];
+
 const isRawSvg = typeof srcProp === "string" && srcProp.trimStart().startsWith("<svg");
-const src = isRawSvg ? null : (typeof srcProp === "string" ? srcProp : srcProp?.src);
+const srcStr = typeof srcProp === "string" ? srcProp : srcProp?.src ?? "";
+const ext = srcStr.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
+const isVideo = !isRawSvg && VIDEO_EXTENSIONS.includes(ext);
+const src = isRawSvg ? null : srcStr;
 ---
 
 <div class="note-wide" style={style}>
@@ -29,7 +33,9 @@ const src = isRawSvg ? null : (typeof srcProp === "string" ? srcProp : srcProp?.
   >
     {srcProp && (isRawSvg
       ? <Fragment set:html={srcProp} />
-      : <img src={src!} alt="" loading="lazy" />
+      : isVideo
+        ? <video src={src!} autoplay loop muted playsinline />
+        : <img src={src!} alt="" loading="lazy" />
     )}
   </div>
 </div>

@@ -6,12 +6,25 @@
 // ----------
 
 $font-family-display: "Instrument Serif", serif;
-$font-family-head:    "Libertinus Serif", serif;
-$font-family-body:    "Figtree", sans-serif;
+$font-family-head: "Libertinus Serif", serif;
+$font-family-body: "Figtree", sans-serif;
 
-*{
+* {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include layout.below(md) {
+    br {
+      display: none;
+    }
+  }
 }
 
 h1 {
@@ -25,7 +38,6 @@ h1 {
   @include layout.below(md) {
     font-size: 4rem;
   }
-
 }
 
 h2,
@@ -71,14 +83,16 @@ h4 {
     background-color: transparent;
   }
   @include layout.below(md) {
-    br {display: none;}
+    br {
+      display: none;
+    }
   }
 }
 
 // Text sizes SCSS map
 
 $font-sizes: (
-  xs: .75rem,
+  xs: 0.75rem,
   sm: 0.875rem,
   md: 1rem,
   lg: 1.25rem,
@@ -96,25 +110,24 @@ $font-sizes: (
   }
 }
 
-
-
-
 // Regular text stylings
 
 strong {
   font-weight: 600;
 }
 
-p, ul, li{
+p,
+ul,
+li {
   font-family: $font-family-body;
   line-height: 1.45;
   font-size: text-size(lg);
 
-  &.lead{
+  &.lead {
     font-size: text-size(lg);
   }
 
-  &.caption{
+  &.caption {
     font-size: text-size(md);
     font-weight: 500;
     color: var(--color-text-muted);

@@ -134,7 +134,7 @@
   }
   h4 {
     margin-top: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 
     + h2 {
       margin-top: 1rem;
@@ -151,6 +151,10 @@
     text-decoration: underline;
     text-underline-offset: 3px;
     opacity: 0.8;
+
+    &.btn{
+      text-decoration: none;
+    }
 
     &:hover {
       opacity: 1;
@@ -339,7 +343,7 @@
   &--ratio {
     aspect-ratio: var(--ratio);
 
-    img {
+    img, video {
       height: 100%;
       object-fit: cover;
       object-position: center;
@@ -355,7 +359,7 @@
 
 // Target any grid item that contains dynamic slot content (prevents bleeding into images grids)
 
-.note-wide-grid > div:has(*) {
+.note-wide-grid > div:not(:has(> img:only-child, > video:only-child, > svg:only-child)) {
   display: flex;
   flex-direction: column;
   justify-content: end;

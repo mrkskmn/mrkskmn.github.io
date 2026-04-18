@@ -17,24 +17,29 @@ interface Props {
   style?: string;        // passthrough inline styles on the outer wrapper
 }
 
+const VIDEO_EXTENSIONS = ["mp4", "webm", "ogg", "mov"];
+
 const { amount, columns = 2, srcs = [], ratio, mobileRatio, style } = Astro.props;
 
 const items = Array.from({ length: amount }, (_, i) => {
   const slotName = `item-${i}`;
   const hasSlot = Astro.slots.has(slotName);
-  if (hasSlot) return { useSlot: true, slotName, empty: false, isRawSvg: false, src: null, raw: null };
+  if (hasSlot) return { useSlot: true, slotName, empty: false, isRawSvg: false, isVideo: false, src: null, raw: null };
 
   const s = srcs[i];
-  if (!s) return { useSlot: false, slotName, empty: true, isRawSvg: false, src: null, raw: null };
+  if (!s) return { useSlot: false, slotName, empty: true, isRawSvg: false, isVideo: false, src: null, raw: null };
   const isRawSvg = typeof s === "string" && s.trimStart().startsWith("<svg");
-  const src = isRawSvg ? null : (typeof s === "string" ? s : s.src);
-  return { useSlot: false, slotName, empty: false, isRawSvg, src, raw: s };
+  const srcStr = typeof s === "string" ? s : s.src;
+  const ext = srcStr.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
+  const isVideo = !isRawSvg && VIDEO_EXTENSIONS.includes(ext);
+  const src = isRawSvg ? null : srcStr;
+  return { useSlot: false, slotName, empty: false, isRawSvg, isVideo, src, raw: s };
 });
 ---
 
 <div class="note-wide" style={style}>
   <div class="note-wide-grid" style={`--cols: ${columns}`}>
-    {items.map(({ useSlot, slotName, empty, isRawSvg, src, raw }) => (
+    {items.map(({ useSlot, slotName, empty, isRawSvg, isVideo, src, raw }) => (
       <div
         class:list={["note-wide__frame", ratio && "note-wide__frame--ratio", mobileRatio && "note-wide__frame--mobile-ratio"]}
         style={[ratio && `--ratio: ${ratio}`, mobileRatio && `--mobile-ratio: ${mobileRatio}`].filter(Boolean).join("; ") || undefined}
@@ -43,7 +48,9 @@ const items = Array.from({ length: amount }, (_, i) => {
           ? <Fragment set:html={await Astro.slots.render(slotName)} />
           : (!empty && (isRawSvg
               ? <Fragment set:html={raw} />
-              : <img src={src!} alt="" loading="lazy" />
+              : isVideo
+                ? <video src={src!} autoplay loop muted playsinline />
+                : <img src={src!} alt="" loading="lazy" />
             ))
         }
       </div>

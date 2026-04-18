@@ -11,11 +11,17 @@ areas: "UI architecture, Design system strategy, Team enablement"
 import WideImage from "@components/Note/WideImage.astro";
 import WideGrid from "@components/Note/WideGrid.astro";
 import Quote from "@components/Note/Quote.astro";
+import Button from "@components/Button/Button.astro";
+import * as content from "@consts";
+
+export const visual1 = "https://servd-geist-studio.b-cdn.net/production/assets/anthropic/Anthropic_UI.mp4";
+export const visual2 = "https://geist-studio.files.svdcdn.com/production/assets/anthropic/Anthropic_ColorPalette.svg?dm=1720750839";
+
 
 #### Context
 ## Three products merged. <br />Zero consistency.
  
-In early 2022 Haiilo was formed by merging COYO, Smarp, and Jubiwee. Each company brought in their expertise: Social intranet, Employee advocacy and internal surveys.
+[In early 2022 Haiilo was formed](https://blog.haiilo.com/blog/smarp-coyo-merger/) by merging COYO, Smarp, and Jubiwee. Each company brought in their expertise: Social intranet, Employee advocacy and internal surveys.
 The goal was simple: Combine them into a single high quality employee engagement suite. 
 
 The reality however was messy. Three products, three design languages, three tech stacks. Put them side by side and they looked like competitors, not a coherent platform.
@@ -32,15 +38,19 @@ Product teams worried it would slow down development.
 ---
  
 #### The goal
-## Make it clear Haiilo is one company with one vision, not three products duct-taped together.
- 
-Supporting the G2M strategy by building a design system that unifies the product language without breaking what already works.
- 
----
+## Position Haiilo as one company with one vision, not three products duct-taped together.
 
-## What we bet on
+
+
+#### Objectives
+
+* Support G2M by telling a cohesive product story through design.
+* Keep up momentum by enabling teams to build faster, not slower.
+* Soften internal culture shock by signaling unity through a shared design language.
  
-We built Catalyst around four hypotheses:
+
+
+#### Business bets
  
 1. **A unified look** will help customers understand Haiilo's value.
 If everything looks like one product, customers will treat it like one product.
@@ -54,25 +64,13 @@ If it's easy to use, teams won't need constant design support.
 4. **A shared system** breaks down silos.  
 Merging teams is hard. A shared design language makes it easier.
  
+
+
 ---
 
-## Principles
- 
-We kept it simple. Four rules guided everything:
- 
-{/* **Accessible**  
-WCAG AA minimum. No exceptions.
- 
-**Customizable**  
-Brands need flexibility. Catalyst adapts.
- 
-**Plug and play**  
-Drop it in. It works. No setup gymnastics.
- 
-**Easy to maintain**  
-If it's hard to update, it won't get updated. */}
- 
-*[VISUAL: Icons or simple graphic representing each principle]*
+
+
+<WideGrid amount={2} columns={1} ratio="16/9" mobileRatio="4/3" />
 
 <WideGrid amount={4} columns={4} ratio="4/5" mobileRatio="2/1">
 <Fragment slot="item-0">
@@ -103,4 +101,9 @@ If it's hard to update, it won't get updated. */}
  
 This work is under NDA, so I can't show detailed screenshots of the concepts we built. If you want the full story, reach out.
  
-[Get in touch](mailto:hey@markus.design)
+<Button
+              href="mailto:hey@markus.design"
+              title={content.contact}
+              size="large"
+              variant="primary"
+            />

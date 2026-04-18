@@ -17,10 +17,15 @@ interface Props {
 
 const { srcs, ratio, style } = Astro.props;
 
-function resolveSrc(s: Source): { isRawSvg: boolean; src: string | null } {
+const VIDEO_EXTENSIONS = ["mp4", "webm", "ogg", "mov"];
+
+function resolveSrc(s: Source): { isRawSvg: boolean; isVideo: boolean; src: string | null } {
   const isRawSvg = typeof s === "string" && s.trimStart().startsWith("<svg");
-  const src = isRawSvg ? null : (typeof s === "string" ? s : s.src);
-  return { isRawSvg, src };
+  const srcStr = typeof s === "string" ? s : s.src;
+  const ext = srcStr.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
+  const isVideo = !isRawSvg && VIDEO_EXTENSIONS.includes(ext);
+  const src = isRawSvg ? null : srcStr;
+  return { isRawSvg, isVideo, src };
 }
 
 const [a, b] = srcs.map(resolveSrc);
@@ -35,7 +40,9 @@ const [a, b] = srcs.map(resolveSrc);
       >
         {isRawSvg
           ? <Fragment set:html={srcs[i]} />
-          : <img src={src!} alt="" loading="lazy" />
+          : isVideo
+            ? <video src={src!} autoplay loop muted playsinline />
+            : <img src={src!} alt="" loading="lazy" />
         }
       </div>
     ))}
