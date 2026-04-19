@@ -35,6 +35,13 @@ const items = Array.from({ length: amount }, (_, i) => {
   const src = isRawSvg ? null : srcStr;
   return { useSlot: false, slotName, empty: false, isRawSvg, isVideo, src, raw: s };
 });
+
+const renderedSlots = new Map<string, string>();
+for (const item of items) {
+  if (item.useSlot) {
+    renderedSlots.set(item.slotName, await Astro.slots.render(item.slotName));
+  }
+}
 ---
 
 <div class="note-wide" style={style}>
@@ -45,7 +52,7 @@ const items = Array.from({ length: amount }, (_, i) => {
         style={[ratio && `--ratio: ${ratio}`, mobileRatio && `--mobile-ratio: ${mobileRatio}`].filter(Boolean).join("; ") || undefined}
       >
         {useSlot
-          ? <Fragment set:html={await Astro.slots.render(slotName)} />
+          ? <Fragment set:html={renderedSlots.get(slotName)} />
           : (!empty && (isRawSvg
               ? <Fragment set:html={raw} />
               : isVideo

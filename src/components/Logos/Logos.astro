@@ -1,0 +1,85 @@
+---
+import "./Logos.scss";
+
+const logoModules = import.meta.glob<{ default: string }>(
+  "../../assets/logos/*.svg",
+  { eager: true, query: "?raw" },
+);
+
+const logos = Object.values(logoModules).map((m) => m.default);
+---
+
+<section class="brands inner">
+  <section class="logos-heading" data-animate-scroll style="--delay: 1">
+    <slot />
+  </section>
+  <section class="logos" aria-label="Brands I've worked with" data-animate-scroll style="--delay: 2">
+    <div class="logos__marquee">
+      {
+        logos.map((svg) => (
+          <div class="logos__item">
+            <Fragment set:html={svg} />
+          </div>
+        ))
+      }
+    </div>
+    <div class="logos__marquee" aria-hidden="true">
+      {
+        logos.map((svg) => (
+          <div class="logos__item">
+            <Fragment set:html={svg} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</section>
+
+<script>
+  function initLogos() {
+    document.querySelectorAll<HTMLElement>(".logos").forEach((container) => {
+      const marquees =
+        container.querySelectorAll<HTMLElement>(".logos__marquee");
+      if (marquees.length < 1) return;
+
+      const firstMarquee = marquees[0];
+      const containerWidth = container.offsetWidth;
+      const marqueeWidth = firstMarquee.scrollWidth;
+
+      // Calculate how many times to repeat to fill the container
+      const multiplier =
+        marqueeWidth < containerWidth
+          ? Math.ceil(containerWidth / marqueeWidth)
+          : 1;
+
+      // Calculate animation duration based on content width (pixels per second)
+      const speed = 20; // px/s
+      const duration = (marqueeWidth * multiplier) / speed;
+
+      container.style.setProperty("--duration", `${duration}s`);
+      container.style.setProperty("--multiplier", `${multiplier}`);
+
+      // Clone items if we need more to fill
+      if (multiplier > 1) {
+        marquees.forEach((marquee) => {
+          const items = Array.from(marquee.querySelectorAll(".logos__item"));
+          for (let i = 0; i < multiplier - 1; i++) {
+            items.forEach((item) => {
+              marquee.appendChild(item.cloneNode(true));
+            });
+          }
+        });
+      }
+
+      container.classList.add("logos--ready");
+    });
+  }
+
+  // Wait for images to load before measuring
+  if (document.readyState === "complete") {
+    initLogos();
+  } else {
+    window.addEventListener("load", initLogos);
+  }
+  document.addEventListener("astro:page-load", initLogos);
+</script>

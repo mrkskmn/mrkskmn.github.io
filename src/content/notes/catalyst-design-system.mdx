@@ -1,7 +1,8 @@
 ---
 title: "Catalyst Design System"
-subline: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-image: "../../assets/notes/bluenoise.jpg"
+subline: "Supporting Haiilo's Go-to-Market and bringing people together through a shared design language"
+image: "../../assets/catalyst/cover-catalyst-4-3.jpg"
+coverImage: "../../assets/catalyst/cover-catalyst-21-9.jpg"
 publishedAt: 2026-04-13
 role: "Lead Designer"
 timeline: "Q3 2022 - Q2 2023"
@@ -13,9 +14,7 @@ import WideGrid from "@components/Note/WideGrid.astro";
 import Quote from "@components/Note/Quote.astro";
 import Button from "@components/Button/Button.astro";
 import * as content from "@consts";
-
-export const visual1 = "https://servd-geist-studio.b-cdn.net/production/assets/anthropic/Anthropic_UI.mp4";
-export const visual2 = "https://geist-studio.files.svdcdn.com/production/assets/anthropic/Anthropic_ColorPalette.svg?dm=1720750839";
+import plug from "../../assets/notes/plug.mp4";
 
 
 #### Context
@@ -69,9 +68,12 @@ Merging teams is hard. A shared design language makes it easier.
 ---
 
 
+<WideGrid amount={1} columns={1} ratio="16/9"/>
+<WideGrid amount={2} columns={2} srcs={[plug]} ratio="1/1"/>
+<WideGrid amount={1} columns={1} ratio="16/9"/>
+<WideGrid amount={4} columns={4} ratio="16/9"  mobileRatio="16/9" />
 
-<WideGrid amount={2} columns={1} ratio="16/9" mobileRatio="4/3" />
-
+{/* 
 <WideGrid amount={4} columns={4} ratio="4/5" mobileRatio="2/1">
 <Fragment slot="item-0">
     <strong><p class="reset text-size--md">Accessible</p></strong>
@@ -90,7 +92,7 @@ Merging teams is hard. A shared design language makes it easier.
     <p class="reset caption">If it's hard to update, it won't get updated.</p>
   </Fragment>
 </WideGrid>
- 
+  */}
 ---
 
 … more content to come 

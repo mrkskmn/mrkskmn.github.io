@@ -1,0 +1,138 @@
+@use "styles/tokens" as tokens;
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+// ─── Brands section ──────────────────────────────────────────────────────────
+// Global styles for the entire section
+
+.brands {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.gap(2xl);
+  margin-bottom: 14.75rem;
+
+  .logos-heading {
+    display: flex;
+    flex-direction: column;
+    gap: tokens.gap(md);
+    width: 100%;
+    max-width: tokens.max-width(content);
+    padding: 0;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
+
+// ─── Container ───────────────────────────────────────────────────────────────
+// Clips the scrolling marquees and applies gradient fade
+
+.logos {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  max-width: tokens.max-width(content);
+  margin: 0 auto;
+
+  // Gradient fades on both edges using pseudo-elements
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 8rem;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-canvas), transparent);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-canvas), transparent);
+  }
+}
+
+// ─── Marquee track ───────────────────────────────────────────────────────────
+// Two identical marquee divs, both animating translateX(-100%) simultaneously
+
+.logos__marquee {
+  flex: 0 0 auto;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: tokens.gap(3xl);
+
+  @include tokens.below(md) {
+    gap: tokens.gap(2xl);
+  }
+
+  // Animation only runs after JS has calculated duration
+  .logos--ready & {
+    animation: scroll var(--duration, 30s) linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+  }
+}
+
+// Hide duplicate marquee for reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .logos__marquee:nth-child(2) {
+    display: none;
+  }
+
+  .logos__marquee:first-child {
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100%;
+  }
+}
+
+// ─── Individual logo ─────────────────────────────────────────────────────────
+
+.logos__item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    padding-left: tokens.gap(3xl);
+    @include tokens.below(md) {
+      padding-left: tokens.gap(2xl);
+    }
+  }
+
+  svg {
+    height: 3.5rem;
+    width: auto;
+    display: block;
+    filter: grayscale(1);
+    opacity: 0.2;
+    transition:
+      filter tokens.duration(default) tokens.easing(out),
+      opacity tokens.duration(default) tokens.easing(out);
+
+    @media (hover: hover) {
+      &:hover {
+        filter: grayscale(0);
+        opacity: 1;
+      }
+    }
+  }
+}

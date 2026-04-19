@@ -1,7 +1,7 @@
 ---
 import "../styles/note.scss";
 import BaseLayout from "./BaseLayout.astro";
-import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -9,8 +9,11 @@ interface Props {
 }
 
 const { note } = Astro.props;
-const { title, subline, image, publishedAt, updatedAt, role, timeline, areas } =
+const { title, subline, image, coverImage, publishedAt, updatedAt, role, timeline, areas } =
   note.data;
+
+const heroDesktop = await getImage({ src: coverImage ?? image, alt: title });
+const heroMobile = image ? await getImage({ src: image, alt: title }) : heroDesktop;
 
 const formatted = (d: Date) =>
   d.toLocaleDateString("en-GB", {
@@ -23,7 +26,17 @@ const formatted = (d: Date) =>
 <BaseLayout title={title}>
   <!-- Hero image -->
   <section class="note-hero" data-animate style="--delay: 0">
-    <Image src={image} alt={title} class="note-hero__image" loading={"eager"}/>
+    <picture>
+      <source media="(min-width: 769px)" srcset={heroDesktop.src} />
+      <img
+        src={heroMobile.src}
+        alt={title}
+        class="note-hero__image"
+        loading="eager"
+        width={heroMobile.options.width as number | undefined}
+        height={heroMobile.options.height as number | undefined}
+      />
+    </picture>
   </section>
 
   <!-- Header -->

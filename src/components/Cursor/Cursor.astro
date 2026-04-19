@@ -2,6 +2,7 @@
 interface Props {
   label?: string;
   labels?: string[];
+  pageLabels?: { path: string; labels: string[] }[];
   timeLabels?: { from: number; to: number; labels: string[] }[];  // from/to: 0–23, wraps midnight if from > to
   color?: string;
   offsetX?: number;
@@ -11,6 +12,7 @@ interface Props {
 const {
   label = "You",
   labels,
+  pageLabels,
   timeLabels,
   offsetX = 8,
   offsetY = 20,
@@ -52,12 +54,18 @@ import goose from "src/assets/goose.png";
     background-color: tokens.color-alpha(var(--color-text), 0.15);
     text-shadow: 0 0 3px var(--color-canvas);
 
+    :global([data-cursor-hidden]) & {
+      opacity: 0 !important;
+      filter: blur(0.5rem) !important;
+      pointer-events: none;
+    }
+
     img{
         width: 24px;
+        height: auto;
         aspect-ratio: 1;
         border-radius: tokens.radius(full);
-        background-color: var(--color-accent);
-        background-color: rgb(145, 159, 235);
+        background-color: var(--color-goose);
     }
 
     span {
@@ -71,7 +79,7 @@ import goose from "src/assets/goose.png";
   }
 </style>
 
-<script define:vars={{ offsetX, offsetY, labels, timeLabels }}>
+<script define:vars={{ offsetX, offsetY, labels, pageLabels, timeLabels }}>
   // ── Animation timing constants ─────────────────────────────────────────────
   // Keep these in sync with the span's CSS transition values in the <style> block.
   const FADE_MS   = 150;  // opacity + filter transition on the span
@@ -89,6 +97,12 @@ import goose from "src/assets/goose.png";
     const label = document.getElementById("multiplayer-cursor-label");
     const labelText = document.getElementById("cursor-label-text");
     if (!label || !labelText) return;
+
+    // Enforce hidden state on init — overrides any inline style left by transition:persist
+    if (document.documentElement.hasAttribute("data-cursor-hidden")) {
+      label.style.opacity = "0";
+      label.style.filter = "blur(0.5rem)";
+    }
 
     // Picks a random item if passed an array, otherwise uses the string as-is.
     function resolveText(textOrArray) {
@@ -132,16 +146,19 @@ import goose from "src/assets/goose.png";
 
     // Merge base labels with any matching time bucket's extras.
     function getActiveLabels() {
-      const base = labels ?? [];
-      if (timeLabels?.length) {
-        const hour = new Date().getHours();
-        const bucket = timeLabels.find(({ from, to }) =>
-          from <= to ? hour >= from && hour < to   // e.g. 8–18
-                     : hour >= from || hour < to   // wraps midnight, e.g. 22–4
-        );
-        if (bucket) return [...base, ...bucket.labels];
-      }
-      return base;
+      const hour = new Date().getHours();
+      const timeBucket = timeLabels?.find(({ from, to }) =>
+        from <= to ? hour >= from && hour < to
+                   : hour >= from || hour < to
+      );
+
+      // Check for a page-specific label rule (startsWith, first match wins)
+      const pathname = window.location.pathname;
+      const pageMatch = pageLabels?.find(({ path }) => pathname.startsWith(path));
+
+      // Page match replaces base labels; time labels always merge in on top
+      const base = pageMatch ? pageMatch.labels : (labels ?? []);
+      return timeBucket ? [...base, ...timeBucket.labels] : base;
     }
 
     // Pick a random label from the active pool on each navigation.
@@ -173,6 +190,7 @@ import goose from "src/assets/goose.png";
       },
       enter() {
         isInside = true;
+        if (document.documentElement.hasAttribute("data-cursor-hidden")) return;
         label.style.opacity = "1";
         label.style.filter = "blur(0)";
       },
@@ -189,7 +207,7 @@ import goose from "src/assets/goose.png";
     document.addEventListener("mouseleave", handlers.leave);
 
     // Mouse was already inside the window before navigation — restore visible state.
-    if (isInside) {
+    if (isInside && !document.documentElement.hasAttribute("data-cursor-hidden")) {
       updatePosition();
       label.style.opacity = "1";
       label.style.filter = "blur(0)";

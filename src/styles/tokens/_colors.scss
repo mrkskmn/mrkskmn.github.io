@@ -13,6 +13,7 @@ $color-mid:    #292828;
 $color-light:  #f4f0eb;
 $color-accent: #ff7300;
 $color-surface: #1B1818;
+$color-goose: #919feb;
 
 // ─── Theme definitions ───────────────────────────────────────────────────────
 
@@ -26,6 +27,7 @@ $color-surface: #1B1818;
   --color-text-muted: #{rgba($color-light, 0.5)};
   --color-accent:     #{$color-accent};
   --color-contrast:   #{$color-light};
+  --color-goose:      #{$color-goose};
 }
 
 [data-theme="light"] {
@@ -37,6 +39,7 @@ $color-surface: #1B1818;
   --color-text-muted: #{rgba($color-dark, 0.5)};
   --color-accent:     #{$color-accent};
   --color-contrast:   #{$color-dark};
+  --color-goose:      #{$color-goose};
 }
 
 // ─── SCSS aliases → CSS custom properties ────────────────────────────────────

@@ -9,6 +9,7 @@ import cursor from "../assets/cursor.svg?raw";
 import avatar from "../assets/avatar.svg?raw";
 import dots from "../assets/dots.svg?raw";
 import * as content from "@consts";
+import Logos from "@components/Logos/Logos.astro";
 ---
 
 <BaseLayout title="Start">
@@ -23,8 +24,10 @@ import * as content from "@consts";
           Markus
         </span>
 
+
         <br />
         Design leader shaping <br />how design culture <br />thrives at scale.
+        <button class="goose"></button>
       </h1>
       <div class="stack stack--h gap--md">
         <Button
@@ -61,14 +64,15 @@ import * as content from "@consts";
       <div class="stack stack--h">
         <div class="copy stack stack--v">
           <h2 class="display" data-animate-scroll style="--delay: 0">
-            10+ years of designing products, leading teams <br>and building conditions for great work to happen.
+            10+ years of designing products, leading teams <br />and building
+            conditions for great work to happen.
           </h2>
           <p class="lead" data-animate-scroll style="--delay: 1">
             Right now I'm more into exploring tools and shipping ideas than
             prepping case studies and documenting the past. <br />
             <br />
-            If you want to chat about AI workflows and routines, design culture and systems,
-            or whatever problem you're trying to solve - reach out.
+            If you want to chat about AI workflows and routines, design culture and
+            systems, or whatever problem you're trying to solve - reach out.
           </p>
           <div
             class="buttons stack stack--h gap--lg"
@@ -100,6 +104,13 @@ import * as content from "@consts";
     </div>
   </section>
 
+   <!-- logos -->
+
+  <Logos>
+    <h2 class="display">Brands I've worked with</h2>
+    <p class="caption">From my time at Haiilo and Peter Schmidt Group</p>
+  </Logos>
+
   <!-- work grid -->
   <section>
     <div class="inner inner--work">
@@ -114,7 +125,6 @@ import * as content from "@consts";
 
   <!-- about me -->
   <About />
-
 </BaseLayout>
 
 <script>
@@ -131,7 +141,9 @@ import * as content from "@consts";
       e.preventDefault();
       clicks++;
       clearTimeout(timer);
-      timer = setTimeout(() => { clicks = 0; }, 2000);
+      timer = setTimeout(() => {
+        clicks = 0;
+      }, 2000);
 
       if (clicks >= 3) {
         clicks = 0;
@@ -147,4 +159,25 @@ import * as content from "@consts";
 
   // Re-attach on every page load since view transitions replace the DOM
   document.addEventListener("astro:page-load", initThemeEasterEgg);
+
+  function initGooseToggle() {
+    const btn = document.querySelector(".goose");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const hidden = document.documentElement.toggleAttribute("data-cursor-hidden");
+      localStorage.setItem("cursor-hidden", hidden ? "1" : "0");
+
+      const label = document.getElementById("multiplayer-cursor-label");
+      if (!label) return;
+      if (hidden) {
+        label.style.opacity = "0";
+        label.style.filter = "blur(0.5rem)";
+      } else {
+        label.style.opacity = "1";
+        label.style.filter = "blur(0)";
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initGooseToggle);
 </script>

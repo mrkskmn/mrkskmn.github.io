@@ -7,6 +7,7 @@ const notes = defineCollection({
     title: z.string(),
     subline: z.string(),
     image: image(),
+    coverImage: image().optional(),
     publishedAt: z.date(),
     updatedAt: z.date().optional(),
     timeline: z.string().optional(),
