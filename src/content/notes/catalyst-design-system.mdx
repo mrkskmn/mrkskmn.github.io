@@ -16,6 +16,13 @@ import Button from "@components/Button/Button.astro";
 import * as content from "@consts";
 import plug from "../../assets/notes/plug.mp4";
 
+import widgetSpecs from "../../assets/catalyst/catalyst-widget-spec.png";
+import image1 from "../../assets/catalyst/catalyst-asset-1.png";
+import image2 from "../../assets/catalyst/catalyst-asset-2.png";
+import image3 from "../../assets/catalyst/catalyst-asset-3.png";
+import image4 from "../../assets/catalyst/catalyst-asset-4.png";
+import image5 from "../../assets/catalyst/catalyst-asset-5.png";
+
 
 #### Context
 ## Three products merged. <br />Zero consistency.
@@ -68,10 +75,9 @@ Merging teams is hard. A shared design language makes it easier.
 ---
 
 
-<WideGrid amount={1} columns={1} ratio="16/9"/>
-<WideGrid amount={2} columns={2} srcs={[plug]} ratio="1/1"/>
-<WideGrid amount={1} columns={1} ratio="16/9"/>
-<WideGrid amount={4} columns={4} ratio="16/9"  mobileRatio="16/9" />
+<WideGrid amount={1} columns={1}  srcs={[image2]} ratio="16/9"/>
+<WideGrid amount={2} columns={2} srcs={[image3, image5]} ratio="1/1"/>
+<WideGrid amount={1} columns={1} srcs={[image4]} ratio="16/9"/>
 
 {/* 
 <WideGrid amount={4} columns={4} ratio="4/5" mobileRatio="2/1">
