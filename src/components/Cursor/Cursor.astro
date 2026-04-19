@@ -90,6 +90,7 @@ import goose from "src/assets/goose.png";
   let mouseX = 0;
   let mouseY = 0;
   let isInside = false;
+  let preMusicLabel = null;
   let handlers = null;
   let meHandlers = null;
 
@@ -173,6 +174,8 @@ import goose from "src/assets/goose.png";
       document.removeEventListener("mouseenter", handlers.enter);
       document.removeEventListener("mouseleave", handlers.leave);
       window.removeEventListener("scroll", handlers.scroll);
+      window.removeEventListener("spotify:play", handlers.spotifyPlay);
+      window.removeEventListener("spotify:pause", handlers.spotifyPause);
     }
 
     function updatePosition() {
@@ -199,12 +202,27 @@ import goose from "src/assets/goose.png";
         label.style.opacity = "0";
         label.style.filter = "blur(.5rem)";
       },
+      spotifyPlay() {
+        if (!preMusicLabel) preMusicLabel = labelText.textContent;
+        setLabel(["Music goose", "Vibing goose", "On repeat goose"]);
+      },
+      spotifyPause() {
+        if (preMusicLabel) {
+          setLabel(preMusicLabel);
+          preMusicLabel = null;
+        }
+      },
+      spotifyPause() {
+        if (preMusicLabel) setLabel(preMusicLabel);
+      },
     };
 
     document.addEventListener("mousemove", handlers.move);
     window.addEventListener("scroll", handlers.scroll, { passive: true });
     document.addEventListener("mouseenter", handlers.enter);
     document.addEventListener("mouseleave", handlers.leave);
+    window.addEventListener("spotify:play", handlers.spotifyPlay);
+    window.addEventListener("spotify:pause", handlers.spotifyPause);
 
     // Mouse was already inside the window before navigation — restore visible state.
     if (isInside && !document.documentElement.hasAttribute("data-cursor-hidden")) {

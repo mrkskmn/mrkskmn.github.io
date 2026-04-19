@@ -84,4 +84,18 @@ const spotifyTracks = [
 
   // Run on initial load and after every client-side navigation
   document.addEventListener("astro:page-load", randomiseSpotify);
+
+  // Detect Spotify play/pause via postMessage and bubble as custom events
+  let wasPlaying = false;
+  window.addEventListener("message", (e) => {
+    if (e.origin !== "https://open.spotify.com") return;
+    try {
+      const data = e.data;
+      if (data.type !== "playback_update") return;
+      const playing = !data.payload.isPaused;
+      if (playing === wasPlaying) return; // no state change, ignore
+      wasPlaying = playing;
+      window.dispatchEvent(new CustomEvent(playing ? "spotify:play" : "spotify:pause"));
+    } catch {}
+  });
 </script>
