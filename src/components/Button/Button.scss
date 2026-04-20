@@ -54,19 +54,19 @@
   // Variants
   &--primary {
     color: tokens.$color-text;
-    box-shadow: 0 0 0 0 tokens.$color-mid;
+    box-shadow: 0 0 0 0 var(--color-btn-bg);
 
     .btn__bg {
-      background-color: tokens.color-alpha(tokens.$color-mid, 0.9);
+      background-color: var(--color-btn-bg);
       transform: scale(1);
       opacity: 1;
     }
 
     @media (hover: hover) {
       &:hover {
-        box-shadow: 0 0 0 0.25rem tokens.$color-mid;
+        box-shadow: 0 0 0 0.25rem var(--color-btn-bg);
         .btn__bg {
-          background-color: tokens.$color-mid;
+          background-color: var(--color-btn-bg);
         }
       }
     }
@@ -76,7 +76,7 @@
     color: tokens.$color-text;
 
     .btn__bg {
-      background-color: tokens.color-alpha(tokens.$color-mid, 0.95);
+      background-color: var(--color-btn-bg);
     }
   }
 }

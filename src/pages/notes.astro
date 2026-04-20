@@ -25,7 +25,7 @@ const formatted = (d: Date) =>
   </section>
 
   <!-- Card grid -->
-  <section>
+  <section class="reset-p-top">
     <div class="inner notes-grid">
       {sorted.map((note, i) => (
         <a
@@ -38,7 +38,7 @@ const formatted = (d: Date) =>
             <Image src={note.data.image} alt={note.data.title} />
           </div>
           <div class="note-card__content">
-            {note.data.publishedAt && <p class="note-card__subline">{formatted(note.data.publishedAt)}</p>}
+            {/* {note.data.publishedAt && <p class="note-card__subline">{formatted(note.data.publishedAt)}</p>} */}
             <h2 class="display">{note.data.title}</h2>
             {note.data.subline && <p class="note-card__subline">{note.data.subline}</p>}
           </div>

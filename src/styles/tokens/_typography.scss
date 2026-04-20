@@ -94,7 +94,7 @@ h4 {
 $font-sizes: (
   xs: 0.75rem,
   sm: 0.875rem,
-  md: 1rem,
+  md: 1.125rem,
   lg: 1.25rem,
   xl: 1.5rem,
   2xl: 2rem,
@@ -121,15 +121,24 @@ ul,
 li {
   font-family: $font-family-body;
   line-height: 1.45;
-  font-size: text-size(lg);
+  font-size: text-size(md);
 
   &.lead {
-    font-size: text-size(lg);
+    font-size: text-size(xl);
+    font-weight: 350;
   }
 
-  &.caption {
-    font-size: text-size(md);
-    font-weight: 500;
+  &.caption, &.subline {
+    font-size: text-size(sm);
+    letter-spacing: 0.08em;
     color: var(--color-text-muted);
+    line-height: 1.5;
+    padding-top: 0.35rem;
+  }
+
+  &.subline {
+    font-size: text-size(xs);
+    text-transform: uppercase;
+    font-weight: 600;
   }
 }

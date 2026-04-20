@@ -32,12 +32,8 @@
 // ─── Header ──────────────────────────────────────────────────────────────────
 
 .inner.inner--note-header {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
 
   @include tokens.below(md) {
-    padding-top: tokens.gap(2xl);
-    padding-bottom: tokens.gap(xl);
     padding-left: 1.75rem;
     padding-right: 1.75rem;
   }
@@ -68,7 +64,7 @@
 
 .note-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, auto);
   gap: tokens.gap(lg);
   padding: tokens.gap(2xl) 0;
   margin-top: tokens.gap(2xl);
@@ -106,9 +102,9 @@
       font-size: inherit;
     }
 
-    &.value {
-      color: tokens.$color-text-muted;
-    }
+    // &.value {
+    //   color: tokens.$color-text-muted;
+    // }
   }
 }
 
@@ -299,8 +295,6 @@
   }
 
   .inner--note-header {
-    padding-top: 3rem;
-    padding-bottom: 2.5rem;
     gap: 1rem;
   }
 

@@ -23,7 +23,6 @@ Hey! You're looking at the source. Nice.
 Want to chat about how this was built? 
 Reach out: hey@markus.design 
 -->
-
 <html lang="en" data-theme="dark">
   <head>
     <script is:inline>
@@ -37,7 +36,11 @@ Reach out: hey@markus.design
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" viewport-fit="content" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+      viewport-fit="content"
+    />
     <meta name="generator" content={Astro.generator} />
     <!-- <meta name="robots" content="noindex, nofollow" /> -->
     <link rel="preconnect" href="https://open.spotify.com" />
@@ -48,17 +51,30 @@ Reach out: hey@markus.design
       @use "styles/tokens" as tokens;
 
       @keyframes blur-out {
-        from { filter: blur(0);    opacity: 1; }
-        to   { filter: blur(1rem); opacity: 0; }
+        from {
+          filter: blur(0);
+          opacity: 1;
+        }
+        to {
+          filter: blur(1rem);
+          opacity: 0;
+        }
       }
 
       @keyframes blur-in {
-        from { filter: blur(1rem); opacity: 0; }
-        to   { filter: blur(0);    opacity: 1; }
+        from {
+          filter: blur(1rem);
+          opacity: 0;
+        }
+        to {
+          filter: blur(0);
+          opacity: 1;
+        }
       }
 
       ::view-transition-old(root) {
-        animation: blur-out tokens.duration(slow) tokens.easing(default) forwards;
+        animation: blur-out tokens.duration(slow) tokens.easing(default)
+          forwards;
       }
 
       ::view-transition-new(root) {
@@ -72,19 +88,36 @@ Reach out: hey@markus.design
     <Cursor
       labels={["Visitor", "You", "Curious goose", "Goose on the loose"]}
       pageLabels={[
-        { path: "/notes/", labels: ["Reading goose", "Deep in the notes", "Studious goose", "Portfolio goose"] },
-        { path: "/notes",  labels: ["Browsing goose", "Picking a read", "Curious goose", "Portfolio goose"] },
+        {
+          path: "/notes/",
+          labels: [
+            "Reading goose",
+            "Deep in the notes",
+            "Studious goose",
+            "Portfolio goose",
+          ],
+        },
+        {
+          path: "/notes",
+          labels: [
+            "Browsing goose",
+            "Picking a read",
+            "Curious goose",
+            "Portfolio goose",
+          ],
+        },
       ]}
       timeLabels={[
         { from: 22, to: 4, labels: ["Night owl", "Sleepy goose"] },
         { from: 5, to: 8, labels: ["Early bird", "Morning goose"] },
       ]}
     />
-    <slot />
-    <Footer />
-  </body>
+    <div >
+      <slot />
 
-  <script>
+      <Footer />
+    </div>
+  </body><script>
     function initScrollAnimations() {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -95,7 +128,7 @@ Reach out: hey@markus.design
             }
           });
         },
-        { threshold: 0.35 }
+        { threshold: 0.35 },
       );
 
       document
@@ -111,9 +144,14 @@ Reach out: hey@markus.design
     import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
     document.addEventListener("astro:before-swap", (e) => {
       const saved = localStorage.getItem("theme");
-      if (saved) (e as TransitionBeforeSwapEvent).newDocument.documentElement.dataset.theme = saved;
+      if (saved)
+        (
+          e as TransitionBeforeSwapEvent
+        ).newDocument.documentElement.dataset.theme = saved;
       if (localStorage.getItem("cursor-hidden") !== "0")
-        (e as TransitionBeforeSwapEvent).newDocument.documentElement.setAttribute("data-cursor-hidden", "");
+        (
+          e as TransitionBeforeSwapEvent
+        ).newDocument.documentElement.setAttribute("data-cursor-hidden", "");
     });
   </script>
 </html>

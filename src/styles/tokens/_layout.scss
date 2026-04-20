@@ -14,6 +14,42 @@ $breakpoints: (
   }
 }
 
+// Base styles
+
+$section-spacing: (
+  default: 6.5rem,
+  mobile: 4rem,
+  none: 0,
+);
+
+@function section-spacing($size: default) {
+  @return map.get($section-spacing, $size);
+}
+
+section {
+  padding-top: section-spacing(default);
+  padding-bottom: section-spacing(default);
+
+  &:has(.inner--hero),
+  &.reset-p {
+    padding-top: section-spacing(none);
+    padding-bottom: section-spacing(none);
+  }
+
+  &.reset-p-top {
+    padding-top: section-spacing(none);
+  }
+
+  &.reset-p-bottom {
+    padding-bottom: section-spacing(none);
+  }
+
+  @include below(md) {
+    padding-top: section-spacing(mobile);
+    padding-bottom: section-spacing(mobile);
+  } 
+}
+
 // Spacing, Sizes & Layout
 // ----------------
 
@@ -21,7 +57,7 @@ $breakpoints: (
 
 $page-padding-x: (
   default: 2rem,
-  mobile:  1.25rem,
+  mobile: 1.25rem,
 );
 
 @function page-padding-x($size: default) {
@@ -32,9 +68,11 @@ $page-padding-x: (
 
 $max-width: (
   slim: 500px,
-  content: 980px,   // body text / articles
-  wide: 1080px,     // wide sections
-  full: 1600px,     // full-bleed wrapper cap
+  content: 980px,
+  // body text / articles
+  wide: 1080px,
+  // wide sections
+  full: 1600px, // full-bleed wrapper cap
 );
 
 @function max-width($size) {
@@ -53,7 +91,7 @@ $max-width: (
   }
 }
 
-.reset{
+.reset {
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -95,14 +133,14 @@ $gap: (
 //  nav      (1000)  — sticky / fixed navigation bar
 
 $z-index: (
-  below:    -1,
-  base:      0,
-  raised:    1,
+  below: -1,
+  base: 0,
+  raised: 1,
   dropdown: 100,
-  overlay:  200,
-  modal:    300,
-  toast:    400,
-  nav:     1000,
+  overlay: 200,
+  modal: 300,
+  toast: 400,
+  nav: 1000,
 );
 
 @function z($layer) {

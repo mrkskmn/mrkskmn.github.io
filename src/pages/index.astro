@@ -5,6 +5,7 @@ import About from "@components/About/About.astro";
 import { Image } from "astro:assets";
 import { ArrowUpRight } from "@lucide/astro";
 import blueNoise from "../assets/bluenoise.jpg";
+import greyNoise from "../assets/chillin.jpg";
 import cursor from "../assets/cursor.svg?raw";
 import avatar from "../assets/avatar.svg?raw";
 import dots from "../assets/dots.svg?raw";
@@ -14,137 +15,119 @@ import WideGrid from "@components/Note/WideGrid.astro";
 ---
 
 <BaseLayout title="Start">
-  <!-- Hero & value proposition -->
-  <section>
-    <div class="inner inner--hero">
-      <h1 class="display" data-animate style="--delay: 0">
-        I am
-        <span class="pill">
-          <span class="svg--cursor" set:html={cursor} />
-          <span class="avatar" set:html={avatar} />
-          Markus
-        </span>
+  
+    <!-- Hero & value proposition -->
+    <section>
+      <div class="inner inner--hero">
+        <h1 class="display" data-animate style="--delay: 0">
+          I am
+          <span class="pill">
+            <span class="svg--cursor" set:html={cursor} />
+            <span class="avatar" set:html={avatar} />
+            Markus
+          </span>
 
-
-        <br />
-        Design leader shaping <br />how design culture <br />thrives at scale.
-        <button class="goose"></button>
-      </h1>
-      <div class="stack stack--h gap--md">
-        <Button
-          href="https://www.haiilo.com"
-          title="Head of UX at Haiilo"
-          size="large"
-          icon={ArrowUpRight}
-          data-animate
-          style="--delay: 1"
-        />
-        <Button
-          href="https://www.linkedin.com/in/markuskammin/"
-          title={content.linkedin}
-          size="large"
-          variant="ghost"
-          icon={ArrowUpRight}
-          data-animate
-          style="--delay: 2"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Visual breaker -->
-  <section>
-    <div class="inner inner--visual-break" data-animate style="--delay: 2">
-      <Image src={blueNoise} height={800} alt="" loading="eager" />
-    </div>
-  </section>
-
-  <!-- Core section -->
-  <section class="section--core">
-    <div class="inner inner--core">
-      <div class="stack stack--h">
-        <div class="copy stack stack--v">
-          <h2 class="display" data-animate-scroll style="--delay: 0">
-            10+ years of designing products, leading teams <br />and building
-            conditions for great work to happen.
-          </h2>
-          <p class="lead" data-animate-scroll style="--delay: 1">
-            Right now I'm more into exploring tools and shipping ideas than
-            prepping case studies and documenting the past. <br />
-            <br />
-            If you want to chat about AI workflows and routines, design culture and
-            systems, or whatever problem you're trying to solve - reach out.
-          </p>
-          <div
-            class="buttons stack stack--h gap--lg"
-            data-animate-scroll
+          <br />
+          Design leader shaping <br />how design culture <br />thrives at scale.
+          <button class="goose"></button>
+        </h1>
+        <div class="stack stack--h gap--md">
+          <Button
+            href="https://www.haiilo.com"
+            title="Head of UX at Haiilo"
+            size="large"
+            icon={ArrowUpRight}
+            data-animate
+            style="--delay: 1"
+          />
+          <Button
+            href="https://www.linkedin.com/in/markuskammin/"
+            title={content.linkedin}
+            size="large"
+            variant="ghost"
+            icon={ArrowUpRight}
+            data-animate
             style="--delay: 2"
-          >
-            <Button
-              href="mailto:hey@markus.design"
-              title={content.contact}
-              size="large"
-              variant="primary"
-            />
-            <Button
-              href="https://www.linkedin.com/in/markuskammin/"
-              title={content.linkedin}
-              size="large"
-              variant="ghost"
-              icon={ArrowUpRight}
-            />
-          </div>
+          />
         </div>
-        <span
-          class="svg--dots"
-          set:html={dots}
-          data-animate-scroll
-          style="--delay: 1"
-        />
       </div>
-    </div>
-  </section>
+    </section>
 
-   <!-- logos -->
-
-  <Logos>
-    <h2 class="display">Brands I worked with</h2>
-    <p class="caption">From my time at Haiilo and Peter Schmidt Group</p>
-  </Logos>
-
-  <!-- work grid -->
-  <WideGrid
-        amount={1}
-        columns={1}
-        ratio="16/9"
-        mobileRatio="4/3"
-        srcs={[
-          "https://picsum.photos/1200/800",
-        ]} />
-    <WideGrid
-        amount={2}
-        columns={2}
-        ratio="1/1"
-        mobileRatio="4/3"
-        srcs={[
-          "https://picsum.photos/1200/800?2",
-          "https://picsum.photos/1200/800?3",
-        ]} />
-  <section>
-
-    <!-- <div class="inner inner--work">
-      
-      <div class="work__grid">
-        <div class="work__item"></div>
-        <div class="work__item"></div>
-        <div class="work__item"></div>
-        <div class="work__item"></div>
+    <!-- Visual breaker -->
+    <section class="reset-p-top">
+      <div class="inner inner--visual-break" data-animate style="--delay: 2">
+        <Image src={greyNoise} height={1200} alt="" loading="eager" />
       </div>
-    </div> -->
-  </section>
+    </section>
 
-  <!-- about me -->
-  <About />
+    <!-- Core section -->
+    <section class="section--core">
+      <div class="inner inner--core">
+        <div class="stack stack--h">
+          <div class="copy stack stack--v">
+            <h2 class="display" data-animate-scroll style="--delay: 0">
+              10+ years of designing products, leading teams <br />and building
+              conditions for great work to happen.
+            </h2>
+            <p data-animate-scroll style="--delay: 1">
+              Right now I'm more into exploring tools and shipping ideas than
+              prepping case studies and documenting the past. <br />
+              <br />
+              If you want to chat about AI workflows and routines, design culture
+              and systems, or whatever problem you're trying to solve - reach out.
+            </p>
+            <div
+              class="buttons stack stack--h gap--lg"
+              data-animate-scroll
+              style="--delay: 2"
+            >
+              <Button
+                href="mailto:hey@markus.design"
+                title={content.contact}
+                size="large"
+                variant="primary"
+              />
+              <Button
+                href="https://www.linkedin.com/in/markuskammin/"
+                title={content.linkedin}
+                size="large"
+                variant="ghost"
+                icon={ArrowUpRight}
+              />
+            </div>
+          </div>
+          <span
+            class="svg--dots"
+            set:html={dots}
+            data-animate-scroll
+            style="--delay: 1"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- logos -->
+
+    <Logos>
+      <h2 class="display">Brands I worked with</h2>
+      <h4 >From my time at Haiilo and Peter Schmidt Group</h4>
+    </Logos>
+
+    <!-- work grid -->
+    <section>
+      <div class="inner inner--work">
+        <div class="work__grid">
+          <div class="work__item"></div>
+          <div class="work__item"></div>
+          <div class="work__item"></div>
+          <div class="work__item"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about me -->
+    <About />
+  
 </BaseLayout>
 
 <script>
@@ -184,7 +167,8 @@ import WideGrid from "@components/Note/WideGrid.astro";
     const btn = document.querySelector(".goose");
     if (!btn) return;
     btn.addEventListener("click", () => {
-      const hidden = document.documentElement.toggleAttribute("data-cursor-hidden");
+      const hidden =
+        document.documentElement.toggleAttribute("data-cursor-hidden");
       localStorage.setItem("cursor-hidden", hidden ? "1" : "0");
 
       const label = document.getElementById("multiplayer-cursor-label");

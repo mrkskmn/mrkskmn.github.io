@@ -1,0 +1,823 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+
+interface ColorEntry {
+  label: string;
+  var: string;
+  description: string;
+}
+
+interface UtilRow {
+  token: string;
+  value: string;
+  note?: string;
+}
+
+interface UtilGroup {
+  title: string;
+  kind: "class" | "attribute" | "function" | "map";
+  description: string;
+  rows: UtilRow[];
+}
+
+interface StyleProp {
+  property: string;
+  value: string;
+}
+
+interface TypescaleEntry {
+  label: string;
+  tag?: string;
+  element: string;
+  props?: StyleProp[];
+  undefined?: boolean;
+}
+
+const typescale: TypescaleEntry[] = [
+  {
+    label: "Display",
+    tag: "h1.display",
+    element: "display",
+    props: [
+      { property: "font-family", value: "Instrument Serif" },
+      { property: "font-size", value: "6.5rem" },
+      { property: "line-height", value: "1" },
+      { property: "font-weight", value: "400" },
+      { property: "letter-spacing", value: "-3px" },
+    ],
+  },
+  {
+    label: "H1",
+    tag: "h1",
+    element: "h1",
+    props: [
+      { property: "font-family", value: "Instrument Serif" },
+      { property: "font-size", value: "6.5rem" },
+      { property: "line-height", value: "1" },
+      { property: "font-weight", value: "400" },
+      { property: "letter-spacing", value: "-3px" },
+    ],
+  },
+  {
+    label: "H2",
+    tag: "h2",
+    element: "h2",
+    props: [
+      { property: "font-family", value: "Libertinus Serif" },
+      { property: "font-size", value: "2.75rem" },
+      { property: "line-height", value: "1" },
+      { property: "font-weight", value: "400" },
+      { property: "letter-spacing", value: "-3%" },
+    ],
+  },
+  {
+    label: "H3",
+    tag: "h3",
+    element: "h3",
+    props: [
+      { property: "font-family", value: "Libertinus Serif" },
+      { property: "font-size", value: "1.75rem" },
+      { property: "line-height", value: "1.2" },
+      { property: "font-weight", value: "400" },
+      { property: "letter-spacing", value: "-2%" },
+    ],
+  },
+  {
+    label: "H4",
+    tag: "h4",
+    element: "h4",
+    props: [
+      { property: "font-family", value: "Figtree" },
+      { property: "font-size", value: "1rem" },
+      { property: "line-height", value: "1.3" },
+      { property: "font-weight", value: "500" },
+      { property: "letter-spacing", value: "-1%" },
+      { property: "color", value: "text-muted" },
+    ],
+  },
+  {
+    label: "H5",
+    element: "h5",
+    undefined: true,
+  },
+  {
+    label: "H6",
+    element: "h6",
+    undefined: true,
+  },
+  {
+    label: "Body",
+    tag: "p",
+    element: "body",
+    props: [
+      { property: "font-family", value: "Figtree" },
+      { property: "font-size", value: "1.125rem" },
+      { property: "line-height", value: "1.45" },
+      { property: "font-weight", value: "400" },
+    ],
+  },
+  {
+    label: "Lead",
+    tag: "p.lead",
+    element: "lead",
+    props: [
+      { property: "font-family", value: "Figtree" },
+      { property: "font-size", value: "1.5rem" },
+      { property: "line-height", value: "1.45" },
+      { property: "font-weight", value: "350" },
+    ],
+  },
+  {
+    label: "Caption",
+    tag: "p.caption",
+    element: "caption",
+    props: [
+      { property: "font-family", value: "Figtree" },
+      { property: "font-size", value: "0.875rem" },
+      { property: "letter-spacing", value: "0.08em" },
+      { property: "line-height", value: "1.5" },
+      { property: "color", value: "text-muted" },
+    ],
+  },
+  {
+    label: "Subline",
+    tag: "p.subline",
+    element: "subline",
+    props: [
+      { property: "font-family", value: "Figtree" },
+      { property: "font-size", value: "0.75rem" },
+      { property: "font-weight", value: "600" },
+      { property: "letter-spacing", value: "0.08em" },
+      { property: "text-transform", value: "uppercase" },
+      { property: "color", value: "text-muted" },
+    ],
+  },
+];
+
+const colors: ColorEntry[] = [
+  { label: "Canvas",     var: "--color-canvas",     description: "Page background" },
+  { label: "Surface",    var: "--color-surface",     description: "Card / panel background" },
+  { label: "Text",       var: "--color-text",        description: "Primary text" },
+  { label: "Text muted", var: "--color-text-muted",  description: "Secondary / dimmed text" },
+  { label: "Border",     var: "--color-border",      description: "Dividers and outlines" },
+  { label: "Accent",     var: "--color-accent",      description: "Brand orange" },
+  { label: "Contrast",   var: "--color-contrast",    description: "Always the light palette value" },
+  { label: "Goose",      var: "--color-goose",       description: "Multiplayer cursor" },
+  { label: "Button bg",  var: "--color-btn-bg",       description: "Button background surface" },
+];
+
+const utilities: UtilGroup[] = [
+  {
+    title: "Layout",
+    kind: "class",
+    description: "Flexbox layout helpers for composing stacks and resetting spacing.",
+    rows: [
+      { token: ".stack",    value: "display: flex",                              note: "Base flex container" },
+      { token: ".stack--h", value: "flex-direction: row",                        note: "Horizontal stack" },
+      { token: ".stack--v", value: "flex-direction: column",                     note: "Vertical stack" },
+      { token: ".reset",    value: "margin: 0 !important; padding: 0 !important", note: "Hard-reset spacing" },
+      { token: ".reset-p",        value: "padding-top: 0; padding-bottom: 0",    note: "Remove section vertical padding" },
+      { token: ".reset-p-top",    value: "padding-top: 0",                       note: "Remove section top padding only" },
+      { token: ".reset-p-bottom", value: "padding-bottom: 0",                    note: "Remove section bottom padding only" },
+    ],
+  },
+  {
+    title: "Section spacing",
+    kind: "function",
+    description: "SCSS function tokens.section-spacing($size). Applied automatically to all sections. Override with .reset-p variants.",
+    rows: [
+      { token: "default", value: "6.5rem", note: "Desktop top/bottom padding" },
+      { token: "mobile",  value: "4rem",   note: "Below md breakpoint" },
+      { token: "none",    value: "0",      note: "Used by .reset-p and hero sections" },
+    ],
+  },
+  {
+    title: "Gap",
+    kind: "class",
+    description: "Gap utility classes generated from the $gap token map. Compose with .stack.",
+    rows: [
+      { token: ".gap--none", value: "0" },
+      { token: ".gap--sm",   value: "0.25rem" },
+      { token: ".gap--md",   value: "0.5rem" },
+      { token: ".gap--lg",   value: "0.75rem" },
+      { token: ".gap--xl",   value: "1.5rem" },
+      { token: ".gap--2xl",  value: "3rem" },
+      { token: ".gap--3xl",  value: "5rem" },
+      { token: ".gap--4xl",  value: "7rem" },
+    ],
+  },
+  {
+    title: "Typography sizes",
+    kind: "class",
+    description: "Font-size overrides generated from the $font-sizes token map.",
+    rows: [
+      { token: ".text-size--xs",  value: "0.75rem" },
+      { token: ".text-size--sm",  value: "0.875rem" },
+      { token: ".text-size--md",  value: "1.125rem" },
+      { token: ".text-size--lg",  value: "1.25rem" },
+      { token: ".text-size--xl",  value: "1.5rem" },
+      { token: ".text-size--2xl", value: "2rem" },
+    ],
+  },
+  {
+    title: "Motion — attributes",
+    kind: "attribute",
+    description: "HTML attribute hooks for entrance animations. Set --delay (integer) as an inline CSS var to stagger.",
+    rows: [
+      { token: "[data-animate]",        value: "fade-up, 600ms, on page load",   note: "Immediate entrance on mount" },
+      { token: "[data-animate-scroll]", value: "fade-up, 600ms, on .is-visible", note: "JS adds .is-visible at 35% viewport" },
+    ],
+  },
+  {
+    title: "Motion — duration",
+    kind: "function",
+    description: "SCSS function tokens.duration($value). Not emitted as CSS classes.",
+    rows: [
+      { token: "fast",    value: "150ms" },
+      { token: "default", value: "300ms" },
+      { token: "slow",    value: "600ms" },
+    ],
+  },
+  {
+    title: "Motion — easing",
+    kind: "function",
+    description: "SCSS function tokens.easing($type). Not emitted as CSS classes.",
+    rows: [
+      { token: "default", value: "ease" },
+      { token: "in",      value: "ease-in" },
+      { token: "out",     value: "ease-out" },
+      { token: "in-out",  value: "ease-in-out" },
+      { token: "spring",  value: "cubic-bezier(0.34, 1.56, 0.64, 1)", note: "Overshoot spring" },
+    ],
+  },
+  {
+    title: "Breakpoints",
+    kind: "function",
+    description: "SCSS mixin tokens.below($bp). Wraps content in a max-width media query.",
+    rows: [
+      { token: "lg", value: "max-width: 1000px" },
+      { token: "md", value: "max-width: 768px" },
+      { token: "sm", value: "max-width: 480px" },
+    ],
+  },
+  {
+    title: "Max-widths",
+    kind: "function",
+    description: "SCSS function tokens.max-width($size). Not emitted as CSS classes.",
+    rows: [
+      { token: "slim",    value: "500px",  note: "Narrow text columns" },
+      { token: "content", value: "980px",  note: "Body text / articles" },
+      { token: "wide",    value: "1080px", note: "Wide sections" },
+      { token: "full",    value: "1600px", note: "Full-bleed wrapper cap" },
+    ],
+  },
+  {
+    title: "Border radius",
+    kind: "function",
+    description: "SCSS function tokens.radius($size). Not emitted as CSS classes.",
+    rows: [
+      { token: "none",  value: "0" },
+      { token: "sm",    value: "4px" },
+      { token: "md",    value: "8px" },
+      { token: "lg",    value: "12px" },
+      { token: "xl",    value: "24px" },
+      { token: "1.5xl", value: "32px" },
+      { token: "2xl",   value: "48px" },
+      { token: "3xl",   value: "80px" },
+      { token: "full",  value: "9999px" },
+    ],
+  },
+  {
+    title: "Z-index",
+    kind: "function",
+    description: "SCSS function tokens.z($layer). Named stacking layers. Not emitted as CSS classes.",
+    rows: [
+      { token: "below",    value: "-1",   note: "Behind normal flow" },
+      { token: "base",     value: "0",    note: "Default stacking" },
+      { token: "raised",   value: "1",    note: "Clear local overlays" },
+      { token: "dropdown", value: "100",  note: "Floating menus (reserved)" },
+      { token: "overlay",  value: "200",  note: "Drawers, sheets (reserved)" },
+      { token: "modal",    value: "300",  note: "Dialogs (reserved)" },
+      { token: "toast",    value: "400",  note: "Notifications (reserved)" },
+      { token: "nav",      value: "1000", note: "Sticky navigation" },
+    ],
+  },
+  {
+    title: "Page padding",
+    kind: "function",
+    description: "SCSS function tokens.page-padding-x($size). Applied to section horizontal padding.",
+    rows: [
+      { token: "default", value: "2rem",    note: "Desktop" },
+      { token: "mobile",  value: "1.25rem", note: "Below md breakpoint" },
+    ],
+  },
+];
+---
+
+<BaseLayout title="Styleguide">
+  <!-- Hero -->
+  <section>
+    <div class="inner inner--hero inner--hero--small">
+      <h1 class="display" data-animate style="--delay: 0">Styleguide.</h1>
+    </div>
+  </section>
+
+  <!-- Typescale -->
+  <section>
+    <div class="inner inner--styleguide" data-animate style="--delay: 1">
+      <div class="typescale">
+        {typescale.map((entry) => (
+          <div class={`typescale__row${entry.undefined ? " typescale__row--undefined" : ""}`}>
+            <p class="typescale__label">{entry.label}</p>
+            <div class="typescale__sample">
+
+              {entry.undefined ? (
+                <p class="typescale__undef">This style is not defined yet.</p>
+              ) : entry.element === "display" ? (
+                <h1 class="display">The quick brown fox</h1>
+              ) : entry.element === "h1" ? (
+                <h1>The quick brown fox</h1>
+              ) : entry.element === "h2" ? (
+                <h2>The quick brown fox</h2>
+              ) : entry.element === "h3" ? (
+                <h3>The quick brown fox</h3>
+              ) : entry.element === "h4" ? (
+                <h4>The quick brown fox</h4>
+              ) : entry.element === "lead" ? (
+                <p class="lead">The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.</p>
+              ) : entry.element === "caption" ? (
+                <p class="caption">The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.</p>
+              ) : entry.element === "subline" ? (
+                <p class="subline">Subline label text</p>
+              ) : (
+                <p>The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.</p>
+              )}
+
+              {!entry.undefined && (
+                <details class="typescale__meta">
+                  <summary class="typescale__meta-toggle">
+                    <span class="typescale__label">Style definitions</span>
+                    <span class="typescale__meta-toggle-icon" aria-hidden="true" />
+                  </summary>
+                  <div class="typescale__meta-body">
+                    {entry.tag && (
+                      <div class="typescale__meta-row">
+                        <span class="typescale__label">tag</span>
+                        <span class="typescale__meta-val typescale__meta-val--tag">{entry.tag}</span>
+                      </div>
+                    )}
+                    {entry.props?.map((prop) => (
+                      <div class="typescale__meta-row">
+                        <span class="typescale__label">{prop.property}</span>
+                        <span class="typescale__meta-val">{prop.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )}
+
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Colors -->
+  <section>
+    <div class="inner inner--styleguide inner--styleguide--colors">
+      <h2 class="sg-section-heading">Colors</h2>
+      <div class="colorscale">
+        {colors.map((color) => (
+          <div class="colorscale__row">
+            <div class="colorscale__swatch" style={`background: var(${color.var});`} />
+            <div class="colorscale__info">
+              <p class="typescale__label">{color.label}</p>
+              <p class="colorscale__desc">{color.description}</p>
+            </div>
+            <div class="colorscale__tokens">
+              <span class="colorscale__var">{color.var}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Utilities -->
+  <section>
+    <div class="inner inner--styleguide inner--styleguide--utilities">
+      <h2 class="sg-section-heading">Utilities &amp; Tokens</h2>
+      <div class="utilscale">
+        {utilities.map((group) => (
+          <div class="utilscale__group">
+            <div class="utilscale__group-header">
+              <div class="utilscale__group-title-row">
+                <h3 class="utilscale__group-title">{group.title}</h3>
+                <span class={`utilscale__kind utilscale__kind--${group.kind}`}>{group.kind}</span>
+              </div>
+              <p class="utilscale__group-desc">{group.description}</p>
+            </div>
+            <div class="utilscale__table">
+              <div class="utilscale__thead">
+                <span class="typescale__label">Token</span>
+                <span class="typescale__label">Value</span>
+                <span class="typescale__label">Note</span>
+              </div>
+              {group.rows.map((row) => (
+                <div class="utilscale__row">
+                  <span class="utilscale__token">{row.token}</span>
+                  <span class="utilscale__value">{row.value}</span>
+                  <span class="utilscale__note">{row.note ?? "—"}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  @use "styles/tokens" as tokens;
+
+  .inner--styleguide {
+    max-width: tokens.max-width(content);
+    padding-bottom: 14.75rem;
+  }
+
+  .typescale {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .typescale__row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: start;
+  }
+
+  .typescale__row--undefined {
+    opacity: 0.4;
+  }
+
+  .typescale__label {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    opacity: 0.5 !important;
+    color: var(--color-text) !important;
+    line-height: 1.5 !important;
+    padding-top: 0.35rem;
+  }
+
+  .typescale__sample {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .typescale__undef {
+    font-size: 0.875rem !important;
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* ── Meta props ──────────────────────────────────────────── */
+
+  .typescale__meta {
+    border-top: 1px solid var(--color-border);
+    margin-top: 0.5rem;
+  }
+
+  .typescale__meta-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .typescale__meta-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .typescale__meta-toggle .typescale__label {
+    padding-top: 0;
+    opacity: 0.35 !important;
+    transition: opacity 0.15s ease;
+  }
+
+  .typescale__meta:hover .typescale__meta-toggle .typescale__label,
+  .typescale__meta[open] .typescale__meta-toggle .typescale__label {
+    opacity: 0.5 !important;
+  }
+
+  .typescale__meta-toggle-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    flex-shrink: 0;
+    position: relative;
+    opacity: 0.35;
+    transition: opacity 0.15s ease;
+  }
+
+  .typescale__meta:hover .typescale__meta-toggle-icon,
+  .typescale__meta[open] .typescale__meta-toggle-icon {
+    opacity: 0.5;
+  }
+
+  .typescale__meta-toggle-icon::before,
+  .typescale__meta-toggle-icon::after {
+    content: "";
+    position: absolute;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: transform 0.2s ease;
+  }
+
+  /* horizontal bar — always visible */
+  .typescale__meta-toggle-icon::before {
+    width: 0.75rem;
+    height: 1.5px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  /* vertical bar — rotates to 0 when open */
+  .typescale__meta-toggle-icon::after {
+    width: 1.5px;
+    height: 0.75rem;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .typescale__meta[open] .typescale__meta-toggle-icon::after {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .typescale__meta-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 0.75rem;
+  }
+
+  .typescale__meta-row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 2rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: baseline;
+  }
+
+  .typescale__meta-val {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 0.75rem;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .typescale__meta-val--tag {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    .typescale__row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  /* ── Section heading ─────────────────────────────────────── */
+
+  .sg-section-heading {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    opacity: 0.5 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ── Colors ──────────────────────────────────────────────── */
+
+  .inner--styleguide--colors {
+    padding-bottom: 14.75rem;
+  }
+
+  .colorscale {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border);
+    margin-top: 2rem;
+  }
+
+  .colorscale__row {
+    display: grid;
+    grid-template-columns: 4rem 1fr 1fr;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: center;
+  }
+
+  .colorscale__swatch {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .colorscale__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .colorscale__info .typescale__label {
+    padding-top: 0;
+  }
+
+  .colorscale__desc {
+    font-size: 0.875rem !important;
+    opacity: 0.5;
+    line-height: 1.4;
+  }
+
+  .colorscale__tokens {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .colorscale__var {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 640px) {
+    .colorscale__row {
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+    }
+
+    .colorscale__tokens {
+      grid-column: 2;
+    }
+  }
+
+  /* ── Utilities ───────────────────────────────────────────── */
+
+  .inner--styleguide--utilities {
+    padding-bottom: 14.75rem;
+  }
+
+  .utilscale {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  .utilscale__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .utilscale__group-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .utilscale__group-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .utilscale__group-title {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    color: var(--color-text) !important;
+  }
+
+  .utilscale__kind {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.45rem;
+    border-radius: 4px;
+    line-height: 1;
+  }
+
+  .utilscale__kind--class {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: var(--color-accent);
+  }
+
+  .utilscale__kind--attribute {
+    background: color-mix(in srgb, var(--color-goose) 12%, transparent);
+    color: var(--color-goose);
+  }
+
+  .utilscale__kind--function,
+  .utilscale__kind--map {
+    background: var(--color-surface);
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .utilscale__group-desc {
+    font-size: 0.875rem !important;
+    opacity: 0.5;
+    line-height: 1.5;
+    max-width: 52rem;
+  }
+
+  .utilscale__table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .utilscale__thead {
+    display: grid;
+    grid-template-columns: 14rem 1fr 1fr;
+    gap: 2rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .utilscale__thead .typescale__label {
+    padding-top: 0;
+  }
+
+  .utilscale__row {
+    display: grid;
+    grid-template-columns: 14rem 1fr 1fr;
+    gap: 2rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: baseline;
+  }
+
+  .utilscale__token {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 0.8rem;
+    color: var(--color-text);
+    opacity: 0.85;
+  }
+
+  .utilscale__value {
+    font-family: ui-monospace, "SF Mono", "Fira Code", monospace;
+    font-size: 0.8rem;
+    color: var(--color-text);
+    opacity: 0.6;
+  }
+
+  .utilscale__note {
+    font-size: 0.8rem;
+    color: var(--color-text);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 640px) {
+    .utilscale__thead,
+    .utilscale__row {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .utilscale__note,
+    .utilscale__thead span:last-child {
+      display: none;
+    }
+  }
+</style>

@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: tokens.gap(2xl);
-  margin-bottom: 14.75rem;
+  // margin-bottom: 14.75rem;
 
   .logos-heading {
     display: flex;
@@ -40,7 +40,7 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  max-width: tokens.max-width(content);
+  max-width: tokens.max-width(full);
   margin: 0 auto;
 
   // Gradient fades on both edges using pseudo-elements

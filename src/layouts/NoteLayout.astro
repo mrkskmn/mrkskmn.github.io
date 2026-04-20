@@ -40,9 +40,9 @@ const formatted = (d: Date) =>
   </section>
 
   <!-- Header -->
-  <section>
+  <section class="reset-p-bottom ">
     <div class="inner inner--note-header">
-      <p class="note-meta" data-animate style="--delay: 1">
+      <!-- <p class="note-meta" data-animate style="--delay: 1">
         {formatted(publishedAt)}
         {
           updatedAt && (
@@ -52,14 +52,22 @@ const formatted = (d: Date) =>
             </span>
           )
         }
-      </p>
+      </p> -->
       <h1 class="display" data-animate style="--delay: 2">{title}</h1>
 
       <div class="note-info-grid" data-animate style="--delay: 3">
         {
+          timeline && (
+            <div class="note-info timeline">
+              <p class="caption">Timeline</p>
+              <p class="value">{timeline}</p>
+            </div>
+          )
+        }
+        {
           role && (
             <div class="note-info role">
-              <p class="head">My Role</p>
+              <p class="caption">My Role</p>
               <p class="value" set:html={role} />
             </div>
           )
@@ -67,16 +75,8 @@ const formatted = (d: Date) =>
         {
           areas && (
             <div class="note-info areas">
-              <p class="head">Focus</p>
+              <p class="caption">Focus</p>
               <p class="value" set:html={areas} />
-            </div>
-          )
-        }
-        {
-          timeline && (
-            <div class="note-info timeline">
-              <p class="head">Timeline</p>
-              <p class="value">{timeline}</p>
             </div>
           )
         }

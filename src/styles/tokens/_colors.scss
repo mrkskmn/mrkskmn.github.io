@@ -9,7 +9,6 @@
 // ─── Raw palette ─────────────────────────────────────────────────────────────
 
 $color-dark:   #141412;
-$color-mid:    #292828;
 $color-light:  #f4f0eb;
 $color-accent: #ff7300;
 $color-surface: #1B1818;
@@ -21,25 +20,25 @@ $color-goose: #919feb;
 [data-theme="dark"] {
   --color-canvas:     #{$color-dark};
   --color-surface:    #{rgba($color-light, 0.035)};
-  --color-mid:        #{$color-mid};
   --color-text:       #{$color-light};
   --color-border:     #{rgba($color-light, 0.1)};
   --color-text-muted: #{rgba($color-light, 0.5)};
   --color-accent:     #{$color-accent};
   --color-contrast:   #{$color-light};
   --color-goose:      #{$color-goose};
+  --color-btn-bg:     #{rgba($color-light, 0.035)};
 }
 
 [data-theme="light"] {
   --color-canvas:     #{$color-light};
   --color-surface:    #{rgba($color-dark, 0.035)};
-  --color-mid:        #{rgba($color-mid, 0.08)};
   --color-text:       #{$color-dark};
   --color-border:     #{rgba($color-dark, 0.1)};
   --color-text-muted: #{rgba($color-dark, 0.5)};
   --color-accent:     #{$color-accent};
   --color-contrast:   #{$color-dark};
   --color-goose:      #{$color-goose};
+  --color-btn-bg:     #{rgba($color-dark, 0.045)};
 }
 
 // ─── SCSS aliases → CSS custom properties ────────────────────────────────────
@@ -47,7 +46,6 @@ $color-goose: #919feb;
 
 $color-canvas:     var(--color-canvas);
 $color-surface:    var(--color-surface);
-$color-mid:        var(--color-mid);
 $color-text:       var(--color-text);
 $color-text-muted: var(--color-text-muted);
 $color-accent:     var(--color-accent);
