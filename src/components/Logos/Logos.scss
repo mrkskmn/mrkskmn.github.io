@@ -41,6 +41,7 @@
   flex-direction: row;
   overflow: hidden;
   max-width: tokens.max-width(full);
+  width:100%;
   margin: 0 auto;
 
   // Gradient fades on both edges using pseudo-elements
