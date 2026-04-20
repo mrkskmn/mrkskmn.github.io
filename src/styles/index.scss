@@ -127,7 +127,7 @@ section {
         height: auto;
         border-radius: tokens.radius(2xl);
         object-fit: cover;
-        aspect-ratio: 21 / 9;
+        aspect-ratio: 16 / 9;
       }
     }
 
@@ -191,11 +191,18 @@ section {
         grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
         gap: tokens.gap(xl);
 
+        .work__item {
+          background-size: cover;
+          background-position: center;
+        }
+
         // Top row: two equal halves
         .work__item:nth-child(1) {
           grid-column: span 3;
           aspect-ratio: 4 / 3;
           height: 100%;
+
+          background-image: var(--hero-bg-01);
         }
         .work__item:nth-child(2) {
           grid-column: span 3;
@@ -226,6 +233,8 @@ section {
     }
   }
 }
+
+
 
 // ─── Responsive ───────────────────────────────────────────────────────────────
 
