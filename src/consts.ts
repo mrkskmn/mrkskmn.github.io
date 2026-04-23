@@ -9,4 +9,4 @@ export const imprint = "Imprint"
 
 // Meta tags
 export const description = "Markus Kammin, design leader helping companies ship better products and establish design systems. Head of UX at Haiilo, based in Hamburg, Germany.";
-export const ogImage = "/public/og-image.jpg";      //TODO: Add OG Image
+export const ogImage = "/og-image.jpg";      //TODO: Add OG Image
