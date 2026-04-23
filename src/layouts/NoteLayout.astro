@@ -9,11 +9,22 @@ interface Props {
 }
 
 const { note } = Astro.props;
-const { title, subline, image, coverImage, publishedAt, updatedAt, role, timeline, areas } =
-  note.data;
+const {
+  title,
+  subline,
+  image,
+  coverImage,
+  publishedAt,
+  updatedAt,
+  role,
+  timeline,
+  areas,
+} = note.data;
 
 const heroDesktop = await getImage({ src: coverImage ?? image, alt: title });
-const heroMobile = image ? await getImage({ src: image, alt: title }) : heroDesktop;
+const heroMobile = image
+  ? await getImage({ src: image, alt: title })
+  : heroDesktop;
 
 const formatted = (d: Date) =>
   d.toLocaleDateString("en-GB", {
@@ -40,7 +51,7 @@ const formatted = (d: Date) =>
   </section>
 
   <!-- Header -->
-  <section class="reset-p-bottom ">
+  <section class="reset-p-bottom">
     <div class="inner inner--note-header">
       <!-- <p class="note-meta" data-animate style="--delay: 1">
         {formatted(publishedAt)}
@@ -55,32 +66,30 @@ const formatted = (d: Date) =>
       </p> -->
       <h1 class="display" data-animate style="--delay: 2">{title}</h1>
 
-      <div class="note-info-grid" data-animate style="--delay: 3">
-        {
-          timeline && (
-            <div class="note-info timeline">
-              <p class="caption">Timeline</p>
-              <p class="value">{timeline}</p>
-            </div>
-          )
-        }
-        {
-          role && (
-            <div class="note-info role">
-              <p class="caption">My Role</p>
-              <p class="value" set:html={role} />
-            </div>
-          )
-        }
-        {
-          areas && (
-            <div class="note-info areas">
-              <p class="caption">Focus</p>
-              <p class="value" set:html={areas} />
-            </div>
-          )
-        }
-      </div>
+      {
+        (timeline || role || areas) && (
+          <div class="note-info-grid" data-animate style="--delay: 3">
+            {timeline && (
+              <div class="note-info timeline">
+                <p class="caption">Timeline</p>
+                <p class="value">{timeline}</p>
+              </div>
+            )}
+            {role && (
+              <div class="note-info role">
+                <p class="caption">My Role</p>
+                <p class="value" set:html={role} />
+              </div>
+            )}
+            {areas && (
+              <div class="note-info areas">
+                <p class="caption">Focus</p>
+                <p class="value" set:html={areas} />
+              </div>
+            )}
+          </div>
+        )
+      }
     </div>
   </section>
 

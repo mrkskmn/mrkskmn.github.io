@@ -20,6 +20,11 @@
   + .note-wide {
     margin-top: tokens.gap(xl);
   }
+
+  @include tokens.below(md) {
+    margin-bottom: tokens.gap(xl);
+    margin-top: tokens.gap(3xl);
+  }
 }
 
 .note-wide__frame {
@@ -55,7 +60,8 @@
   &--ratio {
     aspect-ratio: var(--ratio);
 
-    img, video {
+    img,
+    video {
       height: 100%;
       object-fit: cover;
       object-position: center;
@@ -71,7 +77,8 @@
 
 // Target any grid item that contains dynamic slot content (prevents bleeding into images grids)
 
-.note-wide-grid > div:not(:has(> img:only-child, > video:only-child, > svg:only-child)) {
+.note-wide-grid
+  > div:not(:has(> img:only-child, > video:only-child, > svg:only-child)) {
   display: flex;
   flex-direction: column;
   justify-content: end;

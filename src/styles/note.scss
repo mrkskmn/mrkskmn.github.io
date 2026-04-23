@@ -32,7 +32,6 @@
 // ─── Header ──────────────────────────────────────────────────────────────────
 
 .inner.inner--note-header {
-
   @include tokens.below(md) {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
@@ -66,10 +65,25 @@
   display: grid;
   grid-template-columns: repeat(3, auto);
   gap: tokens.gap(lg);
-  padding: tokens.gap(2xl) 0;
-  margin-top: tokens.gap(2xl);
+  padding: tokens.gap(xl) 0;
+  margin-top: tokens.gap(3xl);
   border-bottom: 1px solid var(--color-border);
   border-top: 1px solid var(--color-border);
+
+  @include tokens.below(md) {
+    grid-template-columns: repeat(2, auto);
+    padding: tokens.gap(xl) 0;
+    margin-top: tokens.gap(2xl);
+    row-gap: tokens.gap(lg);
+    column-gap: tokens.gap(xl);
+
+    .note-info {
+      padding: 0;
+      &.areas {
+        grid-column: span 2;
+      }
+    }
+  }
 }
 
 .note-info {
@@ -136,7 +150,6 @@
     + h2 {
       margin-top: 1rem;
     }
-
   }
 
   p {
@@ -149,7 +162,7 @@
     text-underline-offset: 3px;
     opacity: 0.8;
 
-    &.btn{
+    &.btn {
       text-decoration: none;
     }
 
@@ -177,7 +190,6 @@
       @include tokens.below(md) {
         padding-left: 0.5rem;
       }
-
     }
   }
 
@@ -260,6 +272,10 @@
     margin-top: 2rem;
     font-size: 1rem;
 
+    @include tokens.below(md) {
+      margin-top: tokens.gap(xl);
+    }
+
     img {
       height: 3.5rem;
       width: auto;
@@ -283,10 +299,6 @@
   }
 }
 
-// ─── WideImage / WideGrid (MDX components) ───────────────────────────────────
-// Usage inside .mdx: <WideImage src="/image.jpg" />
-//                    <WideGrid amount={3} srcs={[img1, img2, img3]} ratio="3/2" />
-
 // ─── Responsive ───────────────────────────────────────────────────────────────
 
 @include tokens.below(md) {
@@ -302,6 +314,16 @@
     > *:not(.note-wide) {
       padding-left: 1.75rem;
       padding-right: 1.75rem;
+    }
+
+    > hr {
+      margin-left: 1.75rem;
+      margin-right: 1.75rem;
+    }
+
+    > ul,
+    > ol {
+      margin-left: 1rem;
     }
   }
 }
