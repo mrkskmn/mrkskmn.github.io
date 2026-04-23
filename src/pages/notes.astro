@@ -7,14 +7,18 @@ import { Image } from "astro:assets";
 
 const notes = await getCollection("notes");
 const sorted = notes.sort(
-  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
 );
 
 const formatted = (d: Date) =>
-  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 ---
 
-<BaseLayout title="Notes">
+<BaseLayout title="Work samples">
   <!-- Hero -->
   <section>
     <div class="inner inner--hero">
@@ -27,23 +31,27 @@ const formatted = (d: Date) =>
   <!-- Card grid -->
   <section class="reset-p-top">
     <div class="inner notes-grid">
-      {sorted.map((note, i) => (
-        <a
-          href={`/notes/${note.id}`}
-          class="note-card"
-          data-animate
-          style={`--delay: ${i + 2}`}
-        >
-          <div class="note-card__image">
-            <Image src={note.data.image} alt={note.data.title} />
-          </div>
-          <div class="note-card__content">
-            {/* {note.data.publishedAt && <p class="note-card__subline">{formatted(note.data.publishedAt)}</p>} */}
-            <h2 class="display">{note.data.title}</h2>
-            {note.data.subline && <p class="note-card__subline">{note.data.subline}</p>}
-          </div>
-        </a>
-      ))}
+      {
+        sorted.map((note, i) => (
+          <a
+            href={`/notes/${note.id}`}
+            class="note-card"
+            data-animate
+            style={`--delay: ${i + 2}`}
+          >
+            <div class="note-card__image">
+              <Image src={note.data.image} alt={note.data.title} />
+            </div>
+            <div class="note-card__content">
+              {/* {note.data.publishedAt && <p class="note-card__subline">{formatted(note.data.publishedAt)}</p>} */}
+              <h2 class="display">{note.data.title}</h2>
+              {note.data.subline && (
+                <p class="note-card__subline">{note.data.subline}</p>
+              )}
+            </div>
+          </a>
+        ))
+      }
     </div>
   </section>
 

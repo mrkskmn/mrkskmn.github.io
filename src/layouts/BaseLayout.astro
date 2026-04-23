@@ -46,10 +46,12 @@ Reach out: hey@markus.design
       viewport-fit="content"
     />
     <meta name="generator" content={Astro.generator} />
-    <!-- <meta name="robots" content="noindex, nofollow" /> -->
-    <link rel="preconnect" href="https://open.spotify.com" />
-    <link rel="dns-prefetch" href="https://i.scdn.co" />
-    <title>{title} | Markus Kammin</title>
+    <meta name="description" content={content.description} />
+    <link rel="preconnect" href="https://open.spotify.com" /><link
+      rel="dns-prefetch"
+      href="https://i.scdn.co"
+    />
+    <title>Markus Kammin | {title}</title>
     <ClientRouter />
     <style lang="scss" is:global>
       @use "styles/tokens" as tokens;
@@ -84,10 +86,8 @@ Reach out: hey@markus.design
       ::view-transition-new(root) {
         animation: blur-in tokens.duration(slow) tokens.easing(default) forwards;
       }
-    </style></head
-  >
-
-  <body>
+    </style>
+  </head><body>
     <Navigation />
     <Cursor
       labels={["Visitor", "You", "Curious goose", "Goose on the loose"]}

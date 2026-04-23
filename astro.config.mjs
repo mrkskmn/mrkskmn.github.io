@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import path from "path";
 import { fileURLToPath } from "url";
+import path from "path";
 
 import mdx from "@astrojs/mdx";
+
+import sitemap from "@astrojs/sitemap";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -35,5 +37,5 @@ export default defineConfig({
     enabled: false,
   },
 
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
 });
