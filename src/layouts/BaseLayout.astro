@@ -37,9 +37,36 @@ Reach out: hey@markus.design
       if (localStorage.getItem("cursor-hidden") !== "0")
         document.documentElement.setAttribute("data-cursor-hidden", "");
     </script>
-    <meta charset="utf-8" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Markus Kammin",
+        "jobTitle": "Head of UX",
+        "url": "https://markus.design",
+        "sameAs": [
+          "https://www.linkedin.com/in/markuskammin/",
+          "https://github.com/mrkskmn"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Haiilo",
+          "url": "https://www.haiilo.com"
+        }
+      }
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://open.spotify.com" /><link
+      rel="dns-prefetch"
+      href="https://i.scdn.co"
+    />
+
+    <!-- Primary Meta tags -->
+    <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1"
@@ -47,10 +74,19 @@ Reach out: hey@markus.design
     />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={content.description} />
-    <link rel="preconnect" href="https://open.spotify.com" /><link
-      rel="dns-prefetch"
-      href="https://i.scdn.co"
-    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content={`Markus Kammin | ${title}`} />
+    <meta property="og:description" content={content.description} />
+    <meta property="og:image" content={content.ogImage} />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`Markus Kammin | ${title}`} />
+    <meta name="twitter:description" content={content.description} />
+    <meta name="twitter:image" content={content.ogImage} />
+
     <title>Markus Kammin | {title}</title>
     <ClientRouter />
     <style lang="scss" is:global>

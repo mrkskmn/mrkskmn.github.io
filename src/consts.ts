@@ -8,4 +8,5 @@ export const imprint = "Imprint"
 
 
 // Meta tags
-export const description = "Markus Kammin is a UX design leader and builder based in Hamburg. He focuses on building design culture, systems and the environment for great work to happen and ship.";
+export const description = "Markus Kammin, design leader helping companies ship better products and establish design systems. Head of UX at Haiilo, based in Hamburg, Germany.";
+export const ogImage = "../public/og-image.jpg";      //TODO: Add OG Image
