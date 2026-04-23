@@ -25,6 +25,10 @@ Reach out: hey@markus.design
 -->
 <html lang="en" data-theme="dark">
   <head>
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="5847c055-cf5a-48d3-9f11-9934183acd3e"></script>
     <script is:inline>
       // Apply saved theme immediately — before paint — to avoid flash.
       const saved = localStorage.getItem("theme");
@@ -112,11 +116,10 @@ Reach out: hey@markus.design
         { from: 5, to: 8, labels: ["Early bird", "Morning goose"] },
       ]}
     />
-    
-      <slot />
 
-      <Footer />
-    
+    <slot />
+
+    <Footer />
   </body><script>
     function initScrollAnimations() {
       const observer = new IntersectionObserver(
