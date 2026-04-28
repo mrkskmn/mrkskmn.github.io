@@ -11,6 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://markus.design",
   vite: {
     resolve: {
       alias: {
@@ -37,5 +38,5 @@ export default defineConfig({
     enabled: false,
   },
 
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/notes/") && !page.includes("/styleguide/") })],
 });

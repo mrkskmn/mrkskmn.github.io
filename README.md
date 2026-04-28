@@ -13,6 +13,12 @@ Personal site built with Astro + MDX + SCSS.
 
 ---
 
+## TODOs
+
+- [ ] Remove the `/notes` sitemap filter in `astro.config.mjs` when notes content is finalized (`/styleguide` is permanently excluded)
+
+---
+
 ## Working with assets in notes
 
 ### Where to put files
