@@ -16,4 +16,4 @@ export const ogImage = "/og-image.jpg";
 export const activateCases = false;
 export const activateCV = true;
 export const cursorVisibleByDefault = false;
-export const activateBrands = false;
+export const activateBrands = true;
