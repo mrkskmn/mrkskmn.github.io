@@ -110,10 +110,12 @@ import misc2 from "../assets/misc/supergut-example-1.png?url";
 
   <!-- logos -->
 
-  <Logos>
-    <h2 class="display">Brands I worked with</h2>
-    <h4>From my time at Haiilo and Peter Schmidt Group</h4>
-  </Logos>
+  {content.activateBrands && (
+    <Logos>
+      <h2 class="display">Brands I worked with</h2>
+      <h4>From my time at Haiilo and Peter Schmidt Group</h4>
+    </Logos>
+  )}
 
   <!-- work grid -->
   <section>
