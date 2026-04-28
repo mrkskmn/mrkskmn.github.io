@@ -23,7 +23,11 @@ Hey! You're looking at the source. Nice.
 Want to chat about how this was built? 
 Reach out: hey@markus.design 
 -->
-<html lang="en" data-theme="dark" data-cursor-default={content.cursorVisibleByDefault ? "visible" : "hidden"}>
+<html
+  lang="en"
+  data-theme="dark"
+  data-cursor-default={content.cursorVisibleByDefault ? "visible" : "hidden"}
+>
   <head>
     <script
       defer
@@ -34,8 +38,10 @@ Reach out: hey@markus.design
       const saved = localStorage.getItem("theme");
       if (saved) document.documentElement.dataset.theme = saved;
       // Only manage cursor-hidden state when cursor is opt-in (not visible by default).
-      if (document.documentElement.dataset.cursorDefault === "hidden" &&
-          localStorage.getItem("cursor-hidden") !== "0")
+      if (
+        document.documentElement.dataset.cursorDefault === "hidden" &&
+        localStorage.getItem("cursor-hidden") !== "0"
+      )
         document.documentElement.setAttribute("data-cursor-hidden", "");
     </script>
 
@@ -64,6 +70,10 @@ Reach out: hey@markus.design
     <link rel="preconnect" href="https://open.spotify.com" /><link
       rel="dns-prefetch"
       href="https://i.scdn.co"
+    />
+    <link
+      rel="canonical"
+      href={new URL(Astro.url.pathname, "https://markus.design").href}
     />
 
     <!-- Primary Meta tags -->
@@ -188,8 +198,10 @@ Reach out: hey@markus.design
         (
           e as TransitionBeforeSwapEvent
         ).newDocument.documentElement.dataset.theme = saved;
-      if (e.newDocument.documentElement.dataset.cursorDefault === "hidden" &&
-          localStorage.getItem("cursor-hidden") !== "0")
+      if (
+        e.newDocument.documentElement.dataset.cursorDefault === "hidden" &&
+        localStorage.getItem("cursor-hidden") !== "0"
+      )
         (
           e as TransitionBeforeSwapEvent
         ).newDocument.documentElement.setAttribute("data-cursor-hidden", "");
