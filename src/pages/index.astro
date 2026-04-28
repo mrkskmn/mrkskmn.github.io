@@ -31,7 +31,7 @@ import misc2 from "../assets/misc/supergut-example-1.png?url";
 
         <br />
         Design leader shaping <br />how design culture <br />thrives at scale.
-        <button class="goose"></button>
+        {!content.cursorVisibleByDefault && <button class="goose"></button>}
       </h1>
       <div class="stack stack--h gap--md">
         <Button
@@ -167,6 +167,12 @@ import misc2 from "../assets/misc/supergut-example-1.png?url";
   function initGooseToggle() {
     const btn = document.querySelector(".goose");
     if (!btn) return;
+
+    // Default is hidden — show cursor only if user previously activated it
+    const saved = localStorage.getItem("cursor-hidden");
+    const shouldHide = saved !== "0";
+    document.documentElement.toggleAttribute("data-cursor-hidden", shouldHide);
+
     btn.addEventListener("click", () => {
       const hidden =
         document.documentElement.toggleAttribute("data-cursor-hidden");

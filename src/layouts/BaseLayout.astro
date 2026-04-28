@@ -23,7 +23,7 @@ Hey! You're looking at the source. Nice.
 Want to chat about how this was built? 
 Reach out: hey@markus.design 
 -->
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-cursor-default={content.cursorVisibleByDefault ? "visible" : "hidden"}>
   <head>
     <script
       defer
@@ -33,8 +33,9 @@ Reach out: hey@markus.design
       // Apply saved theme immediately — before paint — to avoid flash.
       const saved = localStorage.getItem("theme");
       if (saved) document.documentElement.dataset.theme = saved;
-      // Cursor is hidden by default; only show if user has explicitly activated it.
-      if (localStorage.getItem("cursor-hidden") !== "0")
+      // Only manage cursor-hidden state when cursor is opt-in (not visible by default).
+      if (document.documentElement.dataset.cursorDefault === "hidden" &&
+          localStorage.getItem("cursor-hidden") !== "0")
         document.documentElement.setAttribute("data-cursor-hidden", "");
     </script>
 
@@ -187,7 +188,8 @@ Reach out: hey@markus.design
         (
           e as TransitionBeforeSwapEvent
         ).newDocument.documentElement.dataset.theme = saved;
-      if (localStorage.getItem("cursor-hidden") !== "0")
+      if (e.newDocument.documentElement.dataset.cursorDefault === "hidden" &&
+          localStorage.getItem("cursor-hidden") !== "0")
         (
           e as TransitionBeforeSwapEvent
         ).newDocument.documentElement.setAttribute("data-cursor-hidden", "");

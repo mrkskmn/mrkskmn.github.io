@@ -38,8 +38,14 @@ const spotifyTracks = [
         <p class="footer__col-title">All the links</p>
         <nav class="footer__nav stack stack--v gap--lg">
           <a href="/">{content.home}</a>
-          <a href="/notes">{content.notes}</a>
-          <a href="/cv">{content.cv}</a>
+          {content.activateCases && <a href="/notes">{content.notes}</a>}
+          {
+            content.activateCV && (
+              <a href={content.cvURL} target="_blank">
+                {content.cv}
+              </a>
+            )
+          }
         </nav>
       </div>
 
@@ -63,8 +69,8 @@ const spotifyTracks = [
     </div>
 
     <p class="footer__subline">
-      <span>&copy; 2025 &ndash; {year}</span> 
-      &middot; 
+      <span>&copy; 2025 &ndash; {year}</span>
+      &middot;
       <a href="/imprint">{content.imprint}</a>
     </p>
   </div>
@@ -95,7 +101,9 @@ const spotifyTracks = [
       const playing = !data.payload.isPaused;
       if (playing === wasPlaying) return; // no state change, ignore
       wasPlaying = playing;
-      window.dispatchEvent(new CustomEvent(playing ? "spotify:play" : "spotify:pause"));
+      window.dispatchEvent(
+        new CustomEvent(playing ? "spotify:play" : "spotify:pause"),
+      );
     } catch {}
   });
 </script>

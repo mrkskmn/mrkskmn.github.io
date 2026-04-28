@@ -5,17 +5,17 @@ import { ArrowUpRight } from "@lucide/astro";
 import { Menu } from "@lucide/astro";
 import { X } from "@lucide/astro";
 import * as content from "@consts";
-
-const showNotes = true;
-const showCV    = true;
-
 ---
 
 <nav class="nav">
   <div class="inner">
     <ul class="nav__links mobile">
       <li>
-        <button class="btn btn--ghost btn--large btn--menu" data-menu-btn aria-expanded="false">
+        <button
+          class="btn btn--ghost btn--large btn--menu"
+          data-menu-btn
+          aria-expanded="false"
+        >
           <div class="btn__bg"></div>
           <span class="icon-menu"><Menu size={20} stroke-width={1.5} /></span>
           <span class="icon-close"><X size={20} stroke-width={1.5} /></span>
@@ -27,22 +27,31 @@ const showCV    = true;
       <li>
         <Button href="/" title={content.home} size="compact" variant="ghost" />
       </li>
-      {showNotes && (
-        <li>
-          <Button href="/notes" title={content.notes} size="compact" variant="ghost" />
-        </li>
-      )}
-      {showCV && (
-        <li>
-          <Button
-            href="https://drive.google.com/file/d/1M9tVn5dJqL9ZdZsqwBUC2zS8bFn3vvTq/view"
-            title={content.cv}
-            size="compact"
-            variant="ghost"
-            icon={ArrowUpRight}
-          />
-        </li>
-      )}
+      {
+        content.activateCases && (
+          <li>
+            <Button
+              href="/notes"
+              title={content.notes}
+              size="compact"
+              variant="ghost"
+            />
+          </li>
+        )
+      }
+      {
+        content.activateCV && (
+          <li>
+            <Button
+              href={content.cvURL}
+              title={content.cv}
+              size="compact"
+              variant="ghost"
+              icon={ArrowUpRight}
+            />
+          </li>
+        )
+      }
     </ul>
     <div class="nav__email">
       <Button
@@ -58,29 +67,39 @@ const showCV    = true;
       <li>
         <Button href="/" title={content.home} size="large" variant="ghost" />
       </li>
-      {showNotes && (
-        <li>
-          <Button href="/notes" title={content.notes} size="large" variant="ghost" />
-        </li>
-      )}
-      {showCV && (
-        <li>
-          <Button
-            href="https://drive.google.com/file/d/1M9tVn5dJqL9ZdZsqwBUC2zS8bFn3vvTq/view"
-            title={content.cv}
-            size="large"
-            variant="ghost"
-            icon={ArrowUpRight}
-          />
-        </li>
-      )}
+      {
+        content.activateCases && (
+          <li>
+            <Button
+              href="/notes"
+              title={content.notes}
+              size="large"
+              variant="ghost"
+            />
+          </li>
+        )
+      }
+      {
+        content.activateCV && (
+          <li>
+            <Button
+              href={content.cvURL}
+              title={content.cv}
+              size="large"
+              variant="ghost"
+              icon={ArrowUpRight}
+            />
+          </li>
+        )
+      }
     </ul>
   </div>
 </nav>
 
 <script>
   function initMobileNav() {
-    const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-btn]");
+    const menuBtn =
+      document.querySelector<HTMLButtonElement>("[data-menu-btn]");
     const mobileNav = document.querySelector<HTMLElement>("[data-mobile-nav]");
     const menuLabel = document.querySelector<HTMLElement>("[data-menu-label]");
 

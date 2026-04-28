@@ -1,5 +1,6 @@
 ---
 import "./Logos.scss";
+import * as content from "@consts";
 
 const logoModules = import.meta.glob<{ default: string }>(
   "../../assets/logos/*.svg",
@@ -8,7 +9,33 @@ const logoModules = import.meta.glob<{ default: string }>(
 
 const logos = Object.values(logoModules).map((m) => m.default);
 ---
-
+{content.activateBrands && (
+  <section class="brands inner">
+    <div class="logos-heading" data-animate-scroll style="--delay: 1">
+      <slot />
+    </div>
+    <div
+      class="logos"
+      aria-label="Brands I've worked with"
+      data-animate-scroll
+      style="--delay: 2"
+    >
+      <div class="logos__marquee">
+        {logos.map((svg) => (
+          <div class="logos__item">
+            <Fragment set:html={svg} />
+          </div>
+        ))}
+      </div>
+      <div class="logos__marquee" aria-hidden="true">
+        {logos.map((svg) => (
+          <div class="logos__item">
+            <Fragment set:html={svg} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 <section class="brands inner">
   <div class="logos-heading" data-animate-scroll style="--delay: 1">
     <slot />
@@ -83,3 +110,6 @@ const logos = Object.values(logoModules).map((m) => m.default);
   }
   document.addEventListener("astro:page-load", initLogos);
 </script>
+
+)
+}
