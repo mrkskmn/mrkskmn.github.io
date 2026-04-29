@@ -1,8 +1,12 @@
 @use "styles/tokens" as tokens;
 
 @keyframes scribble-draw {
-  from { clip-path: inset(0 100% 0 0); }
-  to   { clip-path: inset(0 0% 0 0); }
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
 }
 
 // Clip overflow so the scribble SVG doesn't cause horizontal scroll.
@@ -16,16 +20,12 @@ section:has(.about) {
 
   > div {
     align-items: stretch;
-
-    .copy {
-      flex: 0 0 tokens.max-width(slim);
-    }
   }
 
   &__photo {
     position: relative;
     flex: 1;
-    min-width: 0;
+    min-width: 290px;
 
     img {
       width: 100%;

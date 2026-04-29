@@ -1,5 +1,5 @@
 export const home = "Home"
-export const notes = "Selected work"
+export const notes = "Work"
 export const cv = "CV"
 export const cvURL = "https://drive.google.com/file/d/1kzRzabQmUiNvbPihUjbR9mPaBstz23NC/view?usp=sharing"
 export const contact = "Get in touch"
