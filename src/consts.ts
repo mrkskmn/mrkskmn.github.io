@@ -4,6 +4,7 @@ export const cv = "CV"
 export const cvURL = "https://drive.google.com/file/d/1kzRzabQmUiNvbPihUjbR9mPaBstz23NC/view?usp=sharing"
 export const contact = "Get in touch"
 export const linkedin = "LinkedIn"
+export const linkedInURL = "https://de.linkedin.com/in/markuskammin"
 export const github = "GitHub"
 export const imprint = "Imprint" 
 
