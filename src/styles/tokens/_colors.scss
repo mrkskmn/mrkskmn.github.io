@@ -27,7 +27,7 @@ $color-goose: #919feb;
   --color-accent:     #{$color-accent};
   --color-contrast:   #{$color-light};
   --color-goose:      #{$color-goose};
-  --color-btn-bg:     #{rgba($color-light, 0.035)};
+  --color-btn-bg:     #{rgba($color-light, 0.1)};
 }
 
 [data-theme="light"] {
