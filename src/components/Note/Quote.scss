@@ -1,0 +1,92 @@
+@use "styles/tokens" as tokens;
+
+.quote {
+  padding: 3.5rem;
+  background: tokens.$color-surface;
+  border-radius: tokens.radius(xl);
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include tokens.below(md) {
+    padding: 1.5rem;
+  }
+
+  blockquote {
+    padding: 0;
+    border: none;
+    color: inherit;
+    margin: 0;
+  }
+
+  &--compact blockquote p {
+    font-size: 1.65rem;
+  }
+
+  blockquote p {
+    font-family: tokens.$font-family-head;
+    font-size: 2rem;
+    line-height: 1.15;
+    margin: 0;
+
+    &:before,
+    &:after {
+      content: '"';
+    }
+
+    @include tokens.below(md) {
+      font-size: 1.25rem;
+      line-height: 1.45;
+      font-family: tokens.$font-family-body;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    @include tokens.below(md) {
+      margin-top: tokens.gap(xl);
+      flex-direction: column;
+      align-items: start;
+
+      .btn{
+        width:100%;
+        justify-content: center;
+      }
+    }
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+
+    img {
+      height: 3.5rem;
+      width: auto;
+      aspect-ratio: 4 / 5;
+      border-radius: tokens.radius(md);
+      object-fit: cover;
+      margin: 0;
+      flex-shrink: 0;
+    }
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+    gap: tokens.gap(sm);
+    font-weight: 500;
+  }
+
+  &__function {
+    color: var(--color-text-muted);
+  }
+}

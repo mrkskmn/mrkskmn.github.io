@@ -2,6 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import About from "@components/About/About.astro";
+import Quote from "@components/Note/Quote.astro";
 import { Image } from "astro:assets";
 import { ArrowUpRight } from "@lucide/astro";
 import intro from "../assets/intro3.png";
@@ -31,7 +32,11 @@ import misc2 from "../assets/misc/supergut-example-1.png?url";
 
         <br />
         Design leader shaping <br />how design culture <br />thrives at scale.
-        {!content.cursorVisibleByDefault && <button class="goose" data-umami-event="Click on Goose"></button>}
+        {
+          !content.cursorVisibleByDefault && (
+            <button class="goose" data-umami-event="Click on Goose" />
+          )
+        }
       </h1>
       <div class="stack stack--h gap--md">
         <Button
@@ -110,12 +115,14 @@ import misc2 from "../assets/misc/supergut-example-1.png?url";
 
   <!-- logos -->
 
-  {content.activateBrands && (
-    <Logos>
-      <h2 class="display">Brands I worked with</h2>
-      <h4>From my time at Haiilo and Peter Schmidt Group</h4>
-    </Logos>
-  )}
+  {
+    content.activateBrands && (
+      <Logos>
+        <h2 class="display">Brands I worked with</h2>
+        <h4>From my time at Haiilo and Peter Schmidt Group</h4>
+      </Logos>
+    )
+  }
 
   <!-- work grid -->
   <section>
@@ -129,8 +136,53 @@ import misc2 from "../assets/misc/supergut-example-1.png?url";
     </div>
   </section>
 
+  <!-- testimonials -->
+  <section>
+    <div class="inner inner--testimonials">
+      <div class="stack stack--v gap--lg">
+        <h2 class="display">In others' words.</h2>
+        <h4>Some kind words from people I've worked with.</h4>
+      </div>
+      <div class="stack stack--v gap--xl">
+        <Quote
+          quote="Markus is one of the most talented UX designers and leaders I’ve worked with. He combines a natural, effective leadership style with a hands-on passion for solving complex UX challenges, delivering creative solutions at remarkable speed […]"
+          authorName="Gary Bennion"
+          authorFunction="Former CPTO, Haiilo"
+          authorImage="https://media.licdn.com/dms/image/v2/D4E03AQEEixJgeTrsNQ/profile-displayphoto-scale_200_200/B4EZt_.PLkGQAY-/0/1767378582168?e=2147483647&v=beta&t=lkDACtrxjRwjns_XIAi93RH78S_TTXsH1Qf7Q-N3zd8"
+          url="https://www.linkedin.com/in/markuskammin/details/recommendations"
+          urlLabel="Read full recommendation"
+          size="compact"
+          class="reset--m"
+        />
+        <Quote
+          quote="Very simple: Markus is the best product & UI designer I've worked with. He is the mastermind behind Haiilo's strong position and USP in UI/UX which is widely appreciated by our customers. He's not only an exceptional designer. He also has great understanding for product and market […]"
+          authorName="Jan Marquardt"
+          authorFunction="Founder & Former CEO, Haiilo"
+          authorImage="https://media.licdn.com/dms/image/v2/D4E03AQGgNeV0adjtYg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1731570268496?e=2147483647&v=beta&t=1NLbzpVpHMylv_lEnn-jwrlaOI5ulti03x1Dda63JyE"
+          url="https://www.linkedin.com/in/markuskammin/details/recommendations"
+          urlLabel="Read full recommendation"
+          size="compact"
+          class="reset--m"
+        />
+
+        <Quote
+          quote="Without Markus, I'm not sure where Haiilo would be today as a company. He's unassuming, always willing to listen, and continues to develop his skills even under high pressure and heavy workloads. […]"
+          authorName="Florian Lindenau"
+          authorFunction="Former VP BI & Operations, Haiilo"
+          authorImage="https://media.licdn.com/dms/image/v2/C5603AQHRybhQsp5AZQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1553163535847?e=1779321600&v=beta&t=wFIO-oU8ruqu56-SlFWYOoUYnYGnsvm3TU8rg7g6G5U"
+          url="https://www.linkedin.com/in/markuskammin/details/recommendations"
+          urlLabel="Read full recommendation"
+          size="compact"
+          class="reset--m"
+        />
+      </div>
+    </div>
+  </section>
+
   <!-- about me -->
   <About />
+
+
 </BaseLayout>
 
 <script>
