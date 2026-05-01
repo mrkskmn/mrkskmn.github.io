@@ -419,7 +419,7 @@ section {
   // Dots are grandchildren of svg (wrapped in outer texture <g>)
   svg > g > g,
   svg > g > path {
-    animation: fade tokens.duration(slow) tokens.easing(out) both;
+    animation: fade-left tokens.duration(slow) tokens.easing(out) both;
     animation-play-state: paused;
   }
 
@@ -431,7 +431,7 @@ section {
   @each $id, $step in $dot-order {
     svg ##{$id} {
       animation-delay: calc(
-        var(--delay, 0) * tokens.duration(default) + #{($step - 1) * 60}ms
+        var(--delay, 0) * tokens.duration(default) + #{($step - 1) * 120}ms     // was 60ms before
       );
     }
   }
@@ -442,14 +442,4 @@ section {
       animation: none;
     }
   }
-}
-
-// ─── Custom cursor ─────────────────────────────────────────────────────────
-// Prototype for now. Replaces default with custom multiplayer-inspired cursor.
-
-.custom-cursor {
-  height: 24px;
-  width: 24px;
-  border-radius: 999px;
-  background-color: tokens.$color-accent;
 }
